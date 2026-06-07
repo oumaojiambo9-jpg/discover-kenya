@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Discover Kenya</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #f0f2f5; color: #1a1a2e; }
+:root { --primary: #1a5276; --primary-light: #2980b9; --accent: #e67e22; --success: #27ae60; --danger: #e74c3c; --warning: #f39c12; --sidebar: 250px; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Login */
+.login-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #1a5276 0%, #2980b9 100%); }
+.login-card { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); width: 400px; }
+.login-card h1 { text-align: center; margin-bottom: 1.5rem; color: var(--primary); font-size: 1.5rem; }
+.login-card .logo { text-align: center; font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.4rem; font-weight: 600; font-size: 0.85rem; color: #555; }
+.form-group input { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid #ddd; border-radius: 8px; font-size: 0.95rem; transition: border-color 0.2s; }
+.form-group input:focus { outline: none; border-color: var(--primary-light); }
+.btn { padding: 0.7rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-light); }
+.btn-success { background: var(--success); color: white; }
+.btn-success:hover { background: #219a52; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-danger:hover { background: #c0392b; }
+.btn-warning { background: var(--warning); color: white; }
+.btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+.btn-block { width: 100%; justify-content: center; padding: 0.9rem; font-size: 1rem; }
+.error { color: var(--danger); font-size: 0.85rem; margin-top: 0.3rem; display: none; }
+.error.show { display: block; }
+.success { color: var(--success); font-size: 0.85rem; margin-top: 0.3rem; display: none; }
+.success.show { display: block; }
+
+/* Layout */
+.app { display: flex; min-height: 100vh; }
+.sidebar { width: var(--sidebar); background: var(--primary); color: white; padding: 1.5rem 0; position: fixed; height: 100vh; overflow-y: auto; z-index: 100; transition: transform 0.3s; }
+.sidebar .brand { padding: 0 1.5rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.15); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; }
+.sidebar .brand i { font-size: 1.5rem; color: var(--accent); }
+.sidebar .brand h2 { font-size: 1.1rem; font-weight: 700; }
+.sidebar .nav-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem 1.5rem; color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; text-decoration: none; }
+.sidebar .nav-item:hover, .sidebar .nav-item.active { background: rgba(255,255,255,0.1); color: white; }
+.sidebar .nav-item.active { border-left-color: var(--accent); }
+.sidebar .nav-item i { width: 20px; text-align: center; }
+.sidebar .nav-item.logout { margin-top: auto; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem; }
+.main { margin-left: var(--sidebar); flex: 1; padding: 1.5rem 2rem; min-height: 100vh; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd; }
+.header h1 { font-size: 1.5rem; color: var(--primary); }
+.header .user-info { display: flex; align-items: center; gap: 1rem; font-size: 0.9rem; color: #666; }
+.hamburger { display: none; background: none; border: none; color: var(--primary); font-size: 1.5rem; cursor: pointer; }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.stat-card { background: white; padding: 1.2rem 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.stat-card .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+.stat-card .stat-label { font-size: 0.85rem; color: #888; margin-top: 0.2rem; }
+.stat-card .stat-icon { float: right; font-size: 2rem; color: rgba(26,82,118,0.15); }
+
+/* Content */
+.content-section { display: none; }
+.content-section.active { display: block; }
+.card { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden; margin-bottom: 1.5rem; }
+.card-header { padding: 1rem 1.5rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+.card-header h3 { font-size: 1rem; }
+.card-body { padding: 1.5rem; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 0.7rem 0.8rem; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f8f9fa; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; color: #666; letter-spacing: 0.5px; }
+tr:hover td { background: #f8f9fa; }
+.badge { padding: 0.25rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.badge-new { background: #e8f5e9; color: #27ae60; }
+.badge-contact { background: #fff3e0; color: #e67e22; }
+.badge-quote { background: #e3f2fd; color: #2980b9; }
+.badge-confirmed { background: #e8f5e9; color: #27ae60; }
+.badge-cancelled { background: #fbe9e7; color: #e74c3c; }
+.badge-done { background: #f3e5f5; color: #8e24aa; }
+.status-select { padding: 0.3rem 0.5rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.8rem; cursor: pointer; }
+
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+.modal.show { display: flex; }
+.modal-content { background: white; border-radius: 12px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.modal-header { padding: 1.2rem 1.5rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { font-size: 1.1rem; }
+.modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; padding: 0 0.3rem; }
+.modal-body { padding: 1.5rem; }
+.modal-footer { padding: 1rem 1.5rem; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 0.5rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group textarea { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: inherit; resize: vertical; min-height: 80px; }
+.form-group textarea:focus { outline: none; border-color: var(--primary-light); }
+.form-group select { width: 100%; padding: 0.7rem 0.9rem; border: 2px solid #ddd; border-radius: 8px; font-size: 0.95rem; background: white; }
+.form-group select:focus { outline: none; border-color: var(--primary-light); }
+
+.empty-state { text-align: center; padding: 3rem 1rem; color: #999; }
+.empty-state i { font-size: 3rem; margin-bottom: 1rem; display: block; }
+
+.toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--success); color: white; padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 2000; display: none; animation: slideIn 0.3s; }
+.toast.error { background: var(--danger); }
+.toast.show { display: block; }
+@keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap; }
+.search-box { display: flex; align-items: center; gap: 0.5rem; background: white; padding: 0.4rem 0.8rem; border-radius: 8px; border: 1px solid #ddd; }
+.search-box input { border: none; outline: none; font-size: 0.9rem; min-width: 200px; }
+.search-box i { color: #999; }
+
+.inquiry-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.inquiry-detail .field { margin-bottom: 0.5rem; }
+.inquiry-detail .field label { display: block; font-size: 0.75rem; text-transform: uppercase; color: #999; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+.inquiry-detail .field span { font-size: 0.95rem; }
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; padding: 1rem; }
+  .hamburger { display: block; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr; }
+  .inquiry-detail { grid-template-columns: 1fr; }
+  .header { flex-wrap: wrap; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const API = window.location.origin;
+let token = localStorage.getItem('token') || '';
+let currentUser = null;
+let currentPage = 'dashboard';
+
+const $ = id => document.getElementById(id);
+
+function toast(msg, isError = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (isError ? ' error' : '') + ' show';
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+async function api(path, options = {}) {
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const res = await fetch(API + path, { ...options, headers });
+  if (res.status === 401 && path !== '/api/auth/login') {
+    token = '';
+    localStorage.removeItem('token');
+    renderLogin();
+    throw new Error('Session expired');
+  }
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+function renderLogin() {
+  document.getElementById('app').innerHTML = `
+    <div class="login-page">
+      <div class="login-card">
+        <div class="logo"><i class="fas fa-paw"></i></div>
+        <h1>Discover Kenya Admin</h1>
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Username or Email</label>
+            <input type="text" id="loginUsername" required placeholder="admin">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" required placeholder="admin123">
+          </div>
+          <div class="error" id="loginError">Invalid credentials</div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+        </form>
+      </div>
+    </div>
+  `;
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = document.getElementById('loginError');
+    try {
+      const data = await api('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ username: document.getElementById('loginUsername').value, password: document.getElementById('loginPassword').value })
+      });
+      token = data.token;
+      currentUser = data.user;
+      localStorage.setItem('token', token);
+      renderApp();
+    } catch (e) { err.textContent = e.message; err.classList.add('show'); }
+  });
+}
+
+function renderApp() {
+  document.getElementById('app').innerHTML = `
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand"><i class="fas fa-paw"></i><h2>Discover Kenya</h2></div>
+        <a class="nav-item active" data-page="dashboard" href="#"><i class="fas fa-chart-pie"></i> Dashboard</a>
+        <a class="nav-item" data-page="packages" href="#"><i class="fas fa-box"></i> Packages</a>
+        <a class="nav-item" data-page="destinations" href="#"><i class="fas fa-map-marker-alt"></i> Destinations</a>
+        <a class="nav-item" data-page="inquiries" href="#"><i class="fas fa-envelope"></i> Inquiries</a>
+        <a class="nav-item" data-page="testimonials" href="#"><i class="fas fa-star"></i> Testimonials</a>
+        <a class="nav-item" data-page="newsletter" href="#"><i class="fas fa-newspaper"></i> Newsletter</a>
+        <a class="nav-item" data-page="settings" href="#"><i class="fas fa-cog"></i> Settings</a>
+        <a class="nav-item logout" id="logoutBtn" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </aside>
+      <div class="main">
+        <div class="header">
+          <div style="display:flex;align-items:center;gap:1rem">
+            <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+            <h1 id="pageTitle">Dashboard</h1>
+          </div>
+          <div class="user-info"><i class="fas fa-user-circle"></i> <span id="userDisplay">admin</span></div>
+        </div>
+        <div id="pageContent"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('userDisplay').textContent = currentUser?.username || 'admin';
+  document.querySelectorAll('.nav-item[data-page]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.nav-item[data-page]').forEach(n => n.classList.remove('active'));
+      el.classList.add('active');
+      currentPage = el.dataset.page;
+      loadPage(currentPage);
+      document.getElementById('sidebar').classList.remove('open');
+    });
+  });
+  document.getElementById('logoutBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    token = '';
+    localStorage.removeItem('token');
+    renderLogin();
+  });
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+  loadPage('dashboard');
+}
+
+function loadPage(page) {
+  const titles = { dashboard: 'Dashboard', packages: 'Packages', destinations: 'Destinations', inquiries: 'Inquiries', testimonials: 'Testimonials', newsletter: 'Newsletter', settings: 'Settings' };
+  document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
+  const content = document.getElementById('pageContent');
+  if (page === 'dashboard') renderDashboard(content);
+  else if (page === 'packages') renderPackages(content);
+  else if (page === 'destinations') renderDestinations(content);
+  else if (page === 'inquiries') renderInquiries(content);
+  else if (page === 'testimonials') renderTestimonials(content);
+  else if (page === 'newsletter') renderNewsletter(content);
+  else if (page === 'settings') renderSettings(content);
+}
+
+// ── Dashboard ──
+
+async function renderDashboard(el) {
+  el.innerHTML = '<div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>';
+  try {
+    const stats = await api('/api/admin/stats');
+    el.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card"><i class="fas fa-box stat-icon"></i><div class="stat-value">${stats.active_packages}</div><div class="stat-label">Active Packages</div></div>
+        <div class="stat-card"><i class="fas fa-map-marker-alt stat-icon"></i><div class="stat-value">${stats.total_destinations}</div><div class="stat-label">Destinations</div></div>
+        <div class="stat-card"><i class="fas fa-envelope stat-icon"></i><div class="stat-value">${stats.new_inquiries}</div><div class="stat-label">New Inquiries</div></div>
+        <div class="stat-card"><i class="fas fa-envelope-open-text stat-icon"></i><div class="stat-value">${stats.total_inquiries}</div><div class="stat-label">Total Inquiries</div></div>
+        <div class="stat-card"><i class="fas fa-newspaper stat-icon"></i><div class="stat-value">${stats.total_subscribers}</div><div class="stat-label">Newsletter Subscribers</div></div>
+        <div class="stat-card"><i class="fas fa-star stat-icon"></i><div class="stat-value">${stats.total_testimonials}</div><div class="stat-label">Testimonials</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3><i class="fas fa-clock"></i> Recent Inquiries</h3></div>
+        <div class="card-body">
+          ${stats.recent_inquiries.length === 0 ? '<div class="empty-state"><i class="fas fa-inbox"></i> No inquiries yet</div>' : `
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Travelers</th><th>Package</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody>
+                ${stats.recent_inquiries.map(i => `
+                  <tr style="cursor:pointer" onclick="viewInquiry(${i.id})">
+                    <td><strong>${i.name}</strong></td>
+                    <td>${i.email}</td>
+                    <td>${i.travelers || '-'}</td>
+                    <td>${i.package_title || '-'}</td>
+                    <td><span class="badge badge-${i.status}">${i.status}</span></td>
+                    <td>${new Date(i.created_at).toLocaleDateString()}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `}
+        </div>
+      </div>
+    `;
+  } catch (e) { el.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> Error: ${e.message}</div>`; }
+}
+
+// ── Packages ──
+
+async function renderPackages(el) {
+  el.innerHTML = `
+    <div class="toolbar">
+      <div class="search-box"><i class="fas fa-search"></i><input type="text" id="pkgSearch" placeholder="Search packages..."></div>
+      <button class="btn btn-primary" onclick="showPackageForm()"><i class="fas fa-plus"></i> Add Package</button>
+    </div>
+    <div class="card">
+      <div class="card-body" id="pkgTableBody">
+        <div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+      </div>
+    </div>
+  `;
+  await refreshPackages();
+  document.getElementById('pkgSearch').addEventListener('input', refreshPackages);
+}
+
+async function refreshPackages() {
+  const tbody = document.getElementById('pkgTableBody');
+  try {
+    const packages = await api('/api/admin/packages');
+    const q = (document.getElementById('pkgSearch')?.value || '').toLowerCase();
+    const filtered = packages.filter(p => p.title.toLowerCase().includes(q));
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i> No packages found</div>';
+      return;
+    }
+    tbody.innerHTML = `
+      <table>
+        <thead><tr><th>Title</th><th>Category</th><th>Duration</th><th>Price</th><th>Rating</th><th>Badge</th><th>Active</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${filtered.map(p => `
+            <tr>
+              <td><strong>${p.title}</strong></td>
+              <td><span class="badge badge-new">${p.category}</span></td>
+              <td>${p.duration}</td>
+              <td>$${p.price.toLocaleString()}${p.price_label || ''}</td>
+              <td>${'★'.repeat(Math.round(p.rating))} ${p.rating}</td>
+              <td>${p.badge ? `<span class="badge badge-quote">${p.badge}</span>` : '-'}</td>
+              <td>${p.active ? '<span style="color:var(--success)">●</span>' : '<span style="color:#ccc">●</span>'}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="showPackageForm(${p.id})"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger btn-sm" onclick="deletePackage(${p.id})"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } catch (e) { tbody.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`; }
+}
+
+async function showPackageForm(id) {
+  let pkg = { title: '', slug: '', category: 'safari', duration: '', nights: '', price: '', price_label: '/ person', rating: '4.8', review_count: '0', description: '', highlights: [], image_url: '', badge: '', featured: 0 };
+  if (id) {
+    try {
+      const all = await api('/api/admin/packages');
+      const found = all.find(p => p.id === id);
+      if (found) pkg = { ...found, highlights: Array.isArray(found.highlights) ? found.highlights : JSON.parse(found.highlights || '[]') };
+    } catch (e) { toast(e.message, true); return; }
+  }
+  showModal(id ? 'Edit Package' : 'Add Package', `
+    <form id="pkgForm">
+      <div class="form-row">
+        <div class="form-group"><label>Title *</label><input type="text" id="f_title" value="${escapeHtml(pkg.title)}" required></div>
+        <div class="form-group"><label>Slug *</label><input type="text" id="f_slug" value="${escapeHtml(pkg.slug)}" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Category</label><select id="f_category"><option value="safari" ${pkg.category === 'safari' ? 'selected' : ''}>Safari</option><option value="combo" ${pkg.category === 'combo' ? 'selected' : ''}>Combo</option><option value="culture" ${pkg.category === 'culture' ? 'selected' : ''}>Culture</option><option value="adventure" ${pkg.category === 'adventure' ? 'selected' : ''}>Adventure</option><option value="luxury" ${pkg.category === 'luxury' ? 'selected' : ''}>Luxury</option><option value="family" ${pkg.category === 'family' ? 'selected' : ''}>Family</option></select></div>
+        <div class="form-group"><label>Badge</label><input type="text" id="f_badge" value="${escapeHtml(pkg.badge || '')}" placeholder="e.g. Best Seller"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Duration *</label><input type="text" id="f_duration" value="${escapeHtml(pkg.duration)}" placeholder="7 Days" required></div>
+        <div class="form-group"><label>Nights</label><input type="text" id="f_nights" value="${escapeHtml(pkg.nights || '')}" placeholder="6 Nights"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Price *</label><input type="number" id="f_price" value="${pkg.price}" step="0.01" required></div>
+        <div class="form-group"><label>Price Label</label><input type="text" id="f_price_label" value="${escapeHtml(pkg.price_label)}"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Rating</label><input type="number" id="f_rating" value="${pkg.rating}" step="0.1" min="0" max="5"></div>
+        <div class="form-group"><label>Review Count</label><input type="number" id="f_review_count" value="${pkg.review_count}"></div>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="f_description" rows="3">${escapeHtml(pkg.description)}</textarea></div>
+      <div class="form-group"><label>Highlights (comma-separated)</label><input type="text" id="f_highlights" value="${escapeHtml(Array.isArray(pkg.highlights) ? pkg.highlights.join(', ') : pkg.highlights)}"></div>
+      <div class="form-group"><label>Image URL</label><input type="text" id="f_image_url" value="${escapeHtml(pkg.image_url || '')}"></div>
+      <div class="form-row">
+        <div class="form-group"><label><input type="checkbox" id="f_featured" ${pkg.featured ? 'checked' : ''}> Featured</label></div>
+        <div class="form-group"><label><input type="checkbox" id="f_active" ${pkg.active !== 0 ? 'checked' : ''}> Active</label></div>
+      </div>
+    </form>
+  `, async () => {
+    const data = collectPkgForm();
+    if (!data.title || !data.slug || !data.duration || !data.price) { toast('Title, slug, duration, and price are required', true); return; }
+    try {
+      if (id) { await api(`/api/admin/packages/${id}`, { method: 'PUT', body: JSON.stringify(data) }); toast('Package updated!'); }
+      else { await api('/api/admin/packages', { method: 'POST', body: JSON.stringify(data) }); toast('Package created!'); }
+      closeModal();
+      refreshPackages();
+    } catch (e) { toast(e.message, true); }
+  });
+}
+
+function collectPkgForm() {
+  const get = id => document.getElementById(id).value;
+  return {
+    title: get('f_title'), slug: get('f_slug'), category: get('f_category'), duration: get('f_duration'), nights: get('f_nights'),
+    price: parseFloat(get('f_price')), price_label: get('f_price_label'), rating: parseFloat(get('f_rating')), review_count: parseInt(get('f_review_count')),
+    description: get('f_description'), highlights: get('f_highlights').split(',').map(s => s.trim()).filter(Boolean),
+    image_url: get('f_image_url') || null, badge: get('f_badge') || null, featured: document.getElementById('f_featured').checked ? 1 : 0,
+    active: document.getElementById('f_active').checked ? 1 : 0
+  };
+}
+
+async function deletePackage(id) {
+  if (!confirm('Delete this package?')) return;
+  try { await api(`/api/admin/packages/${id}`, { method: 'DELETE' }); toast('Package deleted!'); refreshPackages(); }
+  catch (e) { toast(e.message, true); }
+}
+
+// ── Destinations ──
+
+async function renderDestinations(el) {
+  el.innerHTML = `
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="showDestinationForm()"><i class="fas fa-plus"></i> Add Destination</button>
+    </div>
+    <div class="card">
+      <div class="card-body" id="destTableBody">
+        <div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+      </div>
+    </div>
+  `;
+  await refreshDestinations();
+}
+
+async function refreshDestinations() {
+  const tbody = document.getElementById('destTableBody');
+  try {
+    const dests = await api('/api/admin/destinations');
+    if (dests.length === 0) { tbody.innerHTML = '<div class="empty-state"><i class="fas fa-map-marked-alt"></i> No destinations</div>'; return; }
+    tbody.innerHTML = `
+      <table>
+        <thead><tr><th>Name</th><th>Region</th><th>Slug</th><th>Featured</th><th>Active</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${dests.map(d => `
+            <tr>
+              <td><strong>${d.name}</strong></td>
+              <td>${d.region || '-'}</td>
+              <td><code>${d.slug}</code></td>
+              <td>${d.featured ? '<span style="color:var(--warning)">★</span>' : '-'}</td>
+              <td>${d.active ? '<span style="color:var(--success)">●</span>' : '<span style="color:#ccc">●</span>'}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="showDestinationForm(${d.id})"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger btn-sm" onclick="deleteDestination(${d.id})"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } catch (e) { tbody.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`; }
+}
+
+async function showDestinationForm(id) {
+  let dest = { name: '', slug: '', region: '', description: '', short_desc: '', image_url: '', hero_image_url: '', highlights: [], best_time: '', lat: '', lng: '' };
+  if (id) {
+    try { const d = await api(`/api/destinations/${dest.slug}`); }
+    catch (e) { /* will use the admin list */ }
+    try {
+      const all = await api('/api/admin/destinations');
+      const found = all.find(d => d.id === id);
+      if (found) dest = { ...found, highlights: Array.isArray(found.highlights) ? found.highlights : JSON.parse(found.highlights || '[]') };
+    } catch (e) { toast(e.message, true); return; }
+  }
+  showModal(id ? 'Edit Destination' : 'Add Destination', `
+    <form id="destForm">
+      <div class="form-row">
+        <div class="form-group"><label>Name *</label><input type="text" id="d_name" value="${escapeHtml(dest.name)}" required></div>
+        <div class="form-group"><label>Slug *</label><input type="text" id="d_slug" value="${escapeHtml(dest.slug)}" required></div>
+      </div>
+      <div class="form-group"><label>Region</label><input type="text" id="d_region" value="${escapeHtml(dest.region || '')}"></div>
+      <div class="form-group"><label>Short Description</label><input type="text" id="d_short_desc" value="${escapeHtml(dest.short_desc || '')}"></div>
+      <div class="form-group"><label>Description</label><textarea id="d_description" rows="4">${escapeHtml(dest.description)}</textarea></div>
+      <div class="form-group"><label>Highlights (comma-separated)</label><input type="text" id="d_highlights" value="${escapeHtml(Array.isArray(dest.highlights) ? dest.highlights.join(', ') : dest.highlights)}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Image URL</label><input type="text" id="d_image_url" value="${escapeHtml(dest.image_url || '')}"></div>
+        <div class="form-group"><label>Hero Image URL</label><input type="text" id="d_hero_image_url" value="${escapeHtml(dest.hero_image_url || '')}"></div>
+      </div>
+      <div class="form-group"><label>Best Time to Visit</label><input type="text" id="d_best_time" value="${escapeHtml(dest.best_time || '')}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Latitude</label><input type="number" id="d_lat" value="${dest.lat || ''}" step="any"></div>
+        <div class="form-group"><label>Longitude</label><input type="number" id="d_lng" value="${dest.lng || ''}" step="any"></div>
+      </div>
+    </form>
+  `, async () => {
+    const data = {
+      name: document.getElementById('d_name').value,
+      slug: document.getElementById('d_slug').value,
+      region: document.getElementById('d_region').value || null,
+      description: document.getElementById('d_description').value,
+      short_desc: document.getElementById('d_short_desc').value || null,
+      image_url: document.getElementById('d_image_url').value || null,
+      hero_image_url: document.getElementById('d_hero_image_url').value || null,
+      highlights: document.getElementById('d_highlights').value.split(',').map(s => s.trim()).filter(Boolean),
+      best_time: document.getElementById('d_best_time').value || null,
+      lat: parseFloat(document.getElementById('d_lat').value) || null,
+      lng: parseFloat(document.getElementById('d_lng').value) || null
+    };
+    if (!data.name || !data.slug) { toast('Name and slug are required', true); return; }
+    try {
+      if (id) { await api(`/api/admin/destinations/${id}`, { method: 'PUT', body: JSON.stringify(data) }); toast('Destination updated!'); }
+      else { await api('/api/admin/destinations', { method: 'POST', body: JSON.stringify(data) }); toast('Destination created!'); }
+      closeModal();
+      refreshDestinations();
+    } catch (e) { toast(e.message, true); }
+  });
+}
+
+async function deleteDestination(id) {
+  if (!confirm('Delete this destination?')) return;
+  try { await api(`/api/admin/destinations/${id}`, { method: 'DELETE' }); toast('Destination deleted!'); refreshDestinations(); }
+  catch (e) { toast(e.message, true); }
+}
+
+// ── Inquiries ──
+
+async function renderInquiries(el) {
+  el.innerHTML = `
+    <div class="toolbar">
+      <div class="search-box"><i class="fas fa-search"></i><input type="text" id="inqSearch" placeholder="Search inquiries..."></div>
+      <div>
+        <select id="inqFilter" style="padding:0.5rem;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;margin-right:0.5rem">
+          <option value="">All Status</option>
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="quote">Quote Sent</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="cancelled">Cancelled</option>
+          <option value="done">Done</option>
+        </select>
+        <button class="btn btn-primary" onclick="refreshInquiries()"><i class="fas fa-sync"></i></button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body" id="inqTableBody">
+        <div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('inqSearch').addEventListener('input', refreshInquiries);
+  document.getElementById('inqFilter').addEventListener('change', refreshInquiries);
+  await refreshInquiries();
+}
+
+async function refreshInquiries() {
+  const tbody = document.getElementById('inqTableBody');
+  try {
+    let inquiries = await api('/api/admin/inquiries');
+    const q = (document.getElementById('inqSearch')?.value || '').toLowerCase();
+    const status = document.getElementById('inqFilter')?.value || '';
+    let filtered = inquiries;
+    if (q) filtered = filtered.filter(i => i.name.toLowerCase().includes(q) || i.email.toLowerCase().includes(q));
+    if (status) filtered = filtered.filter(i => i.status === status);
+    if (filtered.length === 0) { tbody.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i> No inquiries found</div>'; return; }
+    tbody.innerHTML = `
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Travelers</th><th>Package</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${filtered.map(i => `
+            <tr>
+              <td><strong>${i.name}</strong></td>
+              <td><a href="mailto:${i.email}">${i.email}</a></td>
+              <td>${i.travelers || '-'}</td>
+              <td>${i.package_title || '-'}</td>
+              <td><span class="badge badge-${i.status}">${i.status}</span></td>
+              <td>${new Date(i.created_at).toLocaleDateString()}</td>
+              <td>
+                <button class="btn btn-primary btn-sm" onclick="viewInquiry(${i.id})"><i class="fas fa-eye"></i></button>
+                <button class="btn btn-danger btn-sm" onclick="deleteInquiry(${i.id})"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } catch (e) { tbody.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`; }
+}
+
+async function viewInquiry(id) {
+  try {
+    const inquiries = await api('/api/admin/inquiries');
+    const i = inquiries.find(x => x.id === id);
+    if (!i) { toast('Inquiry not found', true); return; }
+    showModal('Inquiry Details', `
+      <div class="inquiry-detail">
+        <div class="field"><label>Name</label><span>${escapeHtml(i.name)}</span></div>
+        <div class="field"><label>Email</label><span><a href="mailto:${escapeHtml(i.email)}">${escapeHtml(i.email)}</a></span></div>
+        <div class="field"><label>Phone</label><span>${escapeHtml(i.phone || '-')}</span></div>
+        <div class="field"><label>Travelers</label><span>${i.travelers || '-'}</span></div>
+        <div class="field"><label>Travel Dates</label><span>${i.travel_date_start || '?'} ${i.travel_date_end ? 'to ' + i.travel_date_end : ''}</span></div>
+        <div class="field"><label>Budget</label><span>${escapeHtml(i.budget_range || '-')}</span></div>
+        <div class="field"><label>Package</label><span>${escapeHtml(i.package_title || 'General inquiry')}</span></div>
+        <div class="field"><label>Status</label><span><select class="status-select" id="inqStatus" onchange="updateInquiryStatus(${i.id})">
+          <option value="new" ${i.status === 'new' ? 'selected' : ''}>New</option>
+          <option value="contacted" ${i.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+          <option value="quote" ${i.status === 'quote' ? 'selected' : ''}>Quote Sent</option>
+          <option value="confirmed" ${i.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
+          <option value="cancelled" ${i.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+          <option value="done" ${i.status === 'done' ? 'selected' : ''}>Done</option>
+        </select></span></div>
+      </div>
+      <div class="form-group"><label>Message</label><textarea readonly rows="4" style="background:#f9f9fa">${escapeHtml(i.message || 'No message')}</textarea></div>
+      <div class="form-group"><label>Admin Notes</label><textarea id="inqNotes" rows="3">${escapeHtml(i.notes || '')}</textarea></div>
+    `, async () => {
+      await updateInquiryStatus(i.id);
+      toast('Inquiry updated!');
+    }, 'Save Notes');
+  } catch (e) { toast(e.message, true); }
+}
+
+async function updateInquiryStatus(id) {
+  const status = document.getElementById('inqStatus')?.value;
+  const notes = document.getElementById('inqNotes')?.value;
+  try { await api(`/api/admin/inquiries/${id}`, { method: 'PATCH', body: JSON.stringify({ status, notes }) }); refreshInquiries(); }
+  catch (e) { toast(e.message, true); }
+}
+
+async function deleteInquiry(id) {
+  if (!confirm('Delete this inquiry?')) return;
+  try { await api(`/api/admin/inquiries/${id}`, { method: 'DELETE' }); toast('Inquiry deleted!'); refreshInquiries(); }
+  catch (e) { toast(e.message, true); }
+}
+
+// ── Testimonials ──
+
+async function renderTestimonials(el) {
+  el.innerHTML = `
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="showTestimonialForm()"><i class="fas fa-plus"></i> Add Testimonial</button>
+    </div>
+    <div class="card">
+      <div class="card-body" id="testTableBody">
+        <div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+      </div>
+    </div>
+  `;
+  await refreshTestimonials();
+}
+
+async function refreshTestimonials() {
+  const tbody = document.getElementById('testTableBody');
+  try {
+    const testimonials = await api('/api/admin/testimonials');
+    if (testimonials.length === 0) { tbody.innerHTML = '<div class="empty-state"><i class="fas fa-star"></i> No testimonials</div>'; return; }
+    tbody.innerHTML = `
+      <table>
+        <thead><tr><th>Name</th><th>Location</th><th>Rating</th><th>Preview</th><th>Featured</th><th>Active</th><th>Actions</th></tr></thead>
+        <tbody>
+          ${testimonials.map(t => `
+            <tr>
+              <td><strong>${t.name}</strong></td>
+              <td>${t.location || '-'}</td>
+              <td>${'★'.repeat(t.rating)}</td>
+              <td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(t.text.substring(0, 80))}...</td>
+              <td>${t.featured ? '<span style="color:var(--warning)">★</span>' : '-'}</td>
+              <td>${t.active ? '<span style="color:var(--success)">●</span>' : '<span style="color:#ccc">●</span>'}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="showTestimonialForm(${t.id})"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger btn-sm" onclick="deleteTestimonial(${t.id})"><i class="fas fa-trash"></i></button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } catch (e) { tbody.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`; }
+}
+
+async function showTestimonialForm(id) {
+  let t = { name: '', location: '', avatar_url: '', rating: 5, text: '', featured: 0 };
+  if (id) {
+    try { const all = await api('/api/admin/testimonials'); const found = all.find(x => x.id === id); if (found) t = found; }
+    catch (e) { toast(e.message, true); return; }
+  }
+  showModal(id ? 'Edit Testimonial' : 'Add Testimonial', `
+    <form id="testForm">
+      <div class="form-row">
+        <div class="form-group"><label>Name *</label><input type="text" id="t_name" value="${escapeHtml(t.name)}" required></div>
+        <div class="form-group"><label>Location</label><input type="text" id="t_location" value="${escapeHtml(t.location || '')}"></div>
+      </div>
+      <div class="form-group"><label>Avatar URL</label><input type="text" id="t_avatar_url" value="${escapeHtml(t.avatar_url || '')}"></div>
+      <div class="form-group"><label>Rating</label><select id="t_rating">${[5,4,3,2,1].map(r => `<option value="${r}" ${t.rating === r ? 'selected' : ''}>${'★'.repeat(r)}${'☆'.repeat(5-r)}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Testimonial *</label><textarea id="t_text" rows="4" required>${escapeHtml(t.text)}</textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label><input type="checkbox" id="t_featured" ${t.featured ? 'checked' : ''}> Featured</label></div>
+        <div class="form-group"><label><input type="checkbox" id="t_active" ${t.active !== 0 ? 'checked' : ''}> Active</label></div>
+      </div>
+    </form>
+  `, async () => {
+    const data = {
+      name: document.getElementById('t_name').value,
+      location: document.getElementById('t_location').value || null,
+      avatar_url: document.getElementById('t_avatar_url').value || null,
+      rating: parseInt(document.getElementById('t_rating').value),
+      text: document.getElementById('t_text').value,
+      featured: document.getElementById('t_featured').checked ? 1 : 0,
+      active: document.getElementById('t_active').checked ? 1 : 0
+    };
+    if (!data.name || !data.text) { toast('Name and text are required', true); return; }
+    try {
+      if (id) { await api(`/api/admin/testimonials/${id}`, { method: 'PUT', body: JSON.stringify(data) }); toast('Testimonial updated!'); }
+      else { await api('/api/admin/testimonials', { method: 'POST', body: JSON.stringify(data) }); toast('Testimonial created!'); }
+      closeModal();
+      refreshTestimonials();
+    } catch (e) { toast(e.message, true); }
+  });
+}
+
+async function deleteTestimonial(id) {
+  if (!confirm('Delete this testimonial?')) return;
+  try { await api(`/api/admin/testimonials/${id}`, { method: 'DELETE' }); toast('Testimonial deleted!'); refreshTestimonials(); }
+  catch (e) { toast(e.message, true); }
+}
+
+// ── Newsletter ──
+
+async function renderNewsletter(el) {
+  el.innerHTML = `
+    <div class="card">
+      <div class="card-header"><h3><i class="fas fa-newspaper"></i> Subscribers</h3></div>
+      <div class="card-body" id="newsletterBody">
+        <div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+      </div>
+    </div>
+  `;
+  try {
+    const subs = await api('/api/admin/newsletters');
+    const tbody = document.getElementById('newsletterBody');
+    if (subs.length === 0) { tbody.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i> No subscribers yet</div>'; return; }
+    tbody.innerHTML = `
+      <table>
+        <thead><tr><th>Email</th><th>Name</th><th>Active</th><th>Subscribed</th></tr></thead>
+        <tbody>
+          ${subs.map(s => `
+            <tr>
+              <td><strong>${s.email}</strong></td>
+              <td>${s.name || '-'}</td>
+              <td>${s.active ? '<span style="color:var(--success)">●</span>' : '<span style="color:#ccc">●</span>'}</td>
+              <td>${new Date(s.created_at).toLocaleDateString()}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <p style="margin-top:1rem;color:#999;font-size:0.85rem">Total: ${subs.length} subscriber${subs.length !== 1 ? 's' : ''}</p>
+    `;
+  } catch (e) { document.getElementById('newsletterBody').innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`; }
+}
+
+// ── Settings ──
+
+function renderSettings(el) {
+  el.innerHTML = `
+    <div class="card">
+      <div class="card-header"><h3><i class="fas fa-cog"></i> Settings</h3></div>
+      <div class="card-body">
+        <div class="form-group"><label>Admin Email</label><input type="email" id="settingsEmail" value="${currentUser?.email || ''}" style="width:100%;padding:0.7rem 0.9rem;border:2px solid #ddd;border-radius:8px;font-size:0.95rem"></div>
+        <div class="form-group"><label>Site Name</label><input type="text" id="settingsSiteName" value="Discover Kenya" style="width:100%;padding:0.7rem 0.9rem;border:2px solid #ddd;border-radius:8px;font-size:0.95rem"></div>
+        <button class="btn btn-primary" onclick="toast('Settings saved!')"><i class="fas fa-save"></i> Save Settings</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3><i class="fas fa-info-circle"></i> API Info</h3></div>
+      <div class="card-body">
+        <p style="margin-bottom:0.5rem"><strong>Base URL:</strong> <code>${API}</code></p>
+        <p style="margin-bottom:0.5rem"><strong>Public Endpoints:</strong></p>
+        <ul style="margin-left:1.5rem;color:#555;font-size:0.9rem">
+          <li><code>GET /api/packages</code> - List public packages</li>
+          <li><code>GET /api/packages/:slug</code> - Single package</li>
+          <li><code>GET /api/destinations</code> - List destinations</li>
+          <li><code>GET /api/destinations/:slug</code> - Single destination</li>
+          <li><code>GET /api/testimonials</code> - List testimonials</li>
+          <li><code>POST /api/inquiries</code> - Submit an inquiry</li>
+          <li><code>POST /api/newsletter</code> - Subscribe</li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+// ── Modal ──
+
+let modalCallback = null;
+let modalEl = null;
+
+function showModal(title, bodyHtml, onSave, saveText) {
+  closeModal();
+  const overlay = document.createElement('div');
+  overlay.className = 'modal show';
+  overlay.id = 'modalOverlay';
+  overlay.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>${title}</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">${bodyHtml}</div>
+      <div class="modal-footer">
+        <button class="btn" onclick="closeModal()" style="background:#eee">Cancel</button>
+        <button class="btn btn-primary" id="modalSaveBtn">${saveText || 'Save'}</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  modalCallback = onSave;
+  document.getElementById('modalSaveBtn').addEventListener('click', async () => {
+    if (modalCallback) await modalCallback();
+  });
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+}
+
+function closeModal() {
+  const el = document.getElementById('modalOverlay');
+  if (el) el.remove();
+  modalCallback = null;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+// ── Init ──
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (token) { renderApp(); } else { renderLogin(); }
+});
+</script>
+</body>
+</html>

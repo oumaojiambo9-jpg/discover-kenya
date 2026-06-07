@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: discover-kenya
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: JWT_SECRET
+        generateValue: true
+    healthCheckPath: /api/packages

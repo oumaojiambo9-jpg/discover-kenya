@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamu — UNESCO World Heritage Island | Discover Kenya</title>
+  <meta name="description" content="Explore Lamu Island — a UNESCO World Heritage site with Swahili culture, ancient architecture, and pristine beaches on Kenya's north coast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+    :root {
+      --gold: #d4a341; --gold-light: #f0d68a; --terracotta: #c25b3a; --savanna: #e8c37b;
+      --green: #2d6a4f; --green-dark: #1b4332; --cream: #faf6f0; --dark: #1a1a2e;
+      --gray: #6b7280; --gray-light: #f3f4f6; --white: #ffffff;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+      --radius: 12px; --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-dark { background: var(--dark); color: #fff; }
+    .section-cream { background: var(--cream); }
+    .section-green { background: var(--green-dark); color: #fff; }
+    .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+    .section-dark h2, .section-green h2 { color: #fff; }
+    .section-subtitle { font-size: 1.05rem; color: var(--gray); max-width: 600px; line-height: 1.6; }
+    .section-dark .section-subtitle, .section-green .section-subtitle { color: rgba(255,255,255,0.7); }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header .section-subtitle { margin: 0 auto; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-primary:hover { background: #c49335; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .btn-dark { background: var(--dark); color: #fff; }
+    .btn-dark:hover { background: #2e2e4a; transform: translateY(-2px); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
+    nav.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding: 12px 0; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--gold); }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    nav.scrolled .nav-links a { color: rgba(0,0,0,0.7); }
+    nav.scrolled .nav-links a:hover { color: var(--dark); }
+    .nav-cta { background: var(--gold); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: #c49335 !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; transition: var(--transition); }
+    nav.scrolled .hamburger span { background: var(--dark); }
+    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 560px; margin-bottom: 36px; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    footer { background: var(--dark); color: rgba(255,255,255,0.7); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 80px 0 48px; }
+    .footer-brand .nav-logo { font-size: 1.8rem; color: #fff; display: inline-block; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 320px; }
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: var(--transition); font-size: 0.9rem; }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col h5 { color: #fff; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; padding: 4px 0; transition: var(--transition); }
+    .footer-col a:hover { color: var(--gold); padding-left: 4px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: var(--dark); padding: 80px 32px 32px; gap: 20px; z-index: 999; box-shadow: -4px 0 24px rgba(0,0,0,0.2); }
+      .nav-links.open a { color: rgba(255,255,255,0.8); font-size: 1rem; }
+      .nav-links.open a:hover { color: var(--gold); }
+      .hero h1 { font-size: 2.6rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="experiences.html">Experiences</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="plan.html">Plan Your Trip</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" style="height: 70vh; min-height: 500px;">
+    <div class="hero-bg" style="background-image: url('https://images.pexels.com/photos/1148997/pexels-photo-1148997.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80');"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Lamu<br><span>Timeless Swahili Shores</span></h1>
+      <p style="font-size: 1.05rem; max-width: 520px;">A UNESCO World Heritage island where ancient Swahili culture, coral stone architecture, and pristine beaches converge.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Overview</span>
+        <h2>Where Time Stands Still</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Lamu Island is one of Kenya's most enchanting destinations — a place where dhows still sail the turquoise waters, donkeys are the primary mode of transport, and the pace of life follows the rhythm of the monsoon winds. Located off Kenya's north coast, Lamu is the oldest and best-preserved Swahili settlement in East Africa, with a history stretching back over 700 years.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">The island is part of the Lamu Archipelago and was designated a UNESCO World Heritage site in 2001. Lamu Town, the main settlement, is a maze of narrow alleyways lined with coral stone buildings, carved wooden doors, and bustling marketplaces. The island offers a unique blend of history, culture, and beach relaxation that feels worlds away from modern Africa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Shela Village</span>
+        <h2>Beachside Serenity</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Shela is a charming village on the southern tip of Lamu Island, famous for its pristine beach and relaxed atmosphere. Unlike the more traditional Lamu Town, Shela has developed a reputation as a peaceful retreat with boutique hotels, beachfront villas, and some of the best seafood restaurants on the coast.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">The village is dominated by the impressive Shela Mosque with its distinctive minaret, and its narrow streets are lined with beautifully restored Swahili houses. Shela Beach stretches for miles with soft white sand and gentle turquoise waters, perfect for swimming, walking, and watching traditional dhows sail by.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Lamu Old Town</span>
+        <h2>A Living Museum</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Lamu Old Town is the heart of the island's UNESCO World Heritage designation. Founded in the 14th century, it is the oldest and best-preserved Swahili settlement in East Africa. The town's architecture is a unique fusion of African, Arab, Indian, and European influences, with coral stone buildings featuring ornate carved doors, inner courtyards, and rooftop terraces.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Key landmarks include the Lamu Museum, housed in a 19th-century merchant's house; the 19th-century Lamu Fort built by Omani Arabs; and the Riyadha Mosque, a center of Islamic learning. The waterfront waterfront promenade, known as the seafront, is the social heart of the town where locals gather to chat and watch the dhows come and go.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Beach Life</span>
+        <h2>Paradise Found</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Lamu's beaches are among the most beautiful in Kenya, offering seclusion and natural beauty that rivals any tropical destination. Shela Beach is the most popular, but for those seeking absolute privacy, the beaches further north toward Manda Island and the dunes offer complete solitude. The waters are warm year-round and safe for swimming, with gentle waves and no dangerous currents close to shore.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Sunset walks along the beach are a daily ritual, with the sky turning shades of orange and pink as dhows return with the day's catch. Beachfront dining under the stars is a quintessential Lamu experience, with freshly caught seafood grilled over open fires.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Dhow Safaris</span>
+        <h2>Sailing the Ancient Way</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">A dhow safari is an essential Lamu experience. These traditional wooden sailing vessels have plied the East African coast for centuries, and today they offer visitors a magical way to explore the archipelago. Day trips take you to nearby islands including Manda, Takwa, and Kiwayu, where you can snorkel on pristine reefs, visit deserted beaches, and enjoy fresh seafood lunches.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Sunset dhow cruises are particularly popular, offering champagne and snacks while sailing back to Lamu as the sun dips below the horizon. Multi-day dhow safaris are available for those wanting a more immersive experience, camping on remote islands and exploring the mangrove forests that line the coast.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Cuisine</span>
+        <h2>Flavors of the Swahili Coast</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Lamu's cuisine is a delicious reflection of its Swahili heritage, blending African, Arab, Indian, and Persian influences. Seafood is the star — freshly caught lobster, crab, prawns, tuna, and red snapper are grilled, curried, and stewed with coconut milk and aromatic spices. Signature dishes include biryani, pilau, samaki wa kupaka (fish in coconut sauce), and viazi karai (spiced potato fritters).</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Fresh tropical fruits including mangoes, papayas, coconuts, and passion fruit are abundant. The local Swahili breakfast of mahamri (coconut doughnuts) and chai masala (spiced tea) is not to be missed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Getting There</span>
+        <h2>How to Reach Lamu</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Lamu is accessible by air and sea. Daily scheduled flights operate from Nairobi's Wilson Airport and Mombasa's Moi International Airport to Lamu's Manda Airstrip (LAU), with a flight time of approximately 1 hour 15 minutes from Nairobi. From the airstrip, a short boat transfer takes you to Lamu Town or Shela Village. By road, you can drive to Mokowe Jetty on the mainland and take a motorized dhow crossing to the island.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
+          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder — where safari was born.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="YouTube">yt</a>
+            <a href="#" aria-label="Twitter">x</a>
+            <a href="#" aria-label="TikTok">tk</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Destinations</h5>
+          <a href="maasai-mara.html">Maasai Mara</a>
+          <a href="amboseli.html">Amboseli</a>
+          <a href="nairobi.html">Nairobi</a>
+          <a href="diani-beach.html">Diani Beach</a>
+          <a href="mount-kenya.html">Mount Kenya</a>
+          <a href="lake-nakuru.html">Lake Nakuru</a>
+          <a href="lamu.html">Lamu Island</a>
+        </div>
+        <div class="footer-col">
+          <h5>Plan Your Trip</h5>
+          <a href="visa.html">Visa & eTA</a>
+          <a href="travel-guide.html">Travel Guide</a>
+          <a href="accommodation.html">Accommodation</a>
+          <a href="getting-here.html">Getting Here</a>
+          <a href="weather.html">Weather & Seasons</a>
+          <a href="faqs.html">FAQs</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="index.html">Kenya Tourism Board</a>
+          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="tel:+254202711262">+254-20-2711-262</a>
+          <a href="mailto:info@discoverkenya.com">info@discoverkenya.com</a>
+          <a href="#">Media & Press</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > 60) { navbar.classList.add('scrolled'); }
+      else { navbar.classList.remove('scrolled'); }
+      lastScroll = current;
+    });
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.exp-card, .dest-card, .testimonial-card, .story-card, .plan-card, .itinerary-step, .package-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

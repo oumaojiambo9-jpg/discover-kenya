@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kenya Accommodation — Lodges, Hotels & Camps | Discover Kenya</title>
+  <meta name="description" content="Find the best places to stay in Kenya — from luxury safari lodges to beach resorts, boutique hotels, and eco-friendly camps.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+    :root {
+      --gold: #d4a341; --gold-light: #f0d68a; --terracotta: #c25b3a; --savanna: #e8c37b;
+      --green: #2d6a4f; --green-dark: #1b4332; --cream: #faf6f0; --dark: #1a1a2e;
+      --gray: #6b7280; --gray-light: #f3f4f6; --white: #ffffff;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+      --radius: 12px; --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-dark { background: var(--dark); color: #fff; }
+    .section-cream { background: var(--cream); }
+    .section-green { background: var(--green-dark); color: #fff; }
+    .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+    .section-dark h2, .section-green h2 { color: #fff; }
+    .section-subtitle { font-size: 1.05rem; color: var(--gray); max-width: 600px; line-height: 1.6; }
+    .section-dark .section-subtitle, .section-green .section-subtitle { color: rgba(255,255,255,0.7); }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header .section-subtitle { margin: 0 auto; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-primary:hover { background: #c49335; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .btn-dark { background: var(--dark); color: #fff; }
+    .btn-dark:hover { background: #2e2e4a; transform: translateY(-2px); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
+    nav.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding: 12px 0; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--gold); }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    nav.scrolled .nav-links a { color: rgba(0,0,0,0.7); }
+    nav.scrolled .nav-links a:hover { color: var(--dark); }
+    .nav-cta { background: var(--gold); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: #c49335 !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; transition: var(--transition); }
+    nav.scrolled .hamburger span { background: var(--dark); }
+    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 560px; margin-bottom: 36px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; padding: 48px 0; }
+    .stat-item { text-align: center; }
+    .stat-number { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--gold); }
+    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
+    footer { background: var(--dark); color: rgba(255,255,255,0.7); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 80px 0 48px; }
+    .footer-brand .nav-logo { font-size: 1.8rem; color: #fff; display: inline-block; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 320px; }
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: var(--transition); font-size: 0.9rem; }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col h5 { color: #fff; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; padding: 4px 0; transition: var(--transition); }
+    .footer-col a:hover { color: var(--gold); padding-left: 4px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .package-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); }
+    .package-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .package-img { position: relative; height: 200px; overflow: hidden; }
+    .package-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+    .package-card:hover .package-img img { transform: scale(1.06); }
+    .package-badge { position: absolute; top: 12px; right: 12px; background: var(--gold); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; }
+    .package-badge-green { background: var(--green); }
+    .package-badge-gold { background: var(--terracotta); }
+    .package-body { padding: 24px; }
+    .package-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--gray); margin-bottom: 12px; }
+    .package-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+    .package-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+    .package-highlights { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+    .package-highlights span { font-size: 0.8rem; color: var(--gray); }
+    .package-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--gray-light); }
+    .package-price { font-size: 0.85rem; color: var(--gray); }
+    .package-price strong { font-size: 1.2rem; color: var(--dark); font-weight: 700; }
+    .package-price small { font-size: 0.75rem; }
+    @media (max-width: 1024px) { .packages-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .packages-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { .packages-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1024px) {
+      .experiences-grid { grid-template-columns: repeat(2, 1fr); }
+      .dests-grid { grid-template-columns: repeat(2, 1fr); }
+      .dest-card:first-child { grid-column: 1 / -1; grid-row: auto; }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .plan-grid { grid-template-columns: repeat(2, 1fr); }
+      .stories-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: var(--dark); padding: 80px 32px 32px; gap: 20px; z-index: 999; box-shadow: -4px 0 24px rgba(0,0,0,0.2); }
+      .nav-links.open a { color: rgba(255,255,255,0.8); font-size: 1rem; }
+      .nav-links.open a:hover { color: var(--gold); }
+      .hero h1 { font-size: 2.6rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+    @media (max-width: 480px) { .plan-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="experiences.html">Experiences</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="plan.html">Plan Your Trip</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      </ul>
+    </div>
+  </nav>
+  <section class="hero" style="height: 60vh; min-height: 420px;">
+    <div class="hero-bg" style="background-image: url('https://images.pexels.com/photos/1402688/pexels-photo-1402688.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80');"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Accommodation<br><span>Your Home in the Wild</span></h1>
+      <p style="font-size: 1.05rem; max-width: 520px;">Discover Kenya's incredible range of accommodation — from world-class safari lodges to beachfront resorts and eco-friendly bush camps.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#127968; Types</span>
+        <h2>Where to Stay<br><span style="color: var(--gold);">Find Your Perfect Base</span></h2>
+        <p class="section-subtitle">Kenya offers a remarkable diversity of accommodation to suit every taste and budget.</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Kenya's accommodation scene is as diverse as its landscapes. From ultra-luxurious safari lodges perched on the edge of the Great Rift Valley to intimate tented camps hidden in the heart of the bush, from five-star beach resorts along the Indian Ocean to budget-friendly guesthouses in Nairobi — there is something for every traveler.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Most safari lodges and camps operate on a full-board or all-inclusive basis, covering meals, game drives, and activities. Beach resorts often offer half-board or full-board options. In cities and towns, bed-and-breakfast is the standard rate type.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">We've categorized the main types of accommodation below to help you decide what suits your travel style best.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#128081; Luxury</span>
+        <h2>Luxury Safari Lodges<br><span style="color: var(--gold);">World-Class Wilderness Living</span></h2>
+        <p class="section-subtitle">The pinnacle of African safari accommodation.</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Kenya is home to some of the most renowned luxury safari lodges in Africa. Properties like <strong>Angama Mara</strong> (perched on the Maasai Mara escarpment), <strong>Giraffe Manor</strong> (Nairobi's iconic boutique hotel where giraffes join you for breakfast), and <strong>Ol Donyo Lodge</strong> (Chyulu Hills) set the standard for safari elegance. These lodges offer private plunge pools, gourmet dining under the stars, and expert guides who tailor every game drive to your interests.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">Rates typically range from $800 to $2,500 per person per night, all-inclusive. Most luxury lodges are intimate, with 8-15 rooms, ensuring personalized service and exclusivity. Many also offer unique experiences like sundowner cocktails on the plains, bush breakfasts, and guided walking safaris.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#9978;&#65039; Camping</span>
+        <h2>Tented Camp Experience<br><span style="color: var(--gold);">Sleep Under the African Sky</span></h2>
+        <p class="section-subtitle">The quintessential safari accommodation — canvas meets comfort.</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Tented camps offer the most immersive safari experience. From classic canvas camps to "glamping" with king-size beds and en-suite bathrooms, the range is impressive. <strong>Kichwa Tembo</strong> in the Mara, <strong>Saruni Samburu</strong>, and <strong>Elsa's Kopje</strong> (Meru National Park) are standout examples. Falling asleep to the sounds of the bush and waking to birdsong is an experience unlike any other.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">Tented camps are typically seasonal (open during the dry season from June to October and December to March) and are designed to have minimal environmental impact. Rates range from $300 to $1,200 per person per night, often including meals, drinks, and game drives.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#127754; Beach</span>
+        <h2>Beach Resorts<br><span style="color: var(--gold);">Coastal Relaxation</span></h2>
+        <p class="section-subtitle">Kenya's Indian Ocean coastline offers world-class beach accommodation.</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">After a safari, there's no better way to unwind than on Kenya's pristine beaches. Diani Beach, Watamu, and Malindi are home to outstanding resorts such as <strong>Alfajiri Villas</strong>, <strong>Kinondo Kwetu</strong>, and <strong>Hemingways Watamu</strong>. These properties offer white sand beaches, coral reef snorkeling, Swahili-inspired spas, and exceptional seafood dining.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">Beach resort rates range from $150 per night for comfortable mid-range options to $1,000+ per night for luxury villas with private pools and butler service. Many resorts offer "safari and beach" packages that combine a few days in the bush with a coastal stay.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#128176; Budget</span>
+        <h2>Budget & Mid-Range<br><span style="color: var(--gold);">Affordable Stays</span></h2>
+        <p class="section-subtitle">Kenya offers excellent value for budget-conscious travelers.</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Traveling on a budget doesn't mean compromising on experience. Kenya has a growing selection of mid-range lodges, guesthouses, and hostels. In Nairobi, areas like Westlands and Kilimani offer boutique hotels from $60-120 per night. Near the parks, mid-range lodges such as <strong>Mara Sopa Lodge</strong>, <strong>Amboseli Sopa</strong>, and <strong>Lake Nakuru Lodge</strong> provide comfortable rooms with pool and restaurant from $120-250 per person per night.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">For the ultimate budget option, camping safaris are popular with backpackers. Organized camping trips start from $120-180 per person per day including meals, park fees, and transport. Basic bandas (thatched huts) in national parks offer self-catering options from as little as $30 per night.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section section-green">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#128161; Tips</span>
+        <h2>Booking Tips<br><span style="color: var(--gold);">Get the Best Deals</span></h2>
+        <p class="section-subtitle">Smart tips for booking your stay in Kenya.</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 16px;">Book early for peak season (July-October and December-January). The best lodges fill up months in advance, especially during the Great Migration. For green season travel (April-May), you can often find excellent discounts of 30-50% off peak rates.</p>
+        <p style="font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 16px;">Use a reputable tour operator for booking safari accommodation — they often have access to exclusive rates and can handle logistics like transfers and park fees. Direct bookings are fine for city hotels and beach resorts.</p>
+        <p style="font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.8;">Check cancellation policies carefully. Many lodges offer free cancellation up to 30 days before arrival, but peak season bookings may have stricter terms. Travel insurance is strongly recommended.</p>
+      </div>
+    </div>
+  </section>
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
+          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder — where safari was born.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="YouTube">yt</a>
+            <a href="#" aria-label="Twitter">x</a>
+            <a href="#" aria-label="TikTok">tk</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Destinations</h5>
+          <a href="maasai-mara.html">Maasai Mara</a>
+          <a href="amboseli.html">Amboseli</a>
+          <a href="nairobi.html">Nairobi</a>
+          <a href="diani-beach.html">Diani Beach</a>
+          <a href="mount-kenya.html">Mount Kenya</a>
+          <a href="lake-nakuru.html">Lake Nakuru</a>
+          <a href="lamu.html">Lamu Island</a>
+        </div>
+        <div class="footer-col">
+          <h5>Plan Your Trip</h5>
+          <a href="visa.html">Visa & eTA</a>
+          <a href="travel-guide.html">Travel Guide</a>
+          <a href="accommodation.html">Accommodation</a>
+          <a href="getting-here.html">Getting Here</a>
+          <a href="weather.html">Weather & Seasons</a>
+          <a href="faqs.html">FAQs</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="index.html">Kenya Tourism Board</a>
+          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="tel:+254202711262">+254-20-2711-262</a>
+          <a href="mailto:info@discoverkenya.com">info@discoverkenya.com</a>
+          <a href="#">Media & Press</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > 60) { navbar.classList.add('scrolled'); }
+      else { navbar.classList.remove('scrolled'); }
+    });
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.exp-card, .dest-card, .testimonial-card, .story-card, .plan-card, .itinerary-step, .package-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
