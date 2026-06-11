@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null,
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 10,
+      "includeFiles": "**/*.html"
+    }
+  },
+  "rewrites": [
+    { "source": "/admin", "destination": "/backend/admin/index.html" },
+    { "source": "/admin/(.*)", "destination": "/backend/admin/index.html" },
+    { "source": "/api/(.*)", "destination": "/api/index.js" }
+  ]
+}
