@@ -1,56 +1,286 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Discover Kenya — mount-kenya</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #1a1a2e; background: #fafafa; }
-    .container { max-width: 800px; margin: 0 auto; padding: 4rem 1.5rem; }
-    header { text-align: center; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid #e0e0e0; }
-    h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: #1a5276; margin-bottom: 0.5rem; }
-    .tagline { color: #666; font-size: 1.1rem; }
-    main { text-align: center; }
-    .sentences { font-size: 1.15rem; color: #333; max-width: 700px; margin: 0 auto; }
-    .sentences span { display: inline-block; margin: 0.5rem 0; }
-    footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e0e0e0; text-align: center; color: #888; font-size: 0.9rem; }
-    .nav { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
-    .nav a { color: #1a5276; text-decoration: none; font-weight: 500; }
-    .nav a:hover { text-decoration: underline; }
-    @media (max-width: 600px) { .container { padding: 2rem 1rem; } }
-  </style>
+  <title>Mount Kenya — Africa's Second-Highest Peak | Discover Kenya</title>
+  <meta name="description" content="Climb Mount Kenya — a UNESCO World Heritage site. Explore trekking routes, alpine scenery, and unique wildlife on Africa's second-highest mountain.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+    :root {
+      --gold: #d4a341; --gold-light: #f0d68a; --terracotta: #c25b3a; --savanna: #e8c37b;
+      --green: #2d6a4f; --green-dark: #1b4332; --cream: #faf6f0; --dark: #1a1a2e;
+      --gray: #6b7280; --gray-light: #f3f4f6; --white: #ffffff;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+      --radius: 12px; --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-dark { background: var(--dark); color: #fff; }
+    .section-cream { background: var(--cream); }
+    .section-green { background: var(--green-dark); color: #fff; }
+    .tag { display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+    .section-dark h2, .section-green h2 { color: #fff; }
+    .section-subtitle { font-size: 1.05rem; color: var(--gray); max-width: 600px; line-height: 1.6; }
+    .section-dark .section-subtitle, .section-green .section-subtitle { color: rgba(255,255,255,0.7); }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header .section-subtitle { margin: 0 auto; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: var(--transition); cursor: pointer; border: none; }
+    .btn-primary { background: var(--gold); color: #fff; }
+    .btn-primary:hover { background: #c49335; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .btn-dark { background: var(--dark); color: #fff; }
+    .btn-dark:hover { background: #2e2e4a; transform: translateY(-2px); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 0; transition: var(--transition); }
+    nav.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding: 12px 0; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--gold); }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    nav.scrolled .nav-links a { color: rgba(0,0,0,0.7); }
+    nav.scrolled .nav-links a:hover { color: var(--dark); }
+    .nav-cta { background: var(--gold); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: #c49335 !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; transition: var(--transition); }
+    nav.scrolled .hamburger span { background: var(--dark); }
+    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 560px; margin-bottom: 36px; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    footer { background: var(--dark); color: rgba(255,255,255,0.7); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 80px 0 48px; }
+    .footer-brand .nav-logo { font-size: 1.8rem; color: #fff; display: inline-block; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 320px; }
+    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.6); text-decoration: none; transition: var(--transition); font-size: 0.9rem; }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col h5 { color: #fff; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; padding: 4px 0; transition: var(--transition); }
+    .footer-col a:hover { color: var(--gold); padding-left: 4px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+    @media (max-width: 768px) {
+      .section { padding: 60px 0; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: var(--dark); padding: 80px 32px 32px; gap: 20px; z-index: 999; box-shadow: -4px 0 24px rgba(0,0,0,0.2); }
+      .nav-links.open a { color: rgba(255,255,255,0.8); font-size: 1rem; }
+      .nav-links.open a:hover { color: var(--gold); }
+      .hero h1 { font-size: 2.6rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Discover<span>Kenya</span></h1>
-      <p class="tagline">East Africa's Premier Tourism Platform</p>
-    </header>
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/destinations.html">Destinations</a>
-      <a href="/packages.html">Packages</a>
-      <a href="/experiences.html">Experiences</a>
-      <a href="/plan.html">Plan Your Trip</a>
-      <a href="/inquire.html">Inquire</a>
-    </nav>
-    <main>
-      <div class="sentences">        <span>Discover Kenya is East Africa's premier tourism platform connecting travelers with authentic Kenyan safari experiences.</span>
-        <span>We curate expert-led wildlife safaris, cultural tours, and coastal escapes across Kenya's most iconic destinations.</span>
-        <span>Our local guides and trusted partners ensure every journey supports conservation and community development.</span>
-        <span>From the Maasai Mara's Great Migration to Lamu's UNESCO heritage shores, we reveal Kenya's diverse wonders.</span>
-        <span>Plan your adventure with confidence — we handle every detail so you experience only the magic.</span>
+
+  <nav id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="experiences.html">Experiences</a></li>
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="destinations.html">Destinations</a></li>
+        <li><a href="plan.html">Plan Your Trip</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" style="height: 70vh; min-height: 500px;">
+    <div class="hero-bg" style="background-image: url('https://images.pexels.com/photos/3807792/pexels-photo-3807792.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80');"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Mount Kenya<br><span>Conquer the Peak</span></h1>
+      <p style="font-size: 1.05rem; max-width: 520px;">A UNESCO World Heritage site and Africa's second-highest peak — an unforgettable adventure through alpine forests and glaciers.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Overview</span>
+        <h2>Africa's Second-Highest Peak</h2>
       </div>
-    </main>
-    <footer>
-      <p>&copy; 2026 Discover Kenya. All rights reserved.</p>
-      <p>East Africa's Premier Tourism Platform</p>
-    </footer>
-  </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Mount Kenya is Africa's second-highest mountain at 5,199 meters (17,057 feet), surpassed only by Kilimanjaro. This ancient extinct volcano is a UNESCO World Heritage site and one of Kenya's most spectacular natural wonders. The mountain is a dormant stratovolcano that last erupted approximately 2.6 million years ago, with its jagged peaks and glaciers carved by millennia of glacial activity.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Mount Kenya's slopes feature distinct ecological zones — from lush montane forest at lower elevations through bamboo and heath zones to the stark alpine desert and glaciers at the summit. The mountain is a critical water tower for Kenya, feeding the Tana River system that provides hydroelectric power and irrigation to much of the country.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Trekking Routes</span>
+        <h2>Paths to the Summit</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Mount Kenya offers several established trekking routes, each with its own character and challenges. All routes require a good level of fitness and proper acclimatization.</p>
+        <ul style="font-size: 1rem; line-height: 1.8; color: var(--gray); padding-left: 20px; margin-bottom: 16px;">
+          <li><strong>Sirimon Route</strong> — The most popular and recommended route. Approaches from the northwest with gentle gradients and excellent acclimatization. Stunning views and good hut accommodation. Usually takes 5-7 days.</li>
+          <li><strong>Chogoria Route</strong> — Often considered the most scenic approach. Features breathtaking views of the Gorges Valley, Hall Tarns, and the Temple. Begins from the east side. Combines with Sirimon for a traverse.</li>
+          <li><strong>Naro Moru Route</strong> — The fastest but most challenging route. A steep climb through the Vertical Bog and up to the summit. Popular for experienced trekkers seeking a quicker ascent.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Wildlife</span>
+        <h2>Life on the Mountain</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Mount Kenya's forests are home to a variety of wildlife including elephants, buffaloes, leopards, and the elusive bongo antelope. The lower slopes host Sykes monkeys, colobus monkeys, and large forest hogs. Birdlife is abundant with over 130 bird species recorded including the stunning Mount Kenya ibis, sunbirds, and eagles.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">As you ascend above the tree line, wildlife becomes scarce but the unique giant groundsel and lobelia plants create an otherworldly landscape. The alpine zone features unique flora adapted to extreme temperature swings, with days above 30&deg;C and nights below freezing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Climbing Tips</span>
+        <h2>Prepare for the Summit</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">Climbing Mount Kenya requires proper preparation. The most important factors are acclimatization, proper gear, and fitness. Most climbers take 5-7 days for a summit attempt. Essential gear includes warm sleeping bags rated to -15&deg;C, waterproof boots, trekking poles, and multiple clothing layers. Hiring a licensed guide and porters is mandatory and supports local employment.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Altitude sickness is a real risk above 3,500 meters. The "pole pole" (slowly slowly) approach to pacing, combined with proper hydration and the medication Diamox, helps mitigate symptoms. Acclimatization days should never be skipped, regardless of fitness level.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Best Time to Climb</span>
+        <h2>When to Go</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;"><strong>Dry Seasons (January-February & July-October):</strong> The best times for climbing. Clear skies, minimal rainfall, and relatively warm temperatures on the slopes. Summit views are often spectacular during these months.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);"><strong>Wet Seasons (March-June & November-December):</strong> The mountain receives heavy rainfall, trails become muddy, and summit success rates are lower. However, the scenery is lush and there are far fewer climbers on the routes.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">For the best weather windows and highest summit success rates, plan your climb during the dry seasons.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cream">
+    <div class="container">
+      <div class="section-header" style="text-align: left;">
+        <span class="tag">Conservation</span>
+        <h2>Protecting the Peak</h2>
+      </div>
+      <div style="max-width: 800px;">
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Mount Kenya National Park is a UNESCO World Heritage site and a vital conservation area. The park is managed by the Kenya Wildlife Service with support from community conservancies. Mount Kenya's glaciers have shrunk by more than 80% since the early 1900s due to climate change, making conservation efforts more urgent than ever. Visitors are asked to follow Leave No Trace principles and use designated campsites.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
+          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder — where safari was born.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Destinations</h5>
+          <a href="maasai-mara.html">Maasai Mara</a>
+          <a href="amboseli.html">Amboseli</a>
+          <a href="nairobi.html">Nairobi</a>
+          <a href="diani-beach.html">Diani Beach</a>
+          <a href="mount-kenya.html">Mount Kenya</a>
+          <a href="lake-nakuru.html">Lake Nakuru</a>
+          <a href="lamu.html">Lamu Island</a>
+        </div>
+        <div class="footer-col">
+          <h5>Plan Your Trip</h5>
+          <a href="visa.html">Visa & eTA</a>
+          <a href="travel-guide.html">Travel Guide</a>
+          <a href="accommodation.html">Accommodation</a>
+          <a href="getting-here.html">Getting Here</a>
+          <a href="weather.html">Weather & Seasons</a>
+          <a href="faqs.html">FAQs</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="index.html">Kenya Tourism Board</a>
+          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="tel:+254202711262">+254-20-2711-262</a>
+          <a href="mailto:info@discoverkenya.com">info@discoverkenya.com</a>
+          <a href="#">Media & Press</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > 60) { navbar.classList.add('scrolled'); }
+      else { navbar.classList.remove('scrolled'); }
+      lastScroll = current;
+    });
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.exp-card, .dest-card, .testimonial-card, .story-card, .plan-card, .itinerary-step, .package-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
