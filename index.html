@@ -64,6 +64,7 @@
     body.dark .testimonial-card { background: #1f2937; }
     body.dark .testimonial-text { color: var(--gray); }
     body.dark .testimonial-name { color: #f9fafb; }
+    body.dark .nav-links.open { background: #1f2937; }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     .section { padding: 100px 0; }
@@ -417,6 +418,8 @@
     /* ── MOBILE ── */
     @media (max-width: 1024px) {
       .featured-grid { grid-template-columns: 1fr; }
+      #featured > .container > div:last-child { grid-template-columns: 1fr !important; }
+      .dest-card img { width: 100%; height: 100%; object-fit: cover; }
       .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
     }
 
