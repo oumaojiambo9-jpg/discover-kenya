@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -156,6 +156,17 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
     .hamburger span { width: 24px; height: 2px; background: #fff; transition: var(--transition); }
     nav.scrolled .hamburger span { background: var(--dark); }
+    body.dark nav.scrolled .hamburger span { background: #f9fafb; }
+    .nav-close {
+      display: none;
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: none;
+      color: rgba(255,255,255,0.8); font-size: 1.8rem;
+      cursor: pointer; z-index: 1001;
+      width: 40px; height: 40px;
+      align-items: center; justify-content: center;
+    }
+    .nav-links.open .nav-close { display: flex; }
 
     /* â”€â”€ HERO â”€â”€ */
     .hero {
@@ -549,6 +560,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
+        <button class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
         <li><a href="index.html">Home</a></li>
         <li><a href="experiences.html">Experiences</a></li>
         <li><a href="packages.html">Packages</a></li>
@@ -714,10 +726,15 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       lastScroll = current;
     });
 
+    // Mobile nav
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
+    const navClose = document.getElementById('navClose');
     hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+      navLinks.classList.add('open');
+    });
+    navClose.addEventListener('click', () => {
+      navLinks.classList.remove('open');
     });
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => { navLinks.classList.remove('open'); });
