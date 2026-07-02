@@ -753,7 +753,9 @@ body.dark .section-subtitle { color: var(--gray); }
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(el);
     });
-    <!-- ═══ DARK MODE TOGGLE ═══ -->
+  </script>
+
+  <!-- ═══ DARK MODE TOGGLE ═══ -->
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">&#9789;</button>
 
   <script>
@@ -770,6 +772,5 @@ body.dark .section-subtitle { color: var(--gray); }
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
-</script>
 </body>
 </html>
