@@ -710,10 +710,12 @@ body.dark .plan-card p { color: var(--gray); }
     function openNav() {
       navLinks.classList.add('open');
       navOverlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
     }
     function closeNav() {
       navLinks.classList.remove('open');
       navOverlay.style.display = 'none';
+      document.body.style.overflow = '';
     }
     hamburger.addEventListener('click', openNav);
     navClose.addEventListener('click', closeNav);
