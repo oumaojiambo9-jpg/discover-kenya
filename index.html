@@ -441,16 +441,20 @@
       .hamburger { display: flex; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        width: 100%;
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 280px;
         background: #1f2937;
         padding: 80px 32px 32px;
         gap: 20px;
         z-index: 1100;
-        box-shadow: -4px 0 24px rgba(0,0,0,0.2);
-        align-items: center;
-        justify-content: center;
       }
+      .nav-overlay {
+        display: none;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1099;
+      }
+      .nav-links.open ~ .nav-overlay { display: block; }
       .nav-links.open a { color: rgba(255,255,255,0.9); font-size: 1rem; }
       .nav-links.open a:hover { color: var(--gold); }
       .hero h1 { font-size: 2.6rem; }
@@ -482,6 +486,7 @@
         <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
       </ul>
     </div>
+    <div class="nav-overlay" id="navOverlay"></div>
   </nav>
 
   <!-- ═══ HERO ═══ -->
@@ -636,10 +641,14 @@
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     const navClose = document.getElementById('navClose');
+    const navOverlay = document.getElementById('navOverlay');
     hamburger.addEventListener('click', () => {
       navLinks.classList.add('open');
     });
     navClose.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+    });
+    navOverlay.addEventListener('click', () => {
       navLinks.classList.remove('open');
     });
     navLinks.querySelectorAll('a').forEach(link => {

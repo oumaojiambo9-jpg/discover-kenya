@@ -4,8 +4,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maasai Mara — The Great Migration | Discover Kenya</title>
-  <meta name="description" content="Experience the Maasai Mara — Africa's most iconic wildlife reserve. Witness the Great Migration, the Big Five, and authentic Maasai culture.">
+  <title>Maasai Mara ï¿½ The Great Migration | Discover Kenya</title>
+  <meta name="description" content="Experience the Maasai Mara ï¿½ Africa's most iconic wildlife reserve. Witness the Great Migration, the Big Five, and authentic Maasai culture.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
@@ -522,15 +522,18 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       .hamburger { display: flex; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        width: 100%;
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 280px;
         background: #1f2937;
         padding: 80px 32px 32px;
         gap: 20px;
         z-index: 1100;
-        box-shadow: -4px 0 24px rgba(0,0,0,0.2);
-        align-items: center;
-        justify-content: center;
+      }
+      .nav-overlay {
+        display: none;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1099;
       }
       .nav-links.open a { color: rgba(255,255,255,0.9); font-size: 1rem; }
       .nav-links.open a:hover { color: var(--gold); }
@@ -572,6 +575,8 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
       </ul>
     </div>
+      <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-overlay" id="navOverlay"></div>
   </nav>
 
   <section class="hero" style="height: 70vh; min-height: 500px;">
@@ -579,7 +584,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     <div class="hero-overlay"></div>
     <div class="container hero-content">
       <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Maasai Mara<br><span>Where the Wild Comes Alive</span></h1>
-      <p style="font-size: 1.05rem; max-width: 520px;">Africa's most iconic wildlife reserve — home to the Great Migration, the Big Five, and the timeless Maasai culture.</p>
+      <p style="font-size: 1.05rem; max-width: 520px;">Africa's most iconic wildlife reserve ï¿½ home to the Great Migration, the Big Five, and the timeless Maasai culture.</p>
     </div>
   </section>
 
@@ -591,7 +596,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       </div>
       <div style="max-width: 800px;">
         <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">The Maasai Mara National Reserve is Kenya's most celebrated wildlife destination and one of the most famous safari locations in the world. Spanning approximately 1,510 square kilometers in southwestern Kenya, the Mara forms the northern extension of the Serengeti ecosystem and hosts an extraordinary concentration of wildlife year-round.</p>
-        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Named after the Maasai people — the region's traditional inhabitants — and the Mara River that winds through its plains, this reserve offers rolling grasslands, acacia-dotted savannahs, and riverine forests that create a breathtaking backdrop for wildlife viewing. Visitors can expect some of the highest predator densities in Africa, with lion, cheetah, and leopard sightings being common.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">Named after the Maasai people ï¿½ the region's traditional inhabitants ï¿½ and the Mara River that winds through its plains, this reserve offers rolling grasslands, acacia-dotted savannahs, and riverine forests that create a breathtaking backdrop for wildlife viewing. Visitors can expect some of the highest predator densities in Africa, with lion, cheetah, and leopard sightings being common.</p>
       </div>
     </div>
   </section>
@@ -603,7 +608,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <h2>Nature's Greatest Spectacle</h2>
       </div>
       <div style="max-width: 800px;">
-        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">The Great Migration is the world's most spectacular wildlife event. Over 1.5 million wildebeest, accompanied by hundreds of thousands of zebras and gazelles, make an annual circular trek across the Serengeti-Mara ecosystem in search of fresh grazing and water. The Mara River crossing — where herds plunge into crocodile-infested waters — is one of nature's most dramatic moments.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">The Great Migration is the world's most spectacular wildlife event. Over 1.5 million wildebeest, accompanied by hundreds of thousands of zebras and gazelles, make an annual circular trek across the Serengeti-Mara ecosystem in search of fresh grazing and water. The Mara River crossing ï¿½ where herds plunge into crocodile-infested waters ï¿½ is one of nature's most dramatic moments.</p>
         <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">The migration typically reaches the Maasai Mara between July and October, offering visitors front-row seats to predator-prey interactions at an unparalleled scale. Hot air balloon safaris during this period provide a breathtaking aerial perspective of the endless herds stretching across the plains.</p>
       </div>
     </div>
@@ -619,11 +624,11 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;">The Maasai Mara boasts exceptional biodiversity with over 95 species of mammals and more than 570 bird species recorded. The reserve offers some of the best Big Five viewing opportunities in Africa, alongside cheetah, hyena, giraffe, zebra, eland, and countless other species.</p>
         <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 8px;"><strong>The Big Five found in the Mara:</strong></p>
         <ul style="font-size: 1rem; line-height: 1.8; color: var(--gray); padding-left: 20px; margin-bottom: 16px;">
-          <li><strong>Lion</strong> — The Mara has one of Africa's highest lion densities, with prides often seen hunting on the plains.</li>
-          <li><strong>Leopard</strong> — Often spotted resting in fig trees along the Talek and Mara rivers.</li>
-          <li><strong>African Elephant</strong> — Large herds roam the reserve, especially in the Musiara and Sekenani areas.</li>
-          <li><strong>Black Rhino</strong> — A conservation success story, the Mara provides a sanctuary for these endangered animals.</li>
-          <li><strong>African Buffalo</strong> — Massive herds, sometimes numbering in the hundreds, graze the grasslands.</li>
+          <li><strong>Lion</strong> ï¿½ The Mara has one of Africa's highest lion densities, with prides often seen hunting on the plains.</li>
+          <li><strong>Leopard</strong> ï¿½ Often spotted resting in fig trees along the Talek and Mara rivers.</li>
+          <li><strong>African Elephant</strong> ï¿½ Large herds roam the reserve, especially in the Musiara and Sekenani areas.</li>
+          <li><strong>Black Rhino</strong> ï¿½ A conservation success story, the Mara provides a sanctuary for these endangered animals.</li>
+          <li><strong>African Buffalo</strong> ï¿½ Massive herds, sometimes numbering in the hundreds, graze the grasslands.</li>
         </ul>
       </div>
     </div>
@@ -649,8 +654,8 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <h2>When to Experience the Mara</h2>
       </div>
       <div style="max-width: 800px;">
-        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;"><strong>Peak Season (July – October):</strong> The Great Migration is in full swing. Dry weather and concentrated wildlife make this the most popular time. Expect higher prices and more visitors.</p>
-        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;"><strong>Green Season (November – June):</strong> Lush landscapes, fewer tourists, and excellent bird watching. Calving season (January–February) offers exceptional predator action. Rates are lower.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;"><strong>Peak Season (July ï¿½ October):</strong> The Great Migration is in full swing. Dry weather and concentrated wildlife make this the most popular time. Expect higher prices and more visitors.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray); margin-bottom: 16px;"><strong>Green Season (November ï¿½ June):</strong> Lush landscapes, fewer tourists, and excellent bird watching. Calving season (Januaryï¿½February) offers exceptional predator action. Rates are lower.</p>
         <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">The Mara is a year-round destination. Even outside migration months, resident wildlife populations ensure outstanding game viewing in every season.</p>
       </div>
     </div>
@@ -663,7 +668,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <h2>How to Reach the Mara</h2>
       </div>
       <div style="max-width: 800px;">
-        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">The Maasai Mara is accessible by both road and air. Scheduled flights depart daily from Nairobi's Wilson Airport to several airstrips within the reserve, taking approximately 45–60 minutes. By road, the journey from Nairobi takes about 5–6 hours via Narok, with the recently tarmacked road making the trip more convenient. Most safari lodges and camps offer transfer services. Self-drive is also possible but a 4x4 vehicle is recommended, especially during the rainy season.</p>
+        <p style="font-size: 1rem; line-height: 1.8; color: var(--gray);">The Maasai Mara is accessible by both road and air. Scheduled flights depart daily from Nairobi's Wilson Airport to several airstrips within the reserve, taking approximately 45ï¿½60 minutes. By road, the journey from Nairobi takes about 5ï¿½6 hours via Narok, with the recently tarmacked road making the trip more convenient. Most safari lodges and camps offer transfer services. Self-drive is also possible but a 4x4 vehicle is recommended, especially during the rainy season.</p>
       </div>
     </div>
   </section>
@@ -673,7 +678,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
-          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder — where safari was born.</p>
+          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder ï¿½ where safari was born.</p>
           <div class="footer-social">
             <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
             <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
@@ -732,10 +737,14 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     const navClose = document.getElementById('navClose');
+    const navOverlay = document.getElementById('navOverlay');
     hamburger.addEventListener('click', () => {
       navLinks.classList.add('open');
     });
     navClose.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+    });
+    navOverlay.addEventListener('click', () => {
       navLinks.classList.remove('open');
     });
     navLinks.querySelectorAll('a').forEach(link => {

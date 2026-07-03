@@ -4,8 +4,8 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kenya Weather & Seasons — Best Time to Visit | Discover Kenya</title>
-  <meta name="description" content="Kenya weather guide — dry season, wet season, and the best months for safaris, beach holidays, and mountain trekking.">
+  <title>Kenya Weather & Seasons ï¿½ Best Time to Visit | Discover Kenya</title>
+  <meta name="description" content="Kenya weather guide ï¿½ dry season, wet season, and the best months for safaris, beach holidays, and mountain trekking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
@@ -150,15 +150,18 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       .hamburger { display: flex; }
       .nav-links.open {
         display: flex; flex-direction: column;
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        width: 100%;
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 280px;
         background: #1f2937;
         padding: 80px 32px 32px;
         gap: 20px;
         z-index: 1100;
-        box-shadow: -4px 0 24px rgba(0,0,0,0.2);
-        align-items: center;
-        justify-content: center;
+      }
+      .nav-overlay {
+        display: none;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1099;
       }
       .nav-links.open a { color: rgba(255,255,255,0.9); font-size: 1rem; }
       .nav-links.open a:hover { color: var(--gold); }
@@ -184,6 +187,8 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
       </ul>
     </div>
+      <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-overlay" id="navOverlay"></div>
   </nav>
   <section class="hero" style="height: 60vh; min-height: 420px;">
     <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1600&q=80');"></div>
@@ -198,7 +203,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="section-header">
         <span class="tag">&#127758; Climate</span>
         <h2>Kenya's Climate<br><span style="color: var(--gold);">A Year-Round Destination</span></h2>
-        <p class="section-subtitle">Plan your adventure with confidence — we handle every detail for the perfect timing.</p>
+        <p class="section-subtitle">Plan your adventure with confidence ï¿½ we handle every detail for the perfect timing.</p>
       </div>
       <div style="max-width: 800px; margin: 0 auto;">
         <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Kenya lies on the equator but its climate varies significantly by region. The low-lying coastal areas are hot and humid year-round (26-32&deg;C). The central highlands, including Nairobi, enjoy mild temperatures (18-26&deg;C) with cool evenings. The northern arid regions are hot and dry, while the Rift Valley offers pleasant year-round conditions.</p>
@@ -212,10 +217,10 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="section-header">
         <span class="tag">&#9728;&#65039; Dry Season</span>
         <h2>Dry Season: June - October<br><span style="color: var(--gold);">Prime Safari Time</span></h2>
-        <p class="section-subtitle">Plan your adventure with confidence — we handle every detail for the perfect timing.</p>
+        <p class="section-subtitle">Plan your adventure with confidence ï¿½ we handle every detail for the perfect timing.</p>
       </div>
       <div style="max-width: 800px; margin: 0 auto;">
-        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">The dry season is Kenya's peak travel period — and for good reason. From June to October, skies are clear, vegetation is sparse, and animals gather around rivers and waterholes, making them far easier to spot. The Maasai Mara's Great Migration reaches its peak between July and October, with dramatic river crossings as wildebeest and zebra navigate the crocodile-filled Mara River.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">The dry season is Kenya's peak travel period ï¿½ and for good reason. From June to October, skies are clear, vegetation is sparse, and animals gather around rivers and waterholes, making them far easier to spot. The Maasai Mara's Great Migration reaches its peak between July and October, with dramatic river crossings as wildebeest and zebra navigate the crocodile-filled Mara River.</p>
         <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">Daytime temperatures are warm and pleasant (22-28&deg;C in most safari areas), though mornings and evenings can be cool, especially in highland areas. The coast remains hot and humid. This is the busiest time for tourism, so book accommodation and flights well in advance.</p>
         <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">A secondary dry period occurs in January and February, offering another excellent window for safari travel. These months are also slightly less crowded than July-October, with good wildlife viewing throughout.</p>
       </div>
@@ -226,11 +231,11 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="section-header">
         <span class="tag">&#127782; Green Season</span>
         <h2>Green Season: November - May<br><span style="color: var(--gold);">Lush Landscapes & Fewer Crowds</span></h2>
-        <p class="section-subtitle">Plan your adventure with confidence — we handle every detail for the perfect timing.</p>
+        <p class="section-subtitle">Plan your adventure with confidence ï¿½ we handle every detail for the perfect timing.</p>
       </div>
       <div style="max-width: 800px; margin: 0 auto;">
         <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">The green season is a magical time to visit Kenya. Rain showers are typically heavy but short, often occurring in the late afternoon or overnight, leaving mornings clear for game drives. The landscape bursts into brilliant green, wildflowers bloom, and the birding is exceptional with migratory species present from November to April.</p>
-        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">This is the best time for photographers, as the golden light and dramatic cloud formations create stunning conditions. It's also the calving season for wildebeest (January-February), when thousands of calves are born — a prime time for predator action. Accommodation rates are significantly lower, often 30-50% less than peak season.</p>
+        <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px;">This is the best time for photographers, as the golden light and dramatic cloud formations create stunning conditions. It's also the calving season for wildebeest (January-February), when thousands of calves are born ï¿½ a prime time for predator action. Accommodation rates are significantly lower, often 30-50% less than peak season.</p>
         <p style="font-size: 1rem; color: var(--gray); line-height: 1.8;">The long rains (March-May) can make some park roads muddy and challenging, but most areas remain accessible. The coastal region experiences its best weather during December-February, making this an ideal time for a beach holiday combined with safari.</p>
       </div>
     </div>
@@ -240,7 +245,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="section-header">
         <span class="tag">&#127758; Regions</span>
         <h2>Regional Weather<br><span style="color: var(--gold);">Temperatures by Area</span></h2>
-        <p class="section-subtitle">Plan your adventure with confidence — we handle every detail for the perfect timing.</p>
+        <p class="section-subtitle">Plan your adventure with confidence ï¿½ we handle every detail for the perfect timing.</p>
       </div>
       <div style="max-width: 700px; margin: 0 auto; overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
@@ -269,7 +274,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="section-header">
         <span class="tag">&#128197; Month by Month</span>
         <h2>Month-by-Month Guide<br><span style="color: var(--gold);">What to Expect</span></h2>
-        <p class="section-subtitle">Plan your adventure with confidence — we handle every detail for the perfect timing.</p>
+        <p class="section-subtitle">Plan your adventure with confidence ï¿½ we handle every detail for the perfect timing.</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; margin: 0 auto;">
         <div style="background: var(--cream); border-radius: var(--radius); padding: 20px; text-align: center;"><div style="font-size: 2rem;">&#127774;</div><h4 style="font-size: 1rem; margin: 8px 0 4px;">January</h4><p style="font-size: 0.8rem; color: var(--gray);">Hot & dry. Peak season. Excellent game viewing. Calving season begins. Great for beach.</p></div>
@@ -292,7 +297,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="section-header">
         <span class="tag">&#127891; Packing</span>
         <h2>Packing Tips by Season<br><span style="color: var(--gold);">What to Bring</span></h2>
-        <p class="section-subtitle">Plan your adventure with confidence — we handle every detail for the perfect timing.</p>
+        <p class="section-subtitle">Plan your adventure with confidence ï¿½ we handle every detail for the perfect timing.</p>
       </div>
       <div style="max-width: 800px; margin: 0 auto;">
         <p style="font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.8; margin-bottom: 16px;"><strong>Dry Season (Jun-Oct & Jan-Feb):</strong> Lightweight, neutral-colored clothing (khaki, olive, beige) for daytime. A fleece or light jacket for cool early morning game drives. Sun hat, sunglasses, high-SPF sunscreen. Comfortable walking shoes. Swimwear for lodge pools and beaches.</p>
@@ -306,7 +311,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo">Discover<span>Kenya</span></a>
-          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder — where safari was born.</p>
+          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder ï¿½ where safari was born.</p>
           <div class="footer-social">
             <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
             <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
@@ -360,10 +365,14 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     const navClose = document.getElementById('navClose');
+    const navOverlay = document.getElementById('navOverlay');
     hamburger.addEventListener('click', () => {
       navLinks.classList.add('open');
     });
     navClose.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+    });
+    navOverlay.addEventListener('click', () => {
       navLinks.classList.remove('open');
     });
     navLinks.querySelectorAll('a').forEach(link => {
