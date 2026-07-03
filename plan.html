@@ -707,17 +707,19 @@ body.dark .plan-card p { color: var(--gray); }
     const navLinks = document.getElementById('navLinks');
     const navClose = document.getElementById('navClose');
     const navOverlay = document.getElementById('navOverlay');
-    hamburger.addEventListener('click', () => {
+    function openNav() {
       navLinks.classList.add('open');
-    });
-    navClose.addEventListener('click', () => {
+      navOverlay.style.display = 'block';
+    }
+    function closeNav() {
       navLinks.classList.remove('open');
-    });
-    navOverlay.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-    });
+      navOverlay.style.display = 'none';
+    }
+    hamburger.addEventListener('click', openNav);
+    navClose.addEventListener('click', closeNav);
+    navOverlay.addEventListener('click', closeNav);
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => { navLinks.classList.remove('open'); });
+      link.addEventListener('click', closeNav);
     });
 
     // Intersection Observer for fade-in
