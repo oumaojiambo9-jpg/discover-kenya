@@ -778,13 +778,17 @@ body.dark .exp-detail-body p { color: var(--gray); }
     const navLinks = document.getElementById('navLinks');
     const navClose = document.getElementById('navClose');
     const navOverlay = document.getElementById('navOverlay');
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (isMobile) { navLinks.style.cssText = 'display:none!important;visibility:hidden!important;pointer-events:none!important;position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important;overflow:hidden!important;'; }
     function openNav() {
       navLinks.classList.add('open');
+      navLinks.style.cssText = 'display:flex!important;flex-direction:column;visibility:visible!important;pointer-events:auto!important;position:fixed!important;top:0;right:0;bottom:0;left:auto!important;width:280px;height:auto!important;overflow:visible!important;opacity:1!important;background:#1f2937;padding:80px 32px 32px;gap:20px;z-index:1100;';
       navOverlay.style.display = 'block';
       document.body.style.overflow = 'hidden';
     }
     function closeNav() {
       navLinks.classList.remove('open');
+      navLinks.style.cssText = 'display:none!important;visibility:hidden!important;pointer-events:none!important;position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important;overflow:hidden!important;';
       navOverlay.style.display = 'none';
       document.body.style.overflow = '';
     }
