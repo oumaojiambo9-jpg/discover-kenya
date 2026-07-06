@@ -116,17 +116,8 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     .hamburger span { width: 24px; height: 2px; background: #fff; transition: var(--transition); }
     nav.scrolled .hamburger span { background: var(--dark); }
     body.dark nav.scrolled .hamburger span { background: #f9fafb; }
-    .nav-close {
-      display: none;
-      position: absolute; top: 20px; right: 20px;
-      background: none; border: none;
-      color: rgba(255,255,255,0.8); font-size: 1.8rem;
-      cursor: pointer; z-index: 1101;
-      width: 40px; height: 40px;
-      align-items: center; justify-content: center;
-    }
-    .nav-links.open .nav-close { display: flex; }
-    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
+
+.hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
     @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%); }
@@ -149,40 +140,43 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
     @media (max-width: 768px) {
       .section { padding: 60px 0; }
-            .nav-links {
-        display: none !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
-        position: absolute !important;
-        left: -9999px !important;
-        opacity: 0 !important;
-        height: 0 !important;
-        overflow: hidden !important;
-      }
-      .nav-links.open {
-        display: flex !important; flex-direction: column;
-        visibility: visible !important;
-        pointer-events: auto !important;
-        position: fixed !important; top: 0; right: 0; bottom: 0;
-        left: auto !important;
-        width: 280px;
-        height: auto !important;
-        overflow: visible !important;
-        opacity: 1 !important;
-        background: #1f2937;
-        padding: 80px 32px 32px;
-        gap: 20px;
-        z-index: 1100;
-      }
+
+      .desktop-only { display: none !important; }
       .hamburger { display: flex; }
-      .nav-overlay {
+      .mobile-overlay {
         display: none;
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
         background: rgba(0,0,0,0.5);
         z-index: 1099;
       }
-      .nav-links.open a { color: rgba(255,255,255,0.9); font-size: 1rem; }
-      .nav-links.open a:hover { color: var(--gold); }
+      .mobile-overlay.active { display: block; }
+      .mobile-menu {
+        display: none;
+        position: fixed; top: 0; right: 0; bottom: 0;
+        width: 280px;
+        background: #1f2937;
+        padding: 80px 32px 32px;
+        z-index: 1100;
+        overflow-y: auto;
+      }
+      .mobile-menu.active { display: block; }
+      .mobile-close {
+        position: absolute; top: 20px; right: 20px;
+        background: none; border: none;
+        color: rgba(255,255,255,0.8); font-size: 1.8rem;
+        cursor: pointer; z-index: 1101;
+        width: 40px; height: 40px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+      .mobile-menu a {
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: var(--transition);
+      }
+      .mobile-menu a:hover { color: var(--gold); }
       .hero h1 { font-size: 2.6rem; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
@@ -191,14 +185,14 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
 </head>
 <body>
 
+    <!-- â•â•â• NAV â•â•â• -->
   <nav id="navbar">
     <div class="container">
       <a href="index.html" class="nav-logo"><img src="logo.png" alt="Kiboko Adventures" style="height:40px;width:auto;"></a>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav-links" id="navLinks">
-        <button class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
+      <ul class="nav-links desktop-only" id="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="experiences.html">Experiences</a></li>
         <li><a href="packages.html">Packages</a></li>
@@ -208,9 +202,22 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
       </ul>
     </div>
-      <div class="nav-overlay" id="navOverlay"></div>
-    <div class="nav-overlay" id="navOverlay"></div>
   </nav>
+
+  <!-- â•â•â• MOBILE MENU (outside nav to avoid stacking issues) â•â•â• -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="experiences.html">Experiences</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="destinations.html">Destinations</a></li>
+      <li><a href="plan.html">Plan Your Trip</a></li>
+      <li><a href="stories.html">Stories</a></li>
+      <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+    </ul>
+  </div>
 
   <section class="hero" style="height: 70vh; min-height: 500px;">
     <div class="hero-bg" style="background-image: url('https://images.pexels.com/photos/1148997/pexels-photo-1148997.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80');"></div>
@@ -370,29 +377,25 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       else { navbar.classList.remove('scrolled'); }
       lastScroll = current;
     });
-    // Mobile nav
+        // Mobile nav
     const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    const navClose = document.getElementById('navClose');
-    const navOverlay = document.getElementById('navOverlay');
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    if (isMobile) { navLinks.style.cssText = 'display:none!important;visibility:hidden!important;pointer-events:none!important;position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important;overflow:hidden!important;'; }
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    const mobileOverlay = document.getElementById('mobileOverlay');
     function openNav() {
-      navLinks.classList.add('open');
-      navLinks.style.cssText = 'display:flex!important;flex-direction:column;visibility:visible!important;pointer-events:auto!important;position:fixed!important;top:0;right:0;bottom:0;left:auto!important;width:280px;height:auto!important;overflow:visible!important;opacity:1!important;background:#1f2937;padding:80px 32px 32px;gap:20px;z-index:1100;';
-      navOverlay.style.display = 'block';
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
     function closeNav() {
-      navLinks.classList.remove('open');
-      navLinks.style.cssText = 'display:none!important;visibility:hidden!important;pointer-events:none!important;position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important;overflow:hidden!important;';
-      navOverlay.style.display = 'none';
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
       document.body.style.overflow = '';
     }
     hamburger.addEventListener('click', openNav);
-    navClose.addEventListener('click', closeNav);
-    navOverlay.addEventListener('click', closeNav);
-    navLinks.querySelectorAll('a').forEach(link => {
+    mobileClose.addEventListener('click', closeNav);
+    mobileOverlay.addEventListener('click', closeNav);
+    mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeNav);
     });
     const observer = new IntersectionObserver((entries) => {
