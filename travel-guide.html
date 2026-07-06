@@ -157,6 +157,17 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     nav.scrolled .hamburger span { background: var(--dark); }
     body.dark nav.scrolled .hamburger span { background: #f9fafb; }
 
+    /* â”€â”€ MOBILE MENU (base: hidden on desktop) â”€â”€ */
+    .mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1099; }
+    .mobile-overlay.active { display: block; }
+    .mobile-menu { display: none; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: #1f2937; padding: 80px 32px 32px; z-index: 1100; overflow-y: auto; }
+    .mobile-menu.active { display: block; }
+    .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: rgba(255,255,255,0.8); font-size: 1.8rem; cursor: pointer; z-index: 1101; width: 40px; height: 40px; display: none; align-items: center; justify-content: center; }
+    .mobile-menu.active .mobile-close { display: flex; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .mobile-menu a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 1rem; font-weight: 500; transition: var(--transition); }
+    .mobile-menu a:hover { color: var(--gold); }
+
 .hero {
       position: relative;
       height: 100vh;
@@ -496,40 +507,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
 
       .nav-links.desktop-only { display: none !important; }
       .hamburger { display: flex; }
-      .mobile-overlay {
-        display: none;
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.5);
-        z-index: 1099;
-      }
-      .mobile-overlay.active { display: block; }
-      .mobile-menu {
-        display: none;
-        position: fixed; top: 0; right: 0; bottom: 0;
-        width: 280px;
-        background: #1f2937;
-        padding: 80px 32px 32px;
-        z-index: 1100;
-        overflow-y: auto;
-      }
-      .mobile-menu.active { display: block; }
-      .mobile-close {
-        position: absolute; top: 20px; right: 20px;
-        background: none; border: none;
-        color: rgba(255,255,255,0.8); font-size: 1.8rem;
-        cursor: pointer; z-index: 1101;
-        width: 40px; height: 40px;
-        display: flex; align-items: center; justify-content: center;
-      }
-      .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-      .mobile-menu a {
-        color: rgba(255,255,255,0.9);
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 500;
-        transition: var(--transition);
-      }
-      .mobile-menu a:hover { color: var(--gold); }
+
       .hero h1 { font-size: 2.6rem; }
       .stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .experiences-grid { grid-template-columns: 1fr; }
