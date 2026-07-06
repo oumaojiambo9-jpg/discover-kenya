@@ -11,7 +11,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; color: #1a1a2e; overflow-x: hidden; background: url('logo.png') center/cover fixed no-repeat; }
 
     :root {
       --gold: #d4a341;
@@ -167,11 +167,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       align-items: center;
       overflow: hidden;
     }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('logo.png') center/cover no-repeat;
-      transform: none;
-      animation: none; }
+    .hero-bg { position: absolute; inset: 0; background: transparent; }
     .hero-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
