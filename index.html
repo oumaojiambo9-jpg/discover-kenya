@@ -170,10 +170,9 @@
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('logo.png') center/contain no-repeat;
-      transform: none;
-      animation: none;
-      background-color: #1a1a2e;
+      background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover;
+      transform: scale(1.05);
+      animation: heroZoom 20s ease-in-out infinite alternate;
     }
     @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
     .hero-overlay {
@@ -428,7 +427,7 @@
 
     @media (max-width: 768px) {
       .section { padding: 60px 0; }
-      .desktop-only { display: none !important; }
+      .nav-links.desktop-only { display: none !important; }
       .hamburger { display: flex; }
       .mobile-overlay {
         display: none;
