@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -172,10 +172,9 @@ body.dark .exp-detail-body p { color: var(--gray); }
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover;
-      transform: scale(1.05);
-      animation: heroZoom 20s ease-in-out infinite alternate;
-    }
+      background: url('logo.png') center/cover no-repeat;
+      transform: none;
+      animation: none; }
 
     .hero-overlay {
       position: absolute; inset: 0;
@@ -344,7 +343,7 @@ body.dark .exp-detail-body p { color: var(--gray); }
     .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
     .story-img { height: 200px; overflow: hidden; }
     .story-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-    .story-card:hover .story-img img { transform: scale(1.05); }
+    .story-card:hover .story-img img { transform: none; }
     .story-body { padding: 24px; }
     .story-category {
       font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
@@ -593,7 +592,6 @@ body.dark .exp-detail-body p { color: var(--gray); }
     @media (max-width: 480px) {
       .plan-grid { grid-template-columns: 1fr; }
     }
-  @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
     </style>
 </head>
 <body>
