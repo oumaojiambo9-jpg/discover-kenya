@@ -2,6 +2,11 @@
   "name": "discover-kenya",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "npm --prefix backend start",
+    "dev": "npm --prefix backend run dev",
+    "init-db": "npm --prefix backend run init-db"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
