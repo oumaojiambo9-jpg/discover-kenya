@@ -118,8 +118,11 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     body.dark nav.scrolled .hamburger span { background: #f9fafb; }
 
 .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background: url('https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80') center/cover; transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
-    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
+    .hero-bg { position: absolute; inset: 0;       background: url('logo.png') center/contain no-repeat;
+      transform: none;
+      animation: none;
+      background-color: #1a1a2e; }
+
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%); }
     .hero-content { position: relative; z-index: 2; max-width: 720px; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 8vw, 5.5rem); font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 20px; }
