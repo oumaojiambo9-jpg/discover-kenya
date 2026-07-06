@@ -1,16 +1,37 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="kenya" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#000000"/>
-      <stop offset="33%" style="stop-color:#FF0000"/>
-      <stop offset="33%" style="stop-color:#FF0000"/>
-      <stop offset="66%" style="stop-color:#008000"/>
-      <stop offset="66%" style="stop-color:#008000"/>
-      <stop offset="100%" style="stop-color:#FFFFFF"/>
-    </linearGradient>
-  </defs>
-  <!-- Lion silhouette -->
-  <path fill="url(#kenya)" d="M16 2C10.5 2 6 6.5 6 12c0 2.5 1.2 4.7 3 6 0.6 0.4 1.5 0.5 2.2 0.3 0.7-0.2 1.3-0.8 1.6-1.5 0.3-0.7 0.8-1.2 1.4-1.6 1.5-0.7 3-1.5 4.8-1.5 5.5 0 10 4.5 10 10s-4.5 10-10 10S6 27.5 6 22c0-2.5 1.2-4.7 3-6 0.6-0.4 1.5-1.5-0.5 1.6-0.3 0.7 0.2 1.3 0.8 1.6 1.5 0.3 0.7 0.8 1.2 1.4 1.6 1.5 0.7 3 1.5 4.8 1.5 5.5 0 10-4.5 10-10S21.5 2 16 2z"/>
-  <circle cx="11" cy="14" r="1.5" fill="#FFD700"/>
-  <circle cx="21" cy="14" r="1.5" fill="#FFD700"/>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="32" fill="#1b4332"/>
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#d4a341" stroke-width="2"/>
+  <circle cx="32" cy="32" r="25" fill="none" stroke="#d4a341" stroke-width="1"/>
+  <!-- Buffalo head -->
+  <g transform="translate(32,30)">
+    <!-- Horns -->
+    <path d="M-14,-6 Q-16,-14 -10,-16 Q-6,-14 -4,-8" fill="none" stroke="#d4a341" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M14,-6 Q16,-14 10,-16 Q6,-14 4,-8" fill="none" stroke="#d4a341" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Horn base -->
+    <path d="M-10,-12 Q0,-8 10,-12" fill="none" stroke="#d4a341" stroke-width="3" stroke-linecap="round"/>
+    <!-- Head -->
+    <ellipse cx="0" cy="2" rx="10" ry="11" fill="#8B6914"/>
+    <ellipse cx="0" cy="2" rx="9" ry="10" fill="#6B4F12"/>
+    <!-- Eyes -->
+    <circle cx="-5" cy="-1" r="1.5" fill="#d4a341"/>
+    <circle cx="5" cy="-1" r="1.5" fill="#d4a341"/>
+    <circle cx="-5" cy="-1" r="0.7" fill="#1a1a2e"/>
+    <circle cx="5" cy="-1" r="0.7" fill="#1a1a2e"/>
+    <!-- Nose -->
+    <ellipse cx="0" cy="8" rx="6" ry="4" fill="#5a4210"/>
+    <circle cx="-2.5" cy="8" r="1.2" fill="#3a2a0a"/>
+    <circle cx="2.5" cy="8" r="1.2" fill="#3a2a0a"/>
+    <!-- Ears -->
+    <ellipse cx="-12" cy="2" rx="3" ry="4" fill="#6B4F12" transform="rotate(-20,-12,2)"/>
+    <ellipse cx="12" cy="2" rx="3" ry="4" fill="#6B4F12" transform="rotate(20,12,2)"/>
+  </g>
+  <!-- Gold border dots -->
+  <circle cx="32" cy="4" r="1.2" fill="#d4a341"/>
+  <circle cx="32" cy="60" r="1.2" fill="#d4a341"/>
+  <circle cx="4" cy="32" r="1.2" fill="#d4a341"/>
+  <circle cx="60" cy="32" r="1.2" fill="#d4a341"/>
+  <circle cx="12" cy="12" r="1.2" fill="#d4a341"/>
+  <circle cx="52" cy="12" r="1.2" fill="#d4a341"/>
+  <circle cx="12" cy="52" r="1.2" fill="#d4a341"/>
+  <circle cx="52" cy="52" r="1.2" fill="#d4a341"/>
 </svg>

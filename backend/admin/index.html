@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - Discover Kenya</title>
+<title>Admin - Kiboko Adventures</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -166,7 +166,7 @@ function renderLogin() {
     <div class="login-page">
       <div class="login-card">
         <div class="logo"><i class="fas fa-paw"></i></div>
-        <h1>Discover Kenya Admin</h1>
+        <h1>Kiboko Adventures Admin</h1>
         <form id="loginForm">
           <div class="form-group">
             <label>Username or Email</label>
@@ -202,7 +202,7 @@ function renderApp() {
   document.getElementById('app').innerHTML = `
     <div class="app">
       <aside class="sidebar" id="sidebar">
-        <div class="brand"><i class="fas fa-paw"></i><h2>Discover Kenya</h2></div>
+        <div class="brand"><i class="fas fa-paw"></i><h2>Kiboko Adventures</h2></div>
         <a class="nav-item active" data-page="dashboard" href="#"><i class="fas fa-chart-pie"></i> Dashboard</a>
         <a class="nav-item" data-page="packages" href="#"><i class="fas fa-box"></i> Packages</a>
         <a class="nav-item" data-page="destinations" href="#"><i class="fas fa-map-marker-alt"></i> Destinations</a>
@@ -769,7 +769,7 @@ function renderSettings(el) {
       <div class="card-header"><h3><i class="fas fa-cog"></i> Settings</h3></div>
       <div class="card-body">
         <div class="form-group"><label>Admin Email</label><input type="email" id="settingsEmail" value="${currentUser?.email || ''}" style="width:100%;padding:0.7rem 0.9rem;border:2px solid #ddd;border-radius:8px;font-size:0.95rem"></div>
-        <div class="form-group"><label>Site Name</label><input type="text" id="settingsSiteName" value="Discover Kenya" style="width:100%;padding:0.7rem 0.9rem;border:2px solid #ddd;border-radius:8px;font-size:0.95rem"></div>
+        <div class="form-group"><label>Site Name</label><input type="text" id="settingsSiteName" value="Kiboko Adventures" style="width:100%;padding:0.7rem 0.9rem;border:2px solid #ddd;border-radius:8px;font-size:0.95rem"></div>
         <button class="btn btn-primary" onclick="toast('Settings saved!')"><i class="fas fa-save"></i> Save Settings</button>
       </div>
     </div>
