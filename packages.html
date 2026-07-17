@@ -855,26 +855,35 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       }
     });
 
-    (async () => {
+    const FALLBACK_PACKAGES = [
+      { title:'Mt Kenya Trek & Ol Pejeta Safari', slug:'mt-kenya-ol-pejeta-5day', category:'adventure', duration:'5 Days', nights:'4 Nights', price:2450, rating:4.9, review_count:128, description:'Summit Point Lenana on Mt Kenya (4,985m), then track the Big Five and endangered rhinos at Ol Pejeta Conservancy — our signature Meru-based itinerary.', highlights:['Point Lenana summit attempt','Ol Pejeta Big Five game drives','Professional mountain guides','Community-benefit lodges'], image_url:'/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg', badge:'Signature' },
+      { title:'Laikipia Conservancy Escape', slug:'laikipia-conservancy-4day', category:'safari', duration:'4 Days', nights:'3 Nights', price:1890, rating:4.8, review_count:86, description:'Four intimate days tracking lions, elephants, and Grevy\'s zebra across private Laikipia conservancies — small groups, no mass tourism.', highlights:['Private conservancy access','Daily game drives','Local Meru guides','Full-board bush camps'], image_url:'/IMAGES/Lion/lion.png.jpg', badge:'Best Seller' },
+      { title:'Solio & Ol Pejeta Rhino Trail', slug:'solio-ol-pejeta-4day', category:'safari', duration:'4 Days', nights:'3 Nights', price:1750, rating:4.9, review_count:72, description:'A focused rhino and wildlife safari linking Solio Ranch and Ol Pejeta — Africa\'s strongest black and white rhino sanctuaries.', highlights:['Solio Ranch rhinos','Ol Pejeta conservancy','Chimpanzee sanctuary visit','Airport transfers from Meru/Nanyuki'], image_url:'/IMAGES/Elelphant/elephant.png.jpg', badge:'Popular' },
+      { title:'Mt Kenya Point Lenana Summit', slug:'mt-kenya-lenana-5day', category:'adventure', duration:'5 Days', nights:'4 Nights', price:2150, rating:4.9, review_count:94, description:'Conquer Point Lenana via the scenic Sirimon route with expert local guides, quality gear, and alpine scenery few operators match.', highlights:['Sirimon route trek','Summit certificate','Meals & porters included','All camping equipment'], image_url:'/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg', badge:'Adventure' },
+      { title:'Northern Kenya from Meru', slug:'northern-kenya-meru-7day', category:'safari', duration:'7 Days', nights:'6 Nights', price:3280, rating:4.8, review_count:61, description:'Go beyond the beaten path from our Meru base: reticulated giraffe, Grevy\'s zebra, Samburu culture, and remote northern landscapes.', highlights:['Meru National Park','Samburu / northern specials','Cultural village visit','Full-board lodges & camps'], image_url:'/IMAGES/Maasai/huts.png.jpg', badge:'Off the Path' },
+      { title:'Private Luxury Conservancy Safari', slug:'luxury-conservancy-custom', category:'luxury', duration:'8 Days', nights:'7 Nights', price:5900, rating:5.0, review_count:34, description:'A fully private Laikipia & Mt Kenya journey — exclusive camps, private vehicle and guide, and tailor-made pacing for couples or small groups.', highlights:['Private safari vehicle & guide','Luxury conservancy lodges','Flexible daily itinerary','Spa & exclusive experiences'], image_url:'/IMAGES/Luxury/luxury.png.jpg', badge:'Luxury' }
+    ];
+
+    function paintPackages(pkgs) {
       const grid = document.getElementById('packagesGrid');
+      packagesBySlug = {};
+      pkgs.forEach(p => { packagesBySlug[p.slug] = p; });
+      grid.innerHTML = pkgs.map(renderPackageCard).join('');
+      grid.querySelectorAll('.pkg-detail-btn').forEach(btn => {
+        btn.addEventListener('click', () => openPackageModal(btn.dataset.slug));
+      });
+    }
+
+    (async () => {
       try {
         const pkgs = await fetch('/api/packages').then(r => {
           if (!r.ok) throw new Error('HTTP ' + r.status);
           return r.json();
         });
-        packagesBySlug = {};
-        pkgs.forEach(p => { packagesBySlug[p.slug] = p; });
-        if (pkgs.length) {
-          grid.innerHTML = pkgs.map(renderPackageCard).join('');
-          grid.querySelectorAll('.pkg-detail-btn').forEach(btn => {
-            btn.addEventListener('click', () => openPackageModal(btn.dataset.slug));
-          });
-        } else {
-          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">No packages available yet. <a href="inquire.html" style="color:var(--gold)">Enquire for a custom trip &rarr;</a></div>';
-        }
+        paintPackages(pkgs && pkgs.length ? pkgs : FALLBACK_PACKAGES);
       } catch (err) {
         console.error(err);
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">Packages temporarily unavailable. <a href="inquire.html" style="color:var(--gold)">Contact us &rarr;</a></div>';
+        paintPackages(FALLBACK_PACKAGES);
       }
     })();
   </script>

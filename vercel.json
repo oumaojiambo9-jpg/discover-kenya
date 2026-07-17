@@ -6,7 +6,7 @@
   "functions": {
     "api/index.js": {
       "maxDuration": 10,
-      "includeFiles": "**/*.html"
+      "includeFiles": "{**/*.html,node_modules/sql.js/dist/**}"
     }
   },
   "rewrites": [

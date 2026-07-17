@@ -615,6 +615,16 @@
           </div>`;
       }
 
+      // Static seed — same as API defaults so homepage works if /api is down
+      const FALLBACK_PACKAGES = [
+        { title:'Mt Kenya Trek & Ol Pejeta Safari', slug:'mt-kenya-ol-pejeta-5day', category:'adventure', duration:'5 Days', nights:'4 Nights', price:2450, review_count:128, description:'Summit Point Lenana on Mt Kenya (4,985m), then track the Big Five and endangered rhinos at Ol Pejeta Conservancy — our signature Meru-based itinerary.', highlights:['Point Lenana summit attempt','Ol Pejeta Big Five game drives','Professional mountain guides','Community-benefit lodges'], image_url:'/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg', badge:'Signature' },
+        { title:'Laikipia Conservancy Escape', slug:'laikipia-conservancy-4day', category:'safari', duration:'4 Days', nights:'3 Nights', price:1890, review_count:86, description:'Four intimate days tracking lions, elephants, and Grevy\'s zebra across private Laikipia conservancies — small groups, no mass tourism.', highlights:['Private conservancy access','Daily game drives','Local Meru guides','Full-board bush camps'], image_url:'/IMAGES/Lion/lion.png.jpg', badge:'Best Seller' },
+        { title:'Solio & Ol Pejeta Rhino Trail', slug:'solio-ol-pejeta-4day', category:'safari', duration:'4 Days', nights:'3 Nights', price:1750, review_count:72, description:'A focused rhino and wildlife safari linking Solio Ranch and Ol Pejeta — Africa\'s strongest black and white rhino sanctuaries.', highlights:['Solio Ranch rhinos','Ol Pejeta conservancy','Chimpanzee sanctuary visit','Airport transfers from Meru/Nanyuki'], image_url:'/IMAGES/Elelphant/elephant.png.jpg', badge:'Popular' },
+        { title:'Mt Kenya Point Lenana Summit', slug:'mt-kenya-lenana-5day', category:'adventure', duration:'5 Days', nights:'4 Nights', price:2150, review_count:94, description:'Conquer Point Lenana via the scenic Sirimon route with expert local guides, quality gear, and alpine scenery few operators match.', highlights:['Sirimon route trek','Summit certificate','Meals & porters included','All camping equipment'], image_url:'/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg', badge:'Adventure' },
+        { title:'Northern Kenya from Meru', slug:'northern-kenya-meru-7day', category:'safari', duration:'7 Days', nights:'6 Nights', price:3280, review_count:61, description:'Go beyond the beaten path from our Meru base: reticulated giraffe, Grevy\'s zebra, Samburu culture, and remote northern landscapes.', highlights:['Meru National Park','Samburu / northern specials','Cultural village visit','Full-board lodges & camps'], image_url:'/IMAGES/Maasai/huts.png.jpg', badge:'Off the Path' },
+        { title:'Private Luxury Conservancy Safari', slug:'luxury-conservancy-custom', category:'luxury', duration:'8 Days', nights:'7 Nights', price:5900, review_count:34, description:'A fully private Laikipia & Mt Kenya journey — exclusive camps, private vehicle and guide, and tailor-made pacing for couples or small groups.', highlights:['Private safari vehicle & guide','Luxury conservancy lodges','Flexible daily itinerary','Spa & exclusive experiences'], image_url:'/IMAGES/Luxury/luxury.png.jpg', badge:'Luxury' }
+      ];
+
       try {
         const [packages, siteImgs] = await Promise.all([
           fetchWithRetry('/api/packages'),
@@ -623,11 +633,11 @@
         if (packages && packages.length) {
           grid.innerHTML = packages.map(pkg => renderPackageCard(pkg, siteImgs || {})).join('');
         } else {
-          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">No packages available yet. <a href="packages.html" style="color:var(--gold)">View all packages &rarr;</a></div>';
+          grid.innerHTML = FALLBACK_PACKAGES.map(pkg => renderPackageCard(pkg, siteImgs || {})).join('');
         }
       } catch (err) {
         console.error('Package load failed:', err);
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">Packages temporarily unavailable. <a href="packages.html" style="color:var(--gold)">View all packages &rarr;</a></div>';
+        grid.innerHTML = FALLBACK_PACKAGES.map(pkg => renderPackageCard(pkg, {})).join('');
       }
 
       const cards = [...grid.querySelectorAll('.package-card')];

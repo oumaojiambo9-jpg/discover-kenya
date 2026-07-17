@@ -1,9 +1,25 @@
-﻿const initSqlJs = require('sql.js');
+const fs = require('fs');
+const path = require('path');
+const initSqlJs = require('sql.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'discover-kenya-secret-key-2026';
 let db = null;
+
+/** Load sql.js WASM reliably on Vercel (file tracing misses dynamic locateFile paths). */
+async function createSqlJs() {
+  const distDir = path.dirname(require.resolve('sql.js/dist/sql-wasm.js'));
+  const wasmPath = path.join(distDir, 'sql-wasm.wasm');
+  if (fs.existsSync(wasmPath)) {
+    return initSqlJs({ wasmBinary: fs.readFileSync(wasmPath) });
+  }
+  return initSqlJs({
+    locateFile: function (file) {
+      return path.join(distDir, file);
+    }
+  });
+}
 
 const SITE_IMAGE_KEYS = [
   ['home_pkg_mt-kenya-ol-pejeta-5day', 'Mt Kenya Trek & Ol Pejeta Safari', 'homepage', '/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg'],
@@ -67,7 +83,7 @@ function dbRun(sql, params) {
 
 async function ensureDB() {
   if (db) return;
-  var SQL = await initSqlJs();
+  var SQL = await createSqlJs();
   db = new SQL.Database();
   db.run('PRAGMA foreign_keys = ON');
 
@@ -148,7 +164,12 @@ module.exports = async function(req, res) {
     return res.end();
   }
 
-  try { await ensureDB(); } catch(e) { return send(res, 500, { error: 'DB init failed' }); }
+  try {
+    await ensureDB();
+  } catch (e) {
+    console.error('DB init failed:', e);
+    return send(res, 500, { error: 'DB init failed', detail: String(e && e.message ? e.message : e) });
+  }
 
   var url = req.url.split('?')[0];
   var qs = {};
