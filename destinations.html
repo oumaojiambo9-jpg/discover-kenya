@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="/js/hero-early.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kenya Destinations &mdash; Parks, Beaches & Cities | Kiboko Adventures</title>
@@ -180,7 +181,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('logo.png') center/cover no-repeat;
+      background-color: #1b4332; background-size: cover; background-position: center; background-repeat: no-repeat;
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -564,7 +565,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="plan.html">Plan Your Trip</a></li>
         <li><a href="stories.html">Stories</a></li>
-        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+        <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
       </ul>
     </div>
   </nav>
@@ -580,12 +581,12 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <li><a href="destinations.html">Destinations</a></li>
       <li><a href="plan.html">Plan Your Trip</a></li>
       <li><a href="stories.html">Stories</a></li>
-      <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
     </ul>
   </div>
 
   <section class="hero" style="height: 60vh; min-height: 420px;">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80');"></div>
+    <div class="hero-bg" data-hero-key="hero_destinations" style="background-color:#1b4332;background-size:cover;background-position:center;background-repeat:no-repeat"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-content">
       <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Destinations<br><span>Explore the Land of Wonder</span></h1>
@@ -602,7 +603,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       </div>
       <div class="dests-grid">
         <a href="maasai-mara.html" class="dest-card">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80" alt="Maasai Mara" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80" data-slug="maasai-mara" alt="Maasai Mara" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Maasai Mara</h3>
@@ -610,7 +611,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           </div>
         </a>
         <a href="amboseli.html" class="dest-card">
-          <img src="Amboseli/amboseli.png.jpg" alt="Amboseli" loading="lazy">
+          <img src="IMAGES/Amboseli/amboseli.png.jpg" data-slug="amboseli" alt="Amboseli" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Amboseli</h3>
@@ -618,7 +619,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           </div>
         </a>
         <a href="nairobi.html" class="dest-card">
-          <img src="Nairobi/nairobi.png.jpg" alt="Nairobi" loading="lazy">
+          <img src="IMAGES/Nairobi/nairobi.png.jpg" data-slug="nairobi" alt="Nairobi" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Nairobi</h3>
@@ -626,7 +627,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           </div>
         </a>
         <a href="diani-beach.html" class="dest-card">
-          <img src="Diani/diani beach.png.jpg" alt="Diani Beach" loading="lazy">
+          <img src="IMAGES/Diani/diani%20beach.png.jpg" data-slug="diani-beach" alt="Diani Beach" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Diani Beach</h3>
@@ -634,7 +635,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           </div>
         </a>
         <a href="mount-kenya.html" class="dest-card">
-          <img src="Mount Kenya/mt kenya.png.jpg" alt="Mount Kenya" loading="lazy">
+          <img src="IMAGES/Mount%20Kenya/mt%20kenya.png.jpg" data-slug="mount-kenya" alt="Mount Kenya" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Mount Kenya</h3>
@@ -642,7 +643,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           </div>
         </a>
         <a href="lake-nakuru.html" class="dest-card">
-          <img src="Lake Nakuru/lake nakuru.png.jpg" alt="Lake Nakuru" loading="lazy">
+          <img src="IMAGES/Lake%20Nakuru/lake%20nakuru.png.jpg" data-slug="lake-nakuru" alt="Lake Nakuru" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Lake Nakuru</h3>
@@ -650,7 +651,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           </div>
         </a>
         <a href="lamu.html" class="dest-card">
-          <img src="Lamu/lamu.jpg" alt="Lamu" loading="lazy">
+          <img src="IMAGES/Lamu/lamu.jpg" data-slug="lamu" alt="Lamu" loading="lazy">
           <div class="dest-card-overlay"></div>
           <div class="dest-card-content">
             <h3>Lamu Island</h3>
@@ -696,8 +697,8 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         </div>
         <div class="footer-col">
           <h5>Contact</h5>
-          <a href="index.html">Kenya Tourism Board</a>
-          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="index.html">Kiboko Adventures</a>
+          <a href="#">Meru, Kenya (Base Camp)</a>
           <a href="tel:+254202711262">+254-20-2711-262</a>
           <a href="mailto:info@kibokoadventures.com">info@kibokoadventures.com</a>
           <a href="#">Media & Press</a>
@@ -705,7 +706,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>&copy; 2026 Kiboko Adventures. All rights reserved.</span>
         <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
       </div>
     </div>
@@ -779,5 +780,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
+
+  <script src="/js/apply-site-images.js"></script>
 </body>
 </html>

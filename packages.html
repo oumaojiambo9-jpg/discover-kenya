@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="/js/hero-early.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kenya Safari Packages &mdash; Curated Tours & Travel Deals | Kiboko Adventures</title>
@@ -180,7 +181,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('logo.png') center/cover no-repeat;
+      background-color: #1b4332; background-size: cover; background-position: center; background-repeat: no-repeat;
     }
 
     .hero-overlay {
@@ -556,7 +557,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="plan.html">Plan Your Trip</a></li>
         <li><a href="stories.html">Stories</a></li>
-        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+        <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
       </ul>
     </div>
   </nav>
@@ -572,169 +573,28 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <li><a href="destinations.html">Destinations</a></li>
       <li><a href="plan.html">Plan Your Trip</a></li>
       <li><a href="stories.html">Stories</a></li>
-      <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
     </ul>
   </div>
 
   <section class="hero" style="height: 60vh; min-height: 420px;">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80');"></div>
+    <div class="hero-bg" data-hero-key="hero_packages" style="background-color:#1b4332;background-size:cover;background-position:center;background-repeat:no-repeat"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-content">
-      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Tour Packages<br><span>Your Safari Awaits</span></h1>
-      <p style="font-size: 1.05rem; max-width: 520px;">Hand-picked itineraries designed to give you the best of Kenya &mdash; from the wild savannahs to the turquoise coast.</p>
+      <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Safari Packages<br><span>From Meru Base Camp</span></h1>
+      <p style="font-size: 1.05rem; max-width: 520px;">Signature Mt Kenya treks and Laikipia conservancy safaris &mdash; small groups, community-powered, fully customisable.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <div class="section-header">
-        <span class="tag">&#128230; Tour Packages</span>
-        <h2>Curated Safari<br>& Travel Packages</h2>
-        <p class="section-subtitle">Hand-picked itineraries from savannah to coast &mdash; we handle every detail so you experience only the magic.</p>
+        <span class="tag">&#128230; Signature Itineraries</span>
+        <h2>Mt Kenya Trek &amp;<br>Conservancy Safaris</h2>
+        <p class="section-subtitle">Community-based packages from Meru &mdash; 4-day escapes, 5-day trek combos, and custom northern Kenya journeys.</p>
       </div>
-      <div class="packages-grid">
-        <div class="package-card">
-          <div class="package-img">
-            <img src="Classic mara/classic mara.jpg" alt="Masai Mara Safari" loading="lazy">
-            <span class="package-badge">Best Seller</span>
-          </div>
-          <div class="package-body">
-            <div class="package-meta">
-              <span>&#128197; 7 Days / 6 Nights</span>
-              <span>&#9733; 4.9 (128 reviews)</span>
-            </div>
-            <h3 class="package-title">Classic Mara Safari</h3>
-            <p class="package-desc">Witness the Great Migration, visit Maasai villages, enjoy game drives, and end with a hot air balloon safari over the Mara.</p>
-            <div class="package-highlights">
-              <span>&#10003; Full-board accommodation</span>
-              <span>&#10003; Daily game drives</span>
-              <span>&#10003; Park fees included</span>
-              <span>&#10003; Airport transfers</span>
-            </div>
-            <div class="package-footer">
-              <div class="package-price">From <strong>$2,450</strong> <small>/ person</small></div>
-              <button onclick="openPackageModal('classic-mara')" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-img">
-            <img src="Beaches/beaches.png.jpg" alt="Kenya Beach Safari" loading="lazy">
-            <span class="package-badge package-badge-green">Popular</span>
-          </div>
-          <div class="package-body">
-            <div class="package-meta">
-              <span>&#128197; 10 Days / 9 Nights</span>
-              <span>&#9733; 4.8 (94 reviews)</span>
-            </div>
-            <h3 class="package-title">Safari & Beach Combo</h3>
-            <p class="package-desc">Combine the thrill of a 5-day safari with 5 days of pure beach bliss on the pristine white sands of Diani Beach.</p>
-            <div class="package-highlights">
-              <span>&#10003; 5 days safari + 5 days beach</span>
-              <span>&#10003; All flights & transfers</span>
-              <span>&#10003; Snorkeling & dhow cruise</span>
-              <span>&#10003; Half-board beach resort</span>
-            </div>
-            <div class="package-footer">
-              <div class="package-price">From <strong>$3,280</strong> <small>/ person</small></div>
-              <button onclick="openPackageModal('safari-beach')" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-img">
-            <img src="https://images.pexels.com/photos/13033083/pexels-photo-13033083.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" alt="Maasai Cultural Heritage" loading="lazy">
-          </div>
-          <div class="package-body">
-            <div class="package-meta">
-              <span>&#128197; 5 Days / 4 Nights</span>
-              <span>&#9733; 4.7 (63 reviews)</span>
-            </div>
-            <h3 class="package-title">Cultural Heritage Trail</h3>
-            <p class="package-desc">Immerse yourself in Kenya's rich cultures &mdash; visit Maasai, Samburu, and Swahili communities, explore museums and historic sites.</p>
-            <div class="package-highlights">
-              <span>&#10003; Guided village visits</span>
-              <span>&#10003; Cultural performances</span>
-              <span>&#10003; Local cuisine experiences</span>
-              <span>&#10003; Nairobi city tour</span>
-            </div>
-            <div class="package-footer">
-              <div class="package-price">From <strong>$1,890</strong> <small>/ person</small></div>
-              <button onclick="openPackageModal('cultural-heritage')" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-img">
-            <img src="Mount Kenya/mountain kenya.png.jpg" alt="Mount Kenya Trek" loading="lazy">
-          </div>
-          <div class="package-body">
-            <div class="package-meta">
-              <span>&#128197; 8 Days / 7 Nights</span>
-              <span>&#9733; 4.9 (47 reviews)</span>
-            </div>
-            <h3 class="package-title">Mount Kenya Trekking Expedition</h3>
-            <p class="package-desc">Conquer Africa's second-highest peak via the scenic Sirimon route. Expert guides, quality gear, and stunning alpine scenery.</p>
-            <div class="package-highlights">
-              <span>&#10003; Professional mountain guides</span>
-              <span>&#10003; All camping equipment</span>
-              <span>&#10003; Meals & porters included</span>
-              <span>&#10003; Summit certificate</span>
-            </div>
-            <div class="package-footer">
-              <div class="package-price">From <strong>$2,150</strong> <small>/ person</small></div>
-              <button onclick="openPackageModal('mount-kenya-trek')" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-img">
-            <img src="Luxury/luxury.png.jpg" alt="Luxury Kenya" loading="lazy">
-            <span class="package-badge package-badge-gold">Luxury</span>
-          </div>
-          <div class="package-body">
-            <div class="package-meta">
-              <span>&#128197; 12 Days / 11 Nights</span>
-              <span>&#9733; 5.0 (34 reviews)</span>
-            </div>
-            <h3 class="package-title">Ultimate Luxury Safari</h3>
-            <p class="package-desc">Experience Kenya at its finest &mdash; private charters, award-winning lodges, champagne sunsets, and exclusive wildlife encounters.</p>
-            <div class="package-highlights">
-              <span>&#10003; Private safari vehicle</span>
-              <span>&#10003; Luxury all-inclusive lodges</span>
-              <span>&#10003; Private guide & chef</span>
-              <span>&#10003; Spa & wellness included</span>
-            </div>
-            <div class="package-footer">
-              <div class="package-price">From <strong>$8,900</strong> <small>/ person</small></div>
-              <button onclick="openPackageModal('luxury-safari')" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="package-card">
-          <div class="package-img">
-            <img src="https://images.pexels.com/photos/1920632/pexels-photo-1920632.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" alt="Kenya Family Safari" loading="lazy">
-            <span class="package-badge package-badge-green">Family</span>
-          </div>
-          <div class="package-body">
-            <div class="package-meta">
-              <span>&#128197; 9 Days / 8 Nights</span>
-              <span>&#9733; 4.8 (72 reviews)</span>
-            </div>
-            <h3 class="package-title">Family Adventure Safari</h3>
-            <p class="package-desc">A family-friendly journey with kid-friendly lodges, educational game drives, beach time, and cultural activities for all ages.</p>
-            <div class="package-highlights">
-              <span>&#10003; Family-friendly lodges</span>
-              <span>&#10003; Kids' safari program</span>
-              <span>&#10003; Child discounts available</span>
-              <span>&#10003; Beach & pool time</span>
-            </div>
-            <div class="package-footer">
-              <div class="package-price">From <strong>$3,450</strong> <small>/ person</small></div>
-              <button onclick="openPackageModal('family-safari')" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
-            </div>
-          </div>
-        </div>
+      <div class="packages-grid" id="packagesGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray);font-size:0.95rem;">Loading packages&#8230;</div>
       </div>
     </div>
   </section>
@@ -744,7 +604,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <div class="footer-grid">
         <div class="footer-brand">
           
-          <p>The official destination website for Kenya Tourism. Your guide to the origin of wonder &mdash; where safari was born.</p>
+          <p>Community-based safari operator based in Meru, Kenya. Specialists in Mt Kenya trekking, Laikipia conservancy safaris, and sustainable northern Kenya expeditions.</p>
           <div class="footer-social">
             <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
             <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
@@ -774,16 +634,14 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         </div>
         <div class="footer-col">
           <h5>Contact</h5>
-          <a href="index.html">Kenya Tourism Board</a>
-          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="index.html">Kiboko Adventures</a>
+          <span style="display:block;color:rgba(255,255,255,0.5);font-size:0.9rem;padding:4px 0;">Meru, Kenya (Base Camp)</span>
           <a href="tel:+254202711262">+254-20-2711-262</a>
           <a href="mailto:info@kibokoadventures.com">info@kibokoadventures.com</a>
-          <a href="#">Media & Press</a>
-          <a href="#">Careers</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>&copy; 2026 Kiboko Adventures. All rights reserved.</span>
         <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
       </div>
     </div>
@@ -881,7 +739,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
           <div id="modalHighlights" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"></div>
         </div>
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="inquire.html" style="flex:1; min-width:160px; text-align:center; background:#d4a341; color:#fff; padding:14px 24px; border-radius:50px; font-weight:600; font-size:0.9rem; text-decoration:none;">Inquire About This Package &rarr;</a>
+          <a href="inquire.html" id="modalEnquireLink" class="btn-primary" style="flex:1; min-width:160px; text-align:center; background:#d4a341; color:#fff; padding:14px 24px; border-radius:50px; font-weight:600; font-size:0.9rem; text-decoration:none;">Inquire About This Package &rarr;</a>
           <button onclick="closePackageModal()" style="flex:1; min-width:120px; background:transparent; color:#6b7280; padding:14px 24px; border-radius:50px; font-weight:600; font-size:0.9rem; border:2px solid #e5e7eb; cursor:pointer;">Close</button>
         </div>
       </div>
@@ -898,37 +756,90 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     body.dark .modal-highlight { background:#374151 !important; color:#d1d5db !important; }
   </style>
 
-  <script>
-    const packages = {
-      'classic-mara': { title:'Classic Mara Safari', badge:'&#9733; Best Seller', duration:'&#128197; 7 Days / 6 Nights', rating:'&#9733; 4.9 (128 reviews)', price:'From $2,450 / person', desc:'Witness the Great Migration, visit Maasai villages, enjoy game drives, and end with a hot air balloon safari over the Mara.', highlights:['Full-board accommodation','Daily game drives','Park fees included','Airport transfers'], img:'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80' },
-      'safari-beach': { title:'Safari & Beach Combo', badge:'&#9733; Popular', duration:'&#128197; 10 Days / 9 Nights', rating:'&#9733; 4.8 (94 reviews)', price:'From $3,280 / person', desc:'Combine the thrill of a 5-day safari with 5 days of pure beach bliss on the pristine white sands of Diani Beach.', highlights:['5 days safari + 5 days beach','All flights & transfers','Snorkeling & dhow cruise','Half-board beach resort'], img:'https://images.pexels.com/photos/2053950/pexels-photo-2053950.jpeg?auto=compress&cs=tinysrgb&w=800&q=80' },
-      'cultural-heritage': { title:'Cultural Heritage Trail', badge:'Cultural', duration:'&#128197; 5 Days / 4 Nights', rating:'&#9733; 4.7 (63 reviews)', price:'From $1,890 / person', desc:'Immerse yourself in Kenya\'s rich cultures &mdash; visit Maasai, Samburu, and Swahili communities, explore museums and historic sites.', highlights:['Guided village visits','Cultural performances','Local cuisine experiences','Nairobi city tour'], img:'https://images.pexels.com/photos/13033083/pexels-photo-13033083.jpeg?auto=compress&cs=tinysrgb&w=800&q=80' },
-      'mount-kenya-trek': { title:'Mount Kenya Trekking Expedition', badge:'Adventure', duration:'&#128197; 8 Days / 7 Nights', rating:'&#9733; 4.9 (47 reviews)', price:'From $2,150 / person', desc:'Conquer Africa\'s second-highest peak via the scenic Sirimon route. Expert guides, quality gear, and stunning alpine scenery.', highlights:['Professional mountain guides','All camping equipment','Meals & porters included','Summit certificate'], img:'Mount Kenya/mount kenya.png.jpg' },
-      'luxury-safari': { title:'Ultimate Luxury Safari', badge:'&#10024; Luxury', duration:'&#128197; 12 Days / 11 Nights', rating:'&#9733; 5.0 (34 reviews)', price:'From $8,900 / person', desc:'Experience Kenya at its finest &mdash; private charters, award-winning lodges, champagne sunsets, and exclusive wildlife encounters.', highlights:['Private safari vehicle','Luxury all-inclusive lodges','Private guide & chef','Spa & wellness included'], img:'https://images.pexels.com/photos/789301/pexels-photo-789301.jpeg?auto=compress&cs=tinysrgb&w=800&q=80' },
-      'family-safari': { title:'Family Adventure Safari', badge:'&#128106; Family', duration:'&#128197; 9 Days / 8 Nights', rating:'&#9733; 4.8 (72 reviews)', price:'From $3,450 / person', desc:'A family-friendly journey with kid-friendly lodges, educational game drives, beach time, and cultural activities for all ages.', highlights:['Family-friendly lodges',"Kids' safari program",'Child discounts available','Beach & pool time'], img:'https://images.pexels.com/photos/1920632/pexels-photo-1920632.jpeg?auto=compress&cs=tinysrgb&w=800&q=80' }
-    };
+    <script>
+    const FALLBACK_IMG = 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80';
+    let packagesBySlug = {};
 
-    function openPackageModal(id) {
-      const p = packages[id];
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function badgeClass(badge) {
+      if (!badge) return '';
+      const b = badge.toLowerCase();
+      if (b.includes('popular') || b.includes('signature') || b.includes('best') || b.includes('family')) return 'package-badge-green';
+      if (b.includes('path') || b.includes('off') || b.includes('adventure')) return 'package-badge-terra';
+      if (b.includes('luxury')) return 'package-badge-gold';
+      return '';
+    }
+
+    function renderPackageCard(pkg) {
+      const imgSrc = escapeHtml(pkg.image_url || FALLBACK_IMG);
+      const highlights = Array.isArray(pkg.highlights) ? pkg.highlights : [];
+      const price = pkg.price ? '$' + Number(pkg.price).toLocaleString() : 'POA';
+      const badge = pkg.badge || '';
+      const slug = pkg.slug || '';
+      return `
+        <div class="package-card">
+          <div class="package-img">
+            <img src="${imgSrc}" alt="${escapeHtml(pkg.title)}" loading="lazy" onerror="this.src='${FALLBACK_IMG}';this.onerror=null">
+            ${badge ? `<span class="package-badge ${badgeClass(badge)}">${escapeHtml(badge)}</span>` : ''}
+          </div>
+          <div class="package-body">
+            <div class="package-meta">
+              <span>&#128197; ${escapeHtml(pkg.duration || '')}${pkg.nights ? ' / ' + escapeHtml(pkg.nights) : ''}</span>
+              <span>&#9733; ${pkg.rating != null ? escapeHtml(String(pkg.rating)) : '4.8'}${pkg.review_count ? ' (' + escapeHtml(String(pkg.review_count)) + ' reviews)' : ''}</span>
+            </div>
+            <h3 class="package-title">${escapeHtml(pkg.title)}</h3>
+            <p class="package-desc">${escapeHtml(pkg.description || '')}</p>
+            <div class="package-highlights">
+              ${highlights.slice(0, 4).map(h => '<span>&#10003; ' + escapeHtml(h) + '</span>').join('')}
+            </div>
+            <div class="package-footer">
+              <div class="package-price">From <strong>${price}</strong> <small>/ person</small></div>
+              <button type="button" data-slug="${escapeHtml(slug)}" class="btn btn-primary pkg-detail-btn" style="padding: 10px 24px; font-size: 0.8rem; border:none; cursor:pointer;">View Details</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function openPackageModal(slug) {
+      const p = packagesBySlug[slug];
       if (!p) return;
-      document.getElementById('modalImgSrc').src = p.img;
-      document.getElementById('modalImgSrc').alt = p.title;
-      document.getElementById('modalBadge').innerHTML = p.badge;
-      document.getElementById('modalRating').innerHTML = p.rating;
-      document.getElementById('modalTitle').textContent = p.title;
-      document.getElementById('modalDuration').innerHTML = p.duration;
-      document.getElementById('modalPrice').textContent = p.price;
-      document.getElementById('modalDesc').innerHTML = p.desc;
-      document.getElementById('modalHighlights').innerHTML = p.highlights.map(h =>
-        '<div class="modal-highlight" style="display:flex;align-items:center;gap:8px;background:#faf6f0;border-radius:8px;padding:10px 14px;font-size:0.82rem;color:#374151;font-weight:500;"><span style="color:#d4a341;">&#10003;</span> ' + h + '</div>'
+      const img = p.image_url || FALLBACK_IMG;
+      document.getElementById('modalImgSrc').src = img;
+      document.getElementById('modalImgSrc').alt = p.title || '';
+      document.getElementById('modalBadge').innerHTML = p.badge ? escapeHtml(p.badge) : '';
+      document.getElementById('modalRating').innerHTML = p.rating != null
+        ? '&#9733; ' + escapeHtml(String(p.rating)) + (p.review_count ? ' (' + escapeHtml(String(p.review_count)) + ' reviews)' : '')
+        : '';
+      document.getElementById('modalTitle').textContent = p.title || '';
+      document.getElementById('modalDuration').innerHTML = '&#128197; ' + escapeHtml(p.duration || '') + (p.nights ? ' / ' + escapeHtml(p.nights) : '');
+      document.getElementById('modalPrice').textContent = p.price != null ? 'From $' + Number(p.price).toLocaleString() + ' / person' : 'POA';
+      document.getElementById('modalDesc').textContent = p.description || '';
+      const highlights = Array.isArray(p.highlights) ? p.highlights : [];
+      document.getElementById('modalHighlights').innerHTML = highlights.map(h =>
+        '<div class="modal-highlight" style="display:flex;align-items:center;gap:8px;background:#faf6f0;border-radius:8px;padding:10px 14px;font-size:0.82rem;color:#374151;font-weight:500;"><span style="color:#d4a341;">&#10003;</span> ' + escapeHtml(h) + '</div>'
       ).join('');
+      const enquire = document.getElementById('modalEnquireLink');
+      if (enquire) enquire.href = 'inquire.html?pkg=' + encodeURIComponent(slug);
       const modal = document.getElementById('packageModal');
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      const box = document.getElementById('modalBox');
-      box.style.animation = 'none';
-      box.offsetHeight;
-      box.style.animation = 'modalIn 0.35s cubic-bezier(0.25,0.46,0.45,0.94)';
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        const box = document.getElementById('modalBox');
+        if (box) {
+          box.style.animation = 'none';
+          box.offsetHeight;
+          box.style.animation = 'modalIn 0.35s cubic-bezier(0.25,0.46,0.45,0.94)';
+        }
+      }
     }
 
     function closePackageModal(e) {
@@ -939,11 +850,37 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        document.getElementById('packageModal').style.display = 'none';
-        document.body.style.overflow = '';
+        const m = document.getElementById('packageModal');
+        if (m) { m.style.display = 'none'; document.body.style.overflow = ''; }
       }
     });
+
+    (async () => {
+      const grid = document.getElementById('packagesGrid');
+      try {
+        const pkgs = await fetch('/api/packages').then(r => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        });
+        packagesBySlug = {};
+        pkgs.forEach(p => { packagesBySlug[p.slug] = p; });
+        if (pkgs.length) {
+          grid.innerHTML = pkgs.map(renderPackageCard).join('');
+          grid.querySelectorAll('.pkg-detail-btn').forEach(btn => {
+            btn.addEventListener('click', () => openPackageModal(btn.dataset.slug));
+          });
+        } else {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">No packages available yet. <a href="inquire.html" style="color:var(--gold)">Enquire for a custom trip &rarr;</a></div>';
+        }
+      } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">Packages temporarily unavailable. <a href="inquire.html" style="color:var(--gold)">Contact us &rarr;</a></div>';
+      }
+    })();
   </script>
 
+
+
+  <script src="/js/apply-site-images.js"></script>
 </body>
 </html>

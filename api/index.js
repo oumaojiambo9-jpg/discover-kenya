@@ -2,8 +2,49 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dk-vercel-secret-2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'discover-kenya-secret-key-2026';
 let db = null;
+
+const SITE_IMAGE_KEYS = [
+  ['home_pkg_mt-kenya-ol-pejeta-5day', 'Mt Kenya Trek & Ol Pejeta Safari', 'homepage', '/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg'],
+  ['home_pkg_laikipia-conservancy-4day', 'Laikipia Conservancy Escape', 'homepage', '/IMAGES/Lion/lion.png.jpg'],
+  ['home_pkg_solio-ol-pejeta-4day', 'Solio & Ol Pejeta Rhino Trail', 'homepage', '/IMAGES/Elelphant/elephant.png.jpg'],
+  ['home_pkg_mt-kenya-lenana-5day', 'Mt Kenya Point Lenana Summit', 'homepage', '/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg'],
+  ['home_pkg_northern-kenya-meru-7day', 'Northern Kenya from Meru', 'homepage', '/IMAGES/Maasai/huts.png.jpg'],
+  ['home_pkg_luxury-conservancy-custom', 'Private Luxury Conservancy Safari', 'homepage', '/IMAGES/Luxury/luxury.png.jpg'],
+  ['story_migration', 'Great Migration', 'stories', null],
+  ['story_swahili_coast', 'Swahili Coast', 'stories', null],
+  ['story_conservation', 'Conservation', 'stories', null],
+  ['story_safari_lodges', 'Safari Lodges', 'stories', null],
+  ['story_photography', 'Wildlife Photography', 'stories', null],
+  ['story_cuisine', 'Kenyan Cuisine', 'stories', null],
+  ['exp_big_five', 'Big Five Safari', 'experiences', null],
+  ['exp_coastal_paradise', 'Coastal Paradise', 'experiences', null],
+  ['exp_cultural_immersion', 'Cultural Immersion', 'experiences', null],
+  ['exp_mount_kenya', 'Mount Kenya Trekking', 'experiences', null],
+  ['exp_rift_valley', 'Great Rift Valley', 'experiences', null],
+  ['exp_balloon_safari', 'Balloon Safari', 'experiences', null],
+  ['hero_home', 'Homepage', 'heroes', 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=85'],
+  ['hero_experiences', 'Experiences', 'heroes', '/IMAGES/Elelphant/elephant.png.jpg'],
+  ['hero_stories', 'Stories', 'heroes', '/IMAGES/Stories/bonfire%20stories.jpg'],
+  ['hero_inquire', 'Book / Inquire', 'heroes', '/IMAGES/Inquiring/inquiring.jpg'],
+  ['hero_packages', 'Packages', 'heroes', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80'],
+  ['hero_destinations', 'Destinations', 'heroes', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80'],
+  ['hero_plan', 'Plan Your Trip', 'heroes', 'https://images.pexels.com/photos/2249106/pexels-photo-2249106.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_visa', 'Visa & eTA', 'heroes', 'https://images.pexels.com/photos/2249106/pexels-photo-2249106.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_travel_guide', 'Travel Guide', 'heroes', 'https://images.pexels.com/photos/2249106/pexels-photo-2249106.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_accommodation', 'Accommodation', 'heroes', 'https://images.pexels.com/photos/1402688/pexels-photo-1402688.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_getting_here', 'Getting Here', 'heroes', 'https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_weather', 'Weather & Seasons', 'heroes', 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1600&q=80'],
+  ['hero_faqs', 'FAQs', 'heroes', 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80'],
+  ['hero_maasai_mara', 'Maasai Mara', 'heroes', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80'],
+  ['hero_amboseli', 'Amboseli', 'heroes', 'https://images.pexels.com/photos/2888307/pexels-photo-2888307.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_nairobi', 'Nairobi', 'heroes', 'https://images.pexels.com/photos/931007/pexels-photo-931007.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_diani_beach', 'Diani Beach', 'heroes', 'https://images.pexels.com/photos/2053950/pexels-photo-2053950.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_mount_kenya', 'Mount Kenya', 'heroes', 'https://images.pexels.com/photos/3807792/pexels-photo-3807792.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_lake_nakuru', 'Lake Nakuru', 'heroes', 'https://images.pexels.com/photos/3326647/pexels-photo-3326647.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_lamu', 'Lamu Island', 'heroes', 'https://images.pexels.com/photos/1148997/pexels-photo-1148997.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+];
 
 function rowsAll(sql, params) {
   params = params || [];
@@ -30,50 +71,55 @@ async function ensureDB() {
   db = new SQL.Database();
   db.run('PRAGMA foreign_keys = ON');
 
-  db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE NOT NULL, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT "admin")');
-  db.run('CREATE TABLE IF NOT EXISTS packages (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, slug TEXT UNIQUE NOT NULL, category TEXT DEFAULT "safari", duration TEXT NOT NULL, nights TEXT, price REAL NOT NULL, price_label TEXT DEFAULT "/ person", rating REAL DEFAULT 4.8, review_count INTEGER DEFAULT 0, description TEXT DEFAULT "", highlights TEXT DEFAULT "[]", image_url TEXT, badge TEXT, featured INTEGER DEFAULT 0, active INTEGER DEFAULT 1)');
-  db.run('CREATE TABLE IF NOT EXISTS destinations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, slug TEXT UNIQUE NOT NULL, region TEXT, description TEXT DEFAULT "", short_desc TEXT, image_url TEXT, highlights TEXT, best_time TEXT, lat REAL, lng REAL, featured INTEGER DEFAULT 0, active INTEGER DEFAULT 1)');
-  db.run('CREATE TABLE IF NOT EXISTS inquiries (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, phone TEXT, travelers INTEGER, travel_date_start TEXT, travel_date_end TEXT, budget_range TEXT, package_id INTEGER, message TEXT, status TEXT DEFAULT "new", notes TEXT)');
-  db.run('CREATE TABLE IF NOT EXISTS newsletters (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, name TEXT, active INTEGER DEFAULT 1)');
-  db.run('CREATE TABLE IF NOT EXISTS testimonials (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, location TEXT, rating INTEGER DEFAULT 5, text TEXT NOT NULL, featured INTEGER DEFAULT 0, active INTEGER DEFAULT 1)');
+  db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE NOT NULL, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT "admin", created_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  db.run('CREATE TABLE IF NOT EXISTS packages (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, slug TEXT UNIQUE NOT NULL, category TEXT DEFAULT "safari", duration TEXT NOT NULL, nights TEXT, price REAL NOT NULL, price_label TEXT DEFAULT "/ person", rating REAL DEFAULT 4.8, review_count INTEGER DEFAULT 0, description TEXT DEFAULT "", highlights TEXT DEFAULT "[]", image_url TEXT, badge TEXT, featured INTEGER DEFAULT 0, active INTEGER DEFAULT 1, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  db.run('CREATE TABLE IF NOT EXISTS destinations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, slug TEXT UNIQUE NOT NULL, region TEXT, description TEXT DEFAULT "", short_desc TEXT, image_url TEXT, hero_image_url TEXT, highlights TEXT, best_time TEXT, lat REAL, lng REAL, featured INTEGER DEFAULT 0, active INTEGER DEFAULT 1, created_at DATETIME DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  db.run('CREATE TABLE IF NOT EXISTS inquiries (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT NOT NULL, phone TEXT, travelers INTEGER, travel_date_start TEXT, travel_date_end TEXT, budget_range TEXT, package_id INTEGER, message TEXT, status TEXT DEFAULT "new", notes TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  db.run('CREATE TABLE IF NOT EXISTS newsletters (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL, name TEXT, active INTEGER DEFAULT 1, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  db.run('CREATE TABLE IF NOT EXISTS testimonials (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, location TEXT, avatar_url TEXT, rating INTEGER DEFAULT 5, text TEXT NOT NULL, featured INTEGER DEFAULT 0, active INTEGER DEFAULT 1, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  db.run('CREATE TABLE IF NOT EXISTS site_images (key TEXT PRIMARY KEY, url TEXT DEFAULT NULL, label TEXT, page TEXT, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
+
+  SITE_IMAGE_KEYS.forEach(function(row) {
+    db.run('INSERT OR IGNORE INTO site_images (key, label, page, url) VALUES (?, ?, ?, ?)', [row[0], row[1], row[2], row[3] || null]);
+  });
 
   if (rowGet('SELECT COUNT(*) as c FROM users').c === 0) {
-    db.run('INSERT INTO users (username,email,password,role) VALUES (?,?,?,?)', ['admin','admin@discoverkenya.com', bcrypt.hashSync('admin123', 10), 'admin']);
+    db.run('INSERT INTO users (username,email,password,role) VALUES (?,?,?,?)', ['admin','admin@kibokoadventures.com', bcrypt.hashSync('admin123', 10), 'admin']);
   }
 
   if (rowGet('SELECT COUNT(*) as c FROM packages').c === 0) {
     var ins = db.prepare('INSERT INTO packages (title,slug,category,duration,nights,price,rating,review_count,description,highlights,image_url,badge,featured) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)');
     var pkgs = [
-      ['Classic Mara Safari','classic-mara-safari','safari','7 Days','6 Nights',2450,4.9,128,'Witness the Great Migration, visit Maasai villages, enjoy game drives, and end with a hot air balloon safari over the Mara.',JSON.stringify(['Full-board accommodation','Daily game drives','Park fees included','Airport transfers']),null,'Best Seller',1],
-      ['Safari & Beach Combo','safari-beach-combo','combo','10 Days','9 Nights',3280,4.8,94,'Combine the thrill of a 5-day safari with 5 days of pure beach bliss on the pristine white sands of Diani Beach.',JSON.stringify(['5 days safari + 5 days beach','All flights & transfers','Snorkeling & dhow cruise','Half-board beach resort']),null,'Popular',1],
-      ['Cultural Heritage Trail','cultural-heritage-trail','culture','5 Days','4 Nights',1890,4.7,63,'Immerse yourself in Kenya rich cultures.',JSON.stringify(['Guided village visits','Cultural performances','Local cuisine experiences','Nairobi city tour']),null,null,1],
-      ['Mount Kenya Trekking Expedition','mount-kenya-trekking','adventure','8 Days','7 Nights',2150,4.9,47,'Conquer Africa second-highest peak via the scenic Sirimon route.',JSON.stringify(['Professional mountain guides','All camping equipment','Meals and porters included','Summit certificate']),null,null,1],
-      ['Ultimate Luxury Safari','ultimate-luxury-safari','luxury','12 Days','11 Nights',8900,5.0,34,'Experience Kenya at its finest.',JSON.stringify(['Private safari vehicle','Luxury all-inclusive lodges','Private guide and chef','Spa and wellness included']),null,'Luxury',1],
-      ['Family Adventure Safari','family-adventure-safari','family','9 Days','8 Nights',3450,4.8,72,'A family-friendly journey with kid-friendly lodges, educational game drives, beach time, and cultural activities for all ages.',JSON.stringify(['Family-friendly lodges','Kids safari program','Child discounts available','Beach and pool time']),null,'Family',1]
+      ['Mt Kenya Trek & Ol Pejeta Safari','mt-kenya-ol-pejeta-5day','adventure','5 Days','4 Nights',2450,4.9,128,'Summit Point Lenana on Mt Kenya (4,985m), then track the Big Five and endangered rhinos at Ol Pejeta Conservancy — our signature Meru-based itinerary.',JSON.stringify(['Point Lenana summit attempt','Ol Pejeta Big Five game drives','Professional mountain guides','Community-benefit lodges']),'/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg','Signature',1],
+      ['Laikipia Conservancy Escape','laikipia-conservancy-4day','safari','4 Days','3 Nights',1890,4.8,86,'Four intimate days tracking lions, elephants, and Grevy\'s zebra across private Laikipia conservancies — small groups, no mass tourism.',JSON.stringify(['Private conservancy access','Daily game drives','Local Meru guides','Full-board bush camps']),'/IMAGES/Lion/lion.png.jpg','Best Seller',1],
+      ['Solio & Ol Pejeta Rhino Trail','solio-ol-pejeta-4day','safari','4 Days','3 Nights',1750,4.9,72,'A focused rhino and wildlife safari linking Solio Ranch and Ol Pejeta — Africa\'s strongest black and white rhino sanctuaries.',JSON.stringify(['Solio Ranch rhinos','Ol Pejeta conservancy','Chimpanzee sanctuary visit','Airport transfers from Meru/Nanyuki']),'/IMAGES/Elelphant/elephant.png.jpg','Popular',1],
+      ['Mt Kenya Point Lenana Summit','mt-kenya-lenana-5day','adventure','5 Days','4 Nights',2150,4.9,94,'Conquer Point Lenana via the scenic Sirimon route with expert local guides, quality gear, and alpine scenery few operators match.',JSON.stringify(['Sirimon route trek','Summit certificate','Meals & porters included','All camping equipment']),'/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg','Adventure',1],
+      ['Northern Kenya from Meru','northern-kenya-meru-7day','safari','7 Days','6 Nights',3280,4.8,61,'Go beyond the beaten path from our Meru base: reticulated giraffe, Grevy\'s zebra, Samburu culture, and remote northern landscapes.',JSON.stringify(['Meru National Park','Samburu / northern specials','Cultural village visit','Full-board lodges & camps']),'/IMAGES/Maasai/huts.png.jpg','Off the Path',1],
+      ['Private Luxury Conservancy Safari','luxury-conservancy-custom','luxury','8 Days','7 Nights',5900,5.0,34,'A fully private Laikipia & Mt Kenya journey — exclusive camps, private vehicle and guide, and tailor-made pacing for couples or small groups.',JSON.stringify(['Private safari vehicle & guide','Luxury conservancy lodges','Flexible daily itinerary','Spa & exclusive experiences']),'/IMAGES/Luxury/luxury.png.jpg','Luxury',1]
     ];
     for (var i = 0; i < pkgs.length; i++) { ins.bind(pkgs[i]); ins.step(); ins.reset(); }
     ins.free();
   }
 
   if (rowGet('SELECT COUNT(*) as c FROM destinations').c === 0) {
-    var ins = db.prepare('INSERT INTO destinations (name,slug,region,description,short_desc,highlights,featured) VALUES (?,?,?,?,?,?,?)');
+    var ins = db.prepare('INSERT INTO destinations (name,slug,region,description,short_desc,highlights,image_url,featured) VALUES (?,?,?,?,?,?,?,?)');
     var dests = [
-      ['Maasai Mara','maasai-mara','Southern','Experience the Maasai Mara.','Home of the Great Migration',JSON.stringify(['Great Migration','Big Five wildlife','Maasai cultural visits','Hot air balloon safaris']),1],
-      ['Amboseli','amboseli','Southern','Explore Amboseli National Park.','Elephants against Kilimanjaro',JSON.stringify(['Large elephant herds','Mt Kilimanjaro views','Excellent birding','Photography paradise']),1],
-      ['Nairobi','nairobi','Nairobi and Environs','Discover Nairobi.','The safari capital',JSON.stringify(['Nairobi National Park','Karen Blixen Museum','Giraffe Centre','Vibrant dining scene']),1],
-      ['Diani Beach','diani-beach','Coast','Escape to Diani Beach with pristine white sands and crystal-clear waters.','Kenya coastal gem',JSON.stringify(['White sand beaches','Snorkeling and diving','Dhow cruises','Beachfront resorts']),1],
-      ['Mount Kenya','mount-kenya','Central Highlands','Climb Mount Kenya, a UNESCO World Heritage site with trekking routes and alpine scenery.','Africa second-highest peak',JSON.stringify(['Trekking routes','Alpine scenery','Unique wildlife','UNESCO World Heritage site']),1],
-      ['Lake Nakuru','lake-nakuru','Rift Valley','Visit Lake Nakuru, famous for flamingos, rhinos, and breathtaking Rift Valley scenery.','Flamingos and rhinos',JSON.stringify(['Flamingo populations','Rhino sanctuary','Rift Valley scenery','Bird watching']),1],
-      ['Lamu Island','lamu','Coast','Explore Lamu Island, a UNESCO World Heritage site with Swahili culture and ancient architecture.','Timeless Swahili shores',JSON.stringify(['UNESCO Old Town','Swahili architecture','Dhow safaris','Pristine beaches']),1]
+      ['Maasai Mara','maasai-mara','Southern','Experience the Maasai Mara.','Home of the Great Migration',JSON.stringify(['Great Migration','Big Five wildlife','Maasai cultural visits','Hot air balloon safaris']),'/IMAGES/Classic%20mara/classic%20mara.jpg',1],
+      ['Amboseli','amboseli','Southern','Explore Amboseli National Park.','Elephants against Kilimanjaro',JSON.stringify(['Large elephant herds','Mt Kilimanjaro views','Excellent birding','Photography paradise']),'/IMAGES/Amboseli/amboseli.png.jpg',1],
+      ['Nairobi','nairobi','Nairobi and Environs','Discover Nairobi.','The safari capital',JSON.stringify(['Nairobi National Park','Karen Blixen Museum','Giraffe Centre','Vibrant dining scene']),'/IMAGES/Nairobi/nairobi.png.jpg',1],
+      ['Diani Beach','diani-beach','Coast','Escape to Diani Beach with pristine white sands and crystal-clear waters.','Kenya coastal gem',JSON.stringify(['White sand beaches','Snorkeling and diving','Dhow cruises','Beachfront resorts']),'/IMAGES/Diani/diani%20beach.png.jpg',1],
+      ['Mount Kenya','mount-kenya','Central Highlands','Climb Mount Kenya, a UNESCO World Heritage site with trekking routes and alpine scenery.','Africa second-highest peak',JSON.stringify(['Trekking routes','Alpine scenery','Unique wildlife','UNESCO World Heritage site']),'/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg',1],
+      ['Lake Nakuru','lake-nakuru','Rift Valley','Visit Lake Nakuru, famous for flamingos, rhinos, and breathtaking Rift Valley scenery.','Flamingos and rhinos',JSON.stringify(['Flamingo populations','Rhino sanctuary','Rift Valley scenery','Bird watching']),'/IMAGES/Lake%20Nakuru/lake%20nakuru.png.jpg',1],
+      ['Lamu Island','lamu','Coast','Explore Lamu Island, a UNESCO World Heritage site with Swahili culture and ancient architecture.','Timeless Swahili shores',JSON.stringify(['UNESCO Old Town','Swahili architecture','Dhow safaris','Pristine beaches']),'/IMAGES/Lamu/lamu.jpg',1]
     ];
     for (var i = 0; i < dests.length; i++) { ins.bind(dests[i]); ins.step(); ins.reset(); }
     ins.free();
   }
 
   if (rowGet('SELECT COUNT(*) as c FROM testimonials').c === 0) {
-    db.run('INSERT INTO testimonials (name,location,rating,text,featured) VALUES (?,?,?,?,?)', ['Sarah Mitchell','London, UK',5,'An absolutely life-changing experience. Watching the Great Migration from a hot air balloon at sunrise is something I will never forget.',1]);
-    db.run('INSERT INTO testimonials (name,location,rating,text,featured) VALUES (?,?,?,?,?)', ['James Walker','New York, USA',5,'From the Maasai Mara to Diani Beach, every moment was magical.',1]);
-    db.run('INSERT INTO testimonials (name,location,rating,text,featured) VALUES (?,?,?,?,?)', ['Emma Chen','Beijing, China',5,'Climbing Mount Kenya was the challenge of a lifetime. Kenya offers adventure and serenity.',1]);
+    db.run('INSERT INTO testimonials (name,location,rating,text,featured) VALUES (?,?,?,?,?)', ['Sarah H.','London, UK',5,'We summited Point Lenana at sunrise and by evening we were watching a lion pride at Ol Pejeta. The most extraordinary 5 days of my life.',1]);
+    db.run('INSERT INTO testimonials (name,location,rating,text,featured) VALUES (?,?,?,?,?)', ['Amara K.','Nairobi, Kenya',5,'The northern Kenya safari from Meru is genuinely off the beaten path. As a solo traveller Kiboko ticked every box.',1]);
+    db.run('INSERT INTO testimonials (name,location,rating,text,featured) VALUES (?,?,?,?,?)', ['James W.','New York, USA',5,'Laikipia conservancy stays felt exclusive and wild. Small groups, real community benefit, and guides who grew up on this land.',1]);
   }
 }
 
@@ -169,6 +215,13 @@ module.exports = async function(req, res) {
       return send(res, 200, rowsAll(sql));
     }
 
+    if (url === '/api/site-images' && req.method === 'GET') {
+      var rows = rowsAll('SELECT key, url FROM site_images');
+      var map = {};
+      rows.forEach(function(r) { map[r.key] = r.url || null; });
+      return send(res, 200, map);
+    }
+
     if (url === '/api/inquiries' && req.method === 'POST') {
       var body = await parseBody(req);
       if (!body.name || !body.email) return send(res, 400, { error: 'Name and email required' });
@@ -229,6 +282,18 @@ module.exports = async function(req, res) {
       }
       if (url === '/api/admin/newsletters' && req.method === 'GET') {
         return send(res, 200, rowsAll('SELECT * FROM newsletters ORDER BY created_at DESC'));
+      }
+
+      if (url === '/api/admin/site-images' && req.method === 'GET') {
+        return send(res, 200, rowsAll('SELECT * FROM site_images ORDER BY page, key'));
+      }
+      var siteImgM = url.match(/^\/api\/admin\/site-images\/(.+)$/);
+      if (siteImgM && req.method === 'PUT') {
+        var body = await parseBody(req);
+        var existing = rowGet('SELECT key FROM site_images WHERE key = ?', [siteImgM[1]]);
+        if (!existing) return send(res, 404, { error: 'Image key not found' });
+        db.run('UPDATE site_images SET url = ?, updated_at = CURRENT_TIMESTAMP WHERE key = ?', [body.url || null, siteImgM[1]]);
+        return send(res, 200, { message: 'Site image updated' });
       }
     }
 

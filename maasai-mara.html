@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="/js/hero-early.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maasai Mara &mdash; The Great Migration | Kiboko Adventures</title>
@@ -180,7 +181,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('logo.png') center/cover no-repeat;
+      background-color: #1b4332; background-size: cover; background-position: center; background-repeat: no-repeat;
     }
 
     .hero-overlay {
@@ -556,7 +557,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="plan.html">Plan Your Trip</a></li>
         <li><a href="stories.html">Stories</a></li>
-        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+        <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
       </ul>
     </div>
   </nav>
@@ -572,12 +573,12 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       <li><a href="destinations.html">Destinations</a></li>
       <li><a href="plan.html">Plan Your Trip</a></li>
       <li><a href="stories.html">Stories</a></li>
-      <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
     </ul>
   </div>
 
   <section class="hero" style="height: 70vh; min-height: 500px;">
-    <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80');"></div>
+    <div class="hero-bg" data-hero-key="hero_maasai_mara" style="background-color:#1b4332;background-size:cover;background-position:center;background-repeat:no-repeat"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-content">
       <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Maasai Mara<br><span>Where the Wild Comes Alive</span></h1>
@@ -705,8 +706,8 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         </div>
         <div class="footer-col">
           <h5>Contact</h5>
-          <a href="index.html">Kenya Tourism Board</a>
-          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="index.html">Kiboko Adventures</a>
+          <a href="#">Meru, Kenya (Base Camp)</a>
           <a href="tel:+254202711262">+254-20-2711-262</a>
           <a href="mailto:info@kibokoadventures.com">info@kibokoadventures.com</a>
           <a href="#">Media & Press</a>
@@ -714,7 +715,7 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>&copy; 2026 Kiboko Adventures. All rights reserved.</span>
         <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
       </div>
     </div>
@@ -786,5 +787,6 @@ body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
+  <script src="/js/apply-site-images.js"></script>
 </body>
 </html>

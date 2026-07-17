@@ -114,6 +114,53 @@ tr:hover td { background: #f8f9fa; }
 .inquiry-detail .field label { display: block; font-size: 0.75rem; text-transform: uppercase; color: #999; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
 .inquiry-detail .field span { font-size: 0.95rem; }
 
+/* Image Uploader */
+.img-upload-wrap { position: relative; }
+.img-drop-zone {
+  border: 2px dashed #c8d0dc;
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: #fafbfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 110px;
+  justify-content: center;
+}
+.img-drop-zone:hover, .img-drop-zone.drag-over {
+  border-color: var(--primary-light);
+  background: #eaf4fb;
+}
+.img-drop-zone i { font-size: 1.8rem; color: #aab; }
+.img-drop-zone .dz-label { font-size: 0.82rem; color: #777; }
+.img-drop-zone .dz-sub { font-size: 0.75rem; color: #aaa; }
+.img-preview-row { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.5rem; }
+.img-preview-thumb {
+  width: 72px; height: 52px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  display: none;
+}
+.img-preview-thumb.show { display: block; }
+.img-url-display { font-size: 0.78rem; color: #888; word-break: break-all; flex: 1; }
+.img-clear-btn {
+  background: none; border: none; color: #e74c3c; cursor: pointer;
+  font-size: 0.85rem; padding: 0.2rem 0.4rem; border-radius: 4px;
+  display: none;
+}
+.img-clear-btn.show { display: inline-block; }
+.img-upload-spinner { display: none; color: var(--primary-light); }
+.img-upload-spinner.show { display: inline-block; }
+.img-or-row { display: flex; align-items: center; gap: 0.5rem; margin: 0.4rem 0; }
+.img-or-row::before, .img-or-row::after { content: ''; flex: 1; height: 1px; background: #e0e0e0; }
+.img-or-row span { font-size: 0.75rem; color: #bbb; white-space: nowrap; }
+.img-url-input-row input { font-size: 0.82rem; padding: 0.5rem 0.7rem; }
+
 @media (max-width: 768px) {
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
@@ -159,6 +206,108 @@ async function api(path, options = {}) {
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'Request failed');
   return data;
+}
+
+// ── Image upload helper ──
+
+function imagePickerHtml(fieldId, currentUrl, label) {
+  const safeUrl = currentUrl ? escapeHtml(currentUrl) : '';
+  return `
+    <div class="form-group img-upload-wrap" id="wrap_${fieldId}">
+      <label>${label}</label>
+      <input type="hidden" id="${fieldId}" value="${safeUrl}">
+      <div class="img-drop-zone" id="dz_${fieldId}"
+           onclick="document.getElementById('file_${fieldId}').click()"
+           ondragover="event.preventDefault();this.classList.add('drag-over')"
+           ondragleave="this.classList.remove('drag-over')"
+           ondrop="handleImageDrop(event,'${fieldId}')">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <span class="dz-label">Click to browse or drag &amp; drop</span>
+        <span class="dz-sub">JPG, PNG, WebP, GIF &bull; max 10 MB</span>
+        <span class="img-upload-spinner" id="spin_${fieldId}"><i class="fas fa-spinner fa-spin"></i> Uploading…</span>
+      </div>
+      <input type="file" id="file_${fieldId}" accept="image/*" style="display:none"
+             onchange="handleImageFile(event,'${fieldId}')">
+      <div class="img-preview-row">
+        <img class="img-preview-thumb ${safeUrl ? 'show' : ''}" id="thumb_${fieldId}" src="${safeUrl}" alt="preview">
+        <span class="img-url-display" id="urltext_${fieldId}">${safeUrl || 'No image selected'}</span>
+        <button type="button" class="img-clear-btn ${safeUrl ? 'show' : ''}" id="clear_${fieldId}"
+                onclick="clearImage('${fieldId}')" title="Remove image">
+          <i class="fas fa-times"></i> Remove
+        </button>
+      </div>
+      <div class="img-or-row"><span>or paste a URL below</span></div>
+      <div class="img-url-input-row">
+        <input type="text" placeholder="https://example.com/image.jpg"
+               value="${safeUrl}"
+               oninput="setImageUrl('${fieldId}', this.value)"
+               style="width:100%;padding:0.5rem 0.7rem;border:2px solid #ddd;border-radius:8px;font-size:0.82rem">
+      </div>
+    </div>
+  `;
+}
+
+async function handleImageFile(event, fieldId) {
+  const file = event.target.files[0];
+  if (!file) return;
+  await uploadImageFile(file, fieldId);
+}
+
+async function handleImageDrop(event, fieldId) {
+  event.preventDefault();
+  document.getElementById('dz_' + fieldId).classList.remove('drag-over');
+  const file = event.dataTransfer.files[0];
+  if (!file || !file.type.startsWith('image/')) { toast('Please drop an image file', true); return; }
+  await uploadImageFile(file, fieldId);
+}
+
+async function uploadImageFile(file, fieldId) {
+  const spin = document.getElementById('spin_' + fieldId);
+  spin.classList.add('show');
+  try {
+    const formData = new FormData();
+    formData.append('image', file);
+    const res = await fetch(API + '/api/admin/upload', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token },
+      body: formData
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Upload failed');
+    setImageUrl(fieldId, data.url);
+    toast('Image uploaded!');
+  } catch (e) {
+    toast(e.message, true);
+  } finally {
+    spin.classList.remove('show');
+  }
+}
+
+function setImageUrl(fieldId, url) {
+  document.getElementById(fieldId).value = url;
+  const thumb = document.getElementById('thumb_' + fieldId);
+  const urltext = document.getElementById('urltext_' + fieldId);
+  const clearBtn = document.getElementById('clear_' + fieldId);
+  if (url) {
+    thumb.src = url;
+    thumb.classList.add('show');
+    urltext.textContent = url;
+    clearBtn.classList.add('show');
+  } else {
+    thumb.src = '';
+    thumb.classList.remove('show');
+    urltext.textContent = 'No image selected';
+    clearBtn.classList.remove('show');
+  }
+  // also sync the paste-URL input
+  const urlInputs = document.querySelectorAll(`#wrap_${fieldId} .img-url-input-row input`);
+  urlInputs.forEach(i => { if (i.value !== url) i.value = url || ''; });
+}
+
+function clearImage(fieldId) {
+  setImageUrl(fieldId, '');
+  const fileInput = document.getElementById('file_' + fieldId);
+  if (fileInput) fileInput.value = '';
 }
 
 function renderLogin() {
@@ -209,6 +358,8 @@ function renderApp() {
         <a class="nav-item" data-page="inquiries" href="#"><i class="fas fa-envelope"></i> Inquiries</a>
         <a class="nav-item" data-page="testimonials" href="#"><i class="fas fa-star"></i> Testimonials</a>
         <a class="nav-item" data-page="newsletter" href="#"><i class="fas fa-newspaper"></i> Newsletter</a>
+        <a class="nav-item" data-page="heroes" href="#"><i class="fas fa-panorama"></i> Hero Images</a>
+        <a class="nav-item" data-page="media" href="#"><i class="fas fa-images"></i> Site Images</a>
         <a class="nav-item" data-page="settings" href="#"><i class="fas fa-cog"></i> Settings</a>
         <a class="nav-item logout" id="logoutBtn" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
       </aside>
@@ -248,7 +399,7 @@ function renderApp() {
 }
 
 function loadPage(page) {
-  const titles = { dashboard: 'Dashboard', packages: 'Packages', destinations: 'Destinations', inquiries: 'Inquiries', testimonials: 'Testimonials', newsletter: 'Newsletter', settings: 'Settings' };
+  const titles = { dashboard: 'Dashboard', packages: 'Packages', destinations: 'Destinations', inquiries: 'Inquiries', testimonials: 'Testimonials', newsletter: 'Newsletter', heroes: 'Hero Images', settings: 'Settings', media: 'Site Images' };
   document.getElementById('pageTitle').textContent = titles[page] || 'Dashboard';
   const content = document.getElementById('pageContent');
   if (page === 'dashboard') renderDashboard(content);
@@ -257,7 +408,9 @@ function loadPage(page) {
   else if (page === 'inquiries') renderInquiries(content);
   else if (page === 'testimonials') renderTestimonials(content);
   else if (page === 'newsletter') renderNewsletter(content);
+  else if (page === 'heroes') renderHeroImages(content);
   else if (page === 'settings') renderSettings(content);
+  else if (page === 'media') renderMedia(content);
 }
 
 // ── Dashboard ──
@@ -387,7 +540,7 @@ async function showPackageForm(id) {
       </div>
       <div class="form-group"><label>Description</label><textarea id="f_description" rows="3">${escapeHtml(pkg.description)}</textarea></div>
       <div class="form-group"><label>Highlights (comma-separated)</label><input type="text" id="f_highlights" value="${escapeHtml(Array.isArray(pkg.highlights) ? pkg.highlights.join(', ') : pkg.highlights)}"></div>
-      <div class="form-group"><label>Image URL</label><input type="text" id="f_image_url" value="${escapeHtml(pkg.image_url || '')}"></div>
+      ${imagePickerHtml('f_image_url', pkg.image_url, 'Package Image')}
       <div class="form-row">
         <div class="form-group"><label><input type="checkbox" id="f_featured" ${pkg.featured ? 'checked' : ''}> Featured</label></div>
         <div class="form-group"><label><input type="checkbox" id="f_active" ${pkg.active !== 0 ? 'checked' : ''}> Active</label></div>
@@ -487,10 +640,8 @@ async function showDestinationForm(id) {
       <div class="form-group"><label>Short Description</label><input type="text" id="d_short_desc" value="${escapeHtml(dest.short_desc || '')}"></div>
       <div class="form-group"><label>Description</label><textarea id="d_description" rows="4">${escapeHtml(dest.description)}</textarea></div>
       <div class="form-group"><label>Highlights (comma-separated)</label><input type="text" id="d_highlights" value="${escapeHtml(Array.isArray(dest.highlights) ? dest.highlights.join(', ') : dest.highlights)}"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Image URL</label><input type="text" id="d_image_url" value="${escapeHtml(dest.image_url || '')}"></div>
-        <div class="form-group"><label>Hero Image URL</label><input type="text" id="d_hero_image_url" value="${escapeHtml(dest.hero_image_url || '')}"></div>
-      </div>
+      ${imagePickerHtml('d_image_url', dest.image_url, 'Card Image')}
+      ${imagePickerHtml('d_hero_image_url', dest.hero_image_url, 'Hero / Banner Image')}
       <div class="form-group"><label>Best Time to Visit</label><input type="text" id="d_best_time" value="${escapeHtml(dest.best_time || '')}"></div>
       <div class="form-row">
         <div class="form-group"><label>Latitude</label><input type="number" id="d_lat" value="${dest.lat || ''}" step="any"></div>
@@ -693,7 +844,7 @@ async function showTestimonialForm(id) {
         <div class="form-group"><label>Name *</label><input type="text" id="t_name" value="${escapeHtml(t.name)}" required></div>
         <div class="form-group"><label>Location</label><input type="text" id="t_location" value="${escapeHtml(t.location || '')}"></div>
       </div>
-      <div class="form-group"><label>Avatar URL</label><input type="text" id="t_avatar_url" value="${escapeHtml(t.avatar_url || '')}"></div>
+      ${imagePickerHtml('t_avatar_url', t.avatar_url, 'Avatar / Photo')}
       <div class="form-group"><label>Rating</label><select id="t_rating">${[5,4,3,2,1].map(r => `<option value="${r}" ${t.rating === r ? 'selected' : ''}>${'★'.repeat(r)}${'☆'.repeat(5-r)}</option>`).join('')}</select></div>
       <div class="form-group"><label>Testimonial *</label><textarea id="t_text" rows="4" required>${escapeHtml(t.text)}</textarea></div>
       <div class="form-row">
@@ -759,6 +910,172 @@ async function renderNewsletter(el) {
       <p style="margin-top:1rem;color:#999;font-size:0.85rem">Total: ${subs.length} subscriber${subs.length !== 1 ? 's' : ''}</p>
     `;
   } catch (e) { document.getElementById('newsletterBody').innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`; }
+}
+
+// ── Hero Images (dedicated) ──
+
+const HERO_IMAGE_GROUPS = {
+  main: {
+    label: '🏠 Main Pages',
+    keys: [
+      { key: 'hero_home', label: 'Homepage' },
+      { key: 'hero_experiences', label: 'Experiences' },
+      { key: 'hero_packages', label: 'Packages' },
+      { key: 'hero_destinations', label: 'Destinations' },
+      { key: 'hero_plan', label: 'Plan Your Trip' },
+      { key: 'hero_stories', label: 'Stories' },
+      { key: 'hero_inquire', label: 'Book / Inquire' },
+    ]
+  },
+  plan: {
+    label: '🧭 Plan & Info',
+    keys: [
+      { key: 'hero_visa', label: 'Visa & eTA' },
+      { key: 'hero_travel_guide', label: 'Travel Guide' },
+      { key: 'hero_accommodation', label: 'Accommodation' },
+      { key: 'hero_getting_here', label: 'Getting Here' },
+      { key: 'hero_weather', label: 'Weather & Seasons' },
+      { key: 'hero_faqs', label: 'FAQs' },
+    ]
+  },
+  destinations: {
+    label: '📍 Destination Pages',
+    keys: [
+      { key: 'hero_maasai_mara', label: 'Maasai Mara' },
+      { key: 'hero_amboseli', label: 'Amboseli' },
+      { key: 'hero_nairobi', label: 'Nairobi' },
+      { key: 'hero_diani_beach', label: 'Diani Beach' },
+      { key: 'hero_mount_kenya', label: 'Mount Kenya' },
+      { key: 'hero_lake_nakuru', label: 'Lake Nakuru' },
+      { key: 'hero_lamu', label: 'Lamu Island' },
+    ]
+  }
+};
+
+async function renderHeroImages(el) {
+  el.innerHTML = '<div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>';
+  try {
+    const allImages = await api('/api/admin/site-images');
+    const urlMap = {};
+    allImages.forEach(r => { urlMap[r.key] = r.url || ''; });
+
+    el.innerHTML = `
+      <div class="card" style="margin-bottom:1rem;background:linear-gradient(135deg,#fff8e8,#eaf4fb);border:1px solid #f0d68a">
+        <div class="card-body" style="padding:1rem 1.5rem;display:flex;align-items:center;gap:0.8rem">
+          <i class="fas fa-panorama" style="color:var(--accent);font-size:1.3rem;flex-shrink:0"></i>
+          <div style="font-size:0.9rem">
+            <strong>Page hero banners:</strong> Upload or paste a URL for each page header image. Changes appear on the live site immediately after Save. Clear an image to fall back to the page default.
+          </div>
+        </div>
+      </div>
+      ${Object.entries(HERO_IMAGE_GROUPS).map(([, group]) => `
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="card-header"><h3>${group.label}</h3></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem">
+              ${group.keys.map(item => `
+                <div style="border:1px solid #eee;border-radius:10px;padding:1rem;background:#fafbfc">
+                  <div style="font-weight:600;font-size:0.88rem;margin-bottom:0.7rem;color:var(--primary)">${item.label}</div>
+                  ${imagePickerHtml('si_' + item.key, urlMap[item.key], '')}
+                  <button class="btn btn-primary btn-sm" style="margin-top:0.6rem;width:100%" onclick="saveSiteImage('${item.key}')">
+                    <i class="fas fa-save"></i> Save Hero
+                  </button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    `;
+  } catch (e) {
+    el.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`;
+  }
+}
+
+// ── Site Images (Media — card / section images) ──
+
+const SITE_IMAGE_GROUPS = {
+  homepage: {
+    label: '🏠 Homepage Package Cards',
+    keys: [
+      { key: 'home_pkg_mt-kenya-ol-pejeta-5day',   label: 'Mt Kenya Trek & Ol Pejeta Safari' },
+      { key: 'home_pkg_laikipia-conservancy-4day', label: 'Laikipia Conservancy Escape' },
+      { key: 'home_pkg_solio-ol-pejeta-4day',      label: 'Solio & Ol Pejeta Rhino Trail' },
+      { key: 'home_pkg_mt-kenya-lenana-5day',      label: 'Mt Kenya Point Lenana Summit' },
+      { key: 'home_pkg_northern-kenya-meru-7day',  label: 'Northern Kenya from Meru' },
+      { key: 'home_pkg_luxury-conservancy-custom', label: 'Private Luxury Conservancy Safari' },
+    ]
+  },
+  stories: {
+    label: '📖 Stories Page',
+    keys: [
+      { key: 'story_migration',     label: 'The Great Migration' },
+      { key: 'story_swahili_coast', label: 'Swahili Coast' },
+      { key: 'story_conservation',  label: 'Conservation' },
+      { key: 'story_safari_lodges', label: 'Safari Lodges' },
+      { key: 'story_photography',   label: 'Wildlife Photography' },
+      { key: 'story_cuisine',       label: 'Kenyan Cuisine' },
+    ]
+  },
+  experiences: {
+    label: '🌍 Experiences Page',
+    keys: [
+      { key: 'exp_big_five',           label: 'Big Five Safari' },
+      { key: 'exp_coastal_paradise',   label: 'Coastal Paradise' },
+      { key: 'exp_cultural_immersion', label: 'Cultural Immersion' },
+      { key: 'exp_mount_kenya',        label: 'Mount Kenya Trekking' },
+      { key: 'exp_rift_valley',        label: 'Great Rift Valley' },
+      { key: 'exp_balloon_safari',     label: 'Balloon Safari' },
+    ]
+  }
+};
+
+async function renderMedia(el) {
+  el.innerHTML = '<div style="text-align:center;padding:3rem"><i class="fas fa-spinner fa-spin fa-2x"></i></div>';
+  try {
+    const allImages = await api('/api/admin/site-images');
+    const urlMap = {};
+    allImages.forEach(r => { urlMap[r.key] = r.url || ''; });
+
+    el.innerHTML = `
+      <div class="card" style="margin-bottom:1rem;background:linear-gradient(135deg,#eaf4fb,#f0f8e8);border:1px solid #c8e6f9">
+        <div class="card-body" style="padding:1rem 1.5rem;display:flex;align-items:center;gap:0.8rem">
+          <i class="fas fa-info-circle" style="color:var(--primary-light);font-size:1.2rem;flex-shrink:0"></i>
+          <div style="font-size:0.9rem">
+            <strong>How it works:</strong> Upload an image or paste a URL for any slot. Once saved, the live website swaps in your image automatically. Package &amp; destination images are managed in their own sections.
+          </div>
+        </div>
+      </div>
+      ${Object.entries(SITE_IMAGE_GROUPS).map(([, group]) => `
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="card-header"><h3>${group.label}</h3></div>
+          <div class="card-body">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem">
+              ${group.keys.map(item => `
+                <div style="border:1px solid #eee;border-radius:10px;padding:1rem;background:#fafbfc">
+                  <div style="font-weight:600;font-size:0.88rem;margin-bottom:0.7rem;color:var(--primary)">${item.label}</div>
+                  ${imagePickerHtml('si_' + item.key, urlMap[item.key], '')}
+                  <button class="btn btn-primary btn-sm" style="margin-top:0.6rem;width:100%" onclick="saveSiteImage('${item.key}')">
+                    <i class="fas fa-save"></i> Save Image
+                  </button>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    `;
+  } catch (e) {
+    el.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i> ${e.message}</div>`;
+  }
+}
+
+async function saveSiteImage(key) {
+  const url = document.getElementById('si_' + key)?.value || null;
+  try {
+    await api(`/api/admin/site-images/${key}`, { method: 'PUT', body: JSON.stringify({ url }) });
+    toast('Image saved!');
+  } catch (e) { toast(e.message, true); }
 }
 
 // ── Settings ──

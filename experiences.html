@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="/js/hero-early.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kenya Travel Experiences &mdash; Safari, Beach, Culture & Adventure | Kiboko Adventures</title>
@@ -183,7 +184,7 @@ body.dark .exp-detail-body p { color: var(--gray); }
     }
     .hero-bg {
       position: absolute; inset: 0;
-      background: url('Elelphant/elephant.png.jpg') center/cover no-repeat;
+      background-color: #1b4332; background-size: cover; background-position: center; background-repeat: no-repeat;
     }
 
     .hero-overlay {
@@ -587,7 +588,7 @@ body.dark .exp-detail-body p { color: var(--gray); }
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="plan.html">Plan Your Trip</a></li>
         <li><a href="stories.html">Stories</a></li>
-        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+        <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
       </ul>
     </div>
   </nav>
@@ -603,12 +604,12 @@ body.dark .exp-detail-body p { color: var(--gray); }
       <li><a href="destinations.html">Destinations</a></li>
       <li><a href="plan.html">Plan Your Trip</a></li>
       <li><a href="stories.html">Stories</a></li>
-      <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
     </ul>
   </div>
 
   <section class="hero" style="height: 60vh; min-height: 420px;">
-    <div class="hero-bg" style="background-image: url('Elelphant/elephant.png.jpg');"></div>
+    <div class="hero-bg" data-hero-key="hero_experiences" style="background-color:#1b4332;background-size:cover;background-position:center;background-repeat:no-repeat"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-content">
       <h1 style="font-size: clamp(2.4rem, 6vw, 4rem);">Experiences<br><span>Kiboko Adventures</span></h1>
@@ -626,68 +627,68 @@ body.dark .exp-detail-body p { color: var(--gray); }
       <div class="exp-detail-grid">
         <div class="exp-detail-card">
           <div class="exp-detail-img">
-            <img src="Lion/lion.png.jpg" alt="Big Five Safari - Lions in Kenya" loading="lazy">
+            <img src="IMAGES/Lion/lion.png.jpg" data-img-key="exp_big_five" alt="Big Five Safari - Lions in Kenya" loading="lazy">
           </div>
           <div class="exp-detail-body">
             <span class="exp-detail-tag">Wildlife</span>
             <h3>Big Five Safari</h3>
             <p>Witness the majestic lion, leopard, elephant, rhino, and Cape buffalo roam free in their natural habitat. Kenya's world-famous game reserves offer some of the most incredible wildlife viewing on the planet, with expert guides leading you to thrilling encounters you'll treasure forever.</p>
-            <a href="index.html#experiences" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
+            <a href="experiences.html" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
           </div>
         </div>
         <div class="exp-detail-card">
           <div class="exp-detail-img">
-            <img src="https://images.pexels.com/photos/2053950/pexels-photo-2053950.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" alt="Coastal Paradise" loading="lazy">
+            <img src="https://images.pexels.com/photos/2053950/pexels-photo-2053950.jpeg?auto=compress&cs=tinysrgb&w=800&q=80" data-img-key="exp_coastal_paradise" alt="Coastal Paradise" loading="lazy">
           </div>
           <div class="exp-detail-body">
             <span class="exp-detail-tag">Beach & Ocean</span>
             <h3>Coastal Paradise</h3>
             <p>Explore pristine white sand beaches, vibrant coral reefs, and ancient Swahili towns along Kenya's stunning Indian Ocean coastline. From Diani to Watamu, the coast offers world-class snorkeling, diving, dhow cruises, and unforgettable sunsets over turquoise waters.</p>
-            <a href="index.html#experiences" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
+            <a href="experiences.html" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
           </div>
         </div>
         <div class="exp-detail-card">
           <div class="exp-detail-img">
-            <img src="Maasai/huts.png.jpg" alt="Maasai Huts - Cultural Immersion" loading="lazy">
+            <img src="IMAGES/Maasai/huts.png.jpg" data-img-key="exp_cultural_immersion" alt="Maasai Huts - Cultural Immersion" loading="lazy">
           </div>
           <div class="exp-detail-body">
             <span class="exp-detail-tag">Culture</span>
             <h3>Cultural Immersion</h3>
             <p>Connect with Kenya's 42 indigenous tribes and experience timeless traditions, from Maasai warrior dances and beadwork to Swahili cuisine and storytelling. Visit local villages, learn ancient crafts, and gain a deeper understanding of Kenya's rich and diverse cultural heritage.</p>
-            <a href="index.html#experiences" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
+            <a href="experiences.html" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
           </div>
         </div>
         <div class="exp-detail-card">
           <div class="exp-detail-img">
-            <img src="Mount Kenya/mount kenya.png.jpg" alt="Mount Kenya Trekking" loading="lazy">
+            <img src="IMAGES/Mount%20Kenya/mount%20kenya.png.jpg" data-img-key="exp_mount_kenya" alt="Mount Kenya Trekking" loading="lazy">
           </div>
           <div class="exp-detail-body">
             <span class="exp-detail-tag">Adventure</span>
             <h3>Mount Kenya Trekking</h3>
             <p>Conquer Africa's second-highest peak through breathtaking alpine scenery, bamboo forests, and glacier-carved valleys. Multiple routes cater to all fitness levels, with expert guides ensuring a safe and memorable journey to the summit of this majestic equatorial mountain.</p>
-            <a href="index.html#experiences" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
+            <a href="experiences.html" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
           </div>
         </div>
         <div class="exp-detail-card">
           <div class="exp-detail-img">
-            <img src="Rift/rift valley.png.jpg" alt="Great Rift Valley" loading="lazy">
+            <img src="IMAGES/Rift/rift%20valley.png.jpg" data-img-key="exp_rift_valley" alt="Great Rift Valley" loading="lazy">
           </div>
           <div class="exp-detail-body">
             <span class="exp-detail-tag">Landscape</span>
             <h3>Great Rift Valley</h3>
             <p>Explore dramatic escarpments, soda lakes teeming with flamingos, and volcanic landscapes that stretch across the horizon. The Great Rift Valley is a geological wonder that offers some of the most spectacular scenery and birdwatching opportunities in all of Africa.</p>
-            <a href="index.html#experiences" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
+            <a href="experiences.html" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
           </div>
         </div>
         <div class="exp-detail-card">
           <div class="exp-detail-img">
-            <img src="Hot air/hot air balloon.png.jpg" alt="Balloon Safari" loading="lazy">
+            <img src="IMAGES/Hot%20air/hot%20air%20balloon.png.jpg" data-img-key="exp_balloon_safari" alt="Balloon Safari" loading="lazy">
           </div>
           <div class="exp-detail-body">
             <span class="exp-detail-tag">Bucket List</span>
             <h3>Balloon Safari</h3>
             <p>Soar above the Maasai Mara at sunrise for an unmatched perspective of the African wilderness. Watch herds of wildebeest, zebras, and elephants from the sky as the golden light illuminates the vast savannah below &mdash; a truly unforgettable bucket-list experience.</p>
-            <a href="index.html#experiences" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
+            <a href="experiences.html" style="color: var(--gold); font-weight: 600;">Learn More &rarr;</a>
           </div>
         </div>
       </div>
@@ -729,8 +730,8 @@ body.dark .exp-detail-body p { color: var(--gray); }
         </div>
         <div class="footer-col">
           <h5>Contact</h5>
-          <a href="index.html">Kenya Tourism Board</a>
-          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <a href="index.html">Kiboko Adventures</a>
+          <a href="#">Meru, Kenya (Base Camp)</a>
           <a href="tel:+254202711262">+254-20-2711-262</a>
           <a href="mailto:info@kibokoadventures.com">info@kibokoadventures.com</a>
           <a href="#">Media & Press</a>
@@ -738,7 +739,7 @@ body.dark .exp-detail-body p { color: var(--gray); }
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
+        <span>&copy; 2026 Kiboko Adventures. All rights reserved.</span>
         <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
       </div>
     </div>
@@ -812,5 +813,7 @@ body.dark .exp-detail-body p { color: var(--gray); }
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
+
+  <script src="/js/apply-site-images.js"></script>
 </body>
 </html>

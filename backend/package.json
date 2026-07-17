@@ -1,7 +1,7 @@
 {
-  "name": "discover-kenya-backend",
+  "name": "kiboko-adventures-backend",
   "version": "1.0.0",
-  "description": "Backend for Discover Kenya tourism website",
+  "description": "Backend for Kiboko Adventures tourism website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

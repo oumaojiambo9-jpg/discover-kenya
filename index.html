@@ -1,459 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <script src="/js/hero-early.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiboko Adventures — Safari Expeditions in Kenya</title>
-  <meta name="description" content="Kiboko Adventures - your gateway to authentic Kenyan safaris, coastal escapes, and cultural tours. Expert-led journeys across Kenya's most iconic destinations.">
-  <meta name="keywords" content="Kiboko Adventures, Kenya safari, Kenya tourism, Masai Mara, Amboseli, Nairobi, Mombasa, African safari, Big Five, Kenya beaches">
+  <title>Kiboko Adventures | Mt Kenya Trek &amp; Laikipia Conservancy Safaris</title>
+  <meta name="description" content="Kenya's leading Meru-based safari operator. Combine a Mt Kenya trek with a Laikipia or Ol Pejeta conservancy safari in 4-5 days. Sustainable, community-powered adventures since 2010. Book direct and save.">
+  <meta name="keywords" content="Mt Kenya trek and safari package, Laikipia conservancy safari, Solio Ol Pejeta safari, sustainable community-based safari Kenya, northern Kenya safari from Meru, 4-day Kenya safari package, 5-day Kenya safari package, Kiboko Adventures">
+  <link rel="canonical" href="https://www.kibokoadventures.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kibokoadventures.com/">
+  <meta property="og:title" content="Kiboko Adventures | Mt Kenya Trek &amp; Conservancy Safaris">
+  <meta property="og:description" content="Trek Mt Kenya then track rhinos at Ol Pejeta. Small-group, community-based safaris from Meru, Kenya.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&q=80">
+  <meta property="og:locale" content="en_KE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kiboko Adventures | Mt Kenya Trek &amp; Conservancy Safaris">
+  <meta name="twitter:description" content="Trek Mt Kenya then track rhinos at Ol Pejeta. Small-group, community-based safaris from Meru, Kenya.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&q=80">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TourOperator",
+        "@id": "https://www.kibokoadventures.com/#organization",
+        "name": "Kiboko Adventures",
+        "url": "https://www.kibokoadventures.com",
+        "logo": "https://www.kibokoadventures.com/logo.png",
+        "description": "Community-based safari operator based in Meru, Kenya. Specialists in Mt Kenya treks combined with Laikipia conservancy safaris and northern Kenya expeditions.",
+        "foundingDate": "2010",
+        "areaServed": "Kenya",
+        "address": { "@type": "PostalAddress", "addressLocality": "Meru", "addressRegion": "Meru County", "addressCountry": "KE" },
+        "contactPoint": { "@type": "ContactPoint", "telephone": "+254-20-2711-262", "contactType": "Customer Service", "email": "info@kibokoadventures.com" }
+      },
+      {
+        "@type": "TouristTrip",
+        "@id": "https://www.kibokoadventures.com/packages.html#signature-trek",
+        "name": "Mt Kenya Trek & Laikipia Conservancy Safari - 5-Day Package",
+        "description": "Summit Point Lenana on Mt Kenya (4,985m), then track the Big Five at Ol Pejeta or Solio Ranch.",
+        "provider": { "@id": "https://www.kibokoadventures.com/#organization" },
+        "offers": { "@type": "Offer", "price": "2450", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     body { font-family: 'Inter', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
 
     :root {
-      --gold: #d4a341;
-      --gold-light: #f0d68a;
-      --terracotta: #c25b3a;
-      --savanna: #e8c37b;
-      --green: #2d6a4f;
-      --green-dark: #1b4332;
-      --cream: #faf6f0;
-      --dark: #1a1a2e;
-      --gray: #6b7280;
-      --gray-light: #f3f4f6;
-      --white: #ffffff;
-      --shadow: 0 4px 24px rgba(0,0,0,0.08);
-      --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
-      --radius: 12px;
-      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --gold: #d4a341; --gold-light: #f0d68a; --terracotta: #c25b3a;
+      --green: #2d6a4f; --green-dark: #1b4332; --cream: #faf6f0;
+      --dark: #1a1a2e; --gray: #6b7280; --gray-light: #f3f4f6; --white: #ffffff;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08); --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+      --radius: 12px; --transition: 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    body.dark {
-      --cream: #111827;
-      --dark: #f9fafb;
-      --gray: #9ca3af;
-      --gray-light: #374151;
-      --white: #1f2937;
-      --shadow: 0 4px 24px rgba(0,0,0,0.3);
-      --shadow-lg: 0 12px 48px rgba(0,0,0,0.4);
-      color: #f9fafb;
-      background: #111827;
-    }
-    body.dark nav.scrolled { background: rgba(17,24,39,0.95); }
-    body.dark nav.scrolled .nav-logo { color: #f9fafb; }
-    body.dark nav.scrolled .nav-links a { color: rgba(255,255,255,0.7); }
-    body.dark nav.scrolled .nav-links a:hover { color: #fff; }
-    body.dark nav.scrolled .hamburger span { background: #f9fafb; }
-    body.dark .nav-links.open { background: #1f2937; }
-    body.dark .nav-links.open a { color: rgba(255,255,255,0.9) !important; }
-    body.dark .package-title { color: #f9fafb; }
-    body.dark .package-price strong { color: #f9fafb; }
-    body.dark .package-desc, body.dark .package-meta, body.dark .package-highlights span { color: var(--gray); }
-    body.dark .newsletter-box { background: #1f2937; }
-    body.dark footer { background: #0f172a; }
-    body.dark .footer-col a { color: rgba(255,255,255,0.6); }
-    body.dark .exp-card h3, body.dark .dest-card h3 { color: #fff; }
-    body.dark .exp-card p, body.dark .dest-card p { color: rgba(255,255,255,0.7); }
-    body.dark h2 { color: #f9fafb; }
-    body.dark .section-subtitle { color: var(--gray); }
-    body.dark .story-card { background: #1f2937; }
-    body.dark .story-body h4 { color: #f9fafb; }
-    body.dark .story-body p { color: var(--gray); }
-    body.dark .testimonial-card { background: #1f2937; }
-    body.dark .testimonial-text { color: var(--gray); }
-    body.dark .testimonial-name { color: #f9fafb; }
-    body.dark .package-card { background: #1f2937; }
+    body.dark { --cream:#111827; --dark:#f9fafb; --gray:#9ca3af; --gray-light:#374151; --white:#1f2937; color:#f9fafb; background:#111827; }
+    body.dark nav.scrolled { background:rgba(17,24,39,0.95); }
+    body.dark nav.scrolled .nav-logo { color:#f9fafb; }
+    body.dark nav.scrolled .nav-links a { color:rgba(255,255,255,0.7); }
+    body.dark nav.scrolled .hamburger span { background:#f9fafb; }
+    body.dark .nav-links.open { background:#1f2937; }
+    body.dark .package-title { color:#f9fafb; }
+    body.dark .package-price strong { color:#f9fafb; }
+    body.dark .package-desc, body.dark .package-meta, body.dark .package-highlights span { color:var(--gray); }
+    body.dark .newsletter-box { background:#1f2937; }
+    body.dark footer { background:#0f172a; }
+    body.dark .footer-col a { color:rgba(255,255,255,0.6); }
+    body.dark h2 { color:#f9fafb; }
+    body.dark .section-subtitle { color:var(--gray); }
+    body.dark .testimonial-card { background:#1f2937; }
+    body.dark .testimonial-text { color:var(--gray); }
+    body.dark .testimonial-name { color:#f9fafb; }
+    body.dark .package-card { background:#1f2937; }
+    body.dark .filter-tab { color:rgba(255,255,255,0.6); border-color:rgba(255,255,255,0.15); }
+    body.dark .filter-tab.active { color:#fff; }
+    body.dark .filter-tab:hover { color:var(--gold); }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .section { padding: 100px 0; }
-    .section-dark { background: var(--dark); color: #fff; }
+    .section { padding: 80px 0; }
     .section-cream { background: var(--cream); }
     .section-green { background: var(--green-dark); color: #fff; }
+    .tag { display:inline-block; font-size:0.75rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    h2 { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.2rem); font-weight:600; line-height:1.2; margin-bottom:16px; }
+    .section-green h2 { color:#fff; }
+    .section-subtitle { font-size:1.05rem; color:var(--gray); max-width:600px; line-height:1.6; }
+    .section-green .section-subtitle { color:rgba(255,255,255,0.7); }
+    .section-header { text-align:center; margin-bottom:52px; }
+    .section-header .section-subtitle { margin:0 auto; }
 
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .section-dark h2, .section-green h2 { color: #fff; }
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--gray);
-      max-width: 600px;
-      line-height: 1.6;
-    }
-    .section-dark .section-subtitle, .section-green .section-subtitle { color: rgba(255,255,255,0.7); }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    .section-header .section-subtitle { margin: 0 auto; }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: var(--transition);
-      cursor: pointer;
-      border: none;
-    }
-    .btn-primary { background: var(--gold); color: #fff; }
-    .btn-primary:hover { background: #c49335; transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); }
-    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-    .btn-dark { background: var(--dark); color: #fff; }
-    .btn-dark:hover { background: #2e2e4a; transform: translateY(-2px); }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 32px; border-radius:50px; font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600; text-decoration:none; transition:var(--transition); cursor:pointer; border:none; }
+    .btn-primary { background:var(--gold); color:#fff; }
+    .btn-primary:hover { background:#c49335; transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+    .btn-outline { background:transparent; color:#fff; border:2px solid rgba(255,255,255,0.35); }
+    .btn-outline:hover { border-color:#fff; background:rgba(255,255,255,0.1); transform:translateY(-2px); }
+    .btn-dark { background:#1a1a2e; color:#fff; }
+    .btn-dark:hover { background:#2e2e4a; transform:translateY(-2px); color:#fff; }
+    /* Dark mode: --dark is inverted for text, so keep button contrast explicit */
+    body.dark .btn-dark { background:#f9fafb; color:#111827; }
+    body.dark .btn-dark:hover { background:#e5e7eb; color:#111827; }
 
     /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 1000;
-      padding: 20px 0;
-      transition: var(--transition);
-    }
-    nav.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); padding: 12px 0; box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
-    nav .container { display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.5px; }
-    .nav-logo span { color: var(--gold); }
-    nav.scrolled .nav-logo { color: var(--dark); }
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-    .nav-links a {
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: var(--transition);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 2px; background: var(--gold);
-      transition: var(--transition);
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a:hover::after { width: 100%; }
-    nav.scrolled .nav-links a { color: rgba(0,0,0,0.7); }
-    nav.scrolled .nav-links a:hover { color: var(--dark); }
-    .nav-cta { background: var(--gold); color: #fff !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; }
-    .nav-cta::after { display: none !important; }
-    .nav-cta:hover { background: #c49335 !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-    .hamburger span { width: 24px; height: 2px; background: #fff; transition: var(--transition); }
-    nav.scrolled .hamburger span { background: var(--dark); }
-    body.dark nav.scrolled .hamburger span { background: #f9fafb; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:1000; padding:20px 0; transition:var(--transition); }
+    nav.scrolled { background:rgba(255,255,255,0.95); backdrop-filter:blur(20px); padding:12px 0; box-shadow:0 1px 0 rgba(0,0,0,0.06); }
+    nav .container { display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:#fff; text-decoration:none; }
+    .nav-logo span { color:var(--gold); }
+    nav.scrolled .nav-logo { color:var(--dark); }
+    .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
+    .nav-links a { color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.85rem; font-weight:500; transition:var(--transition); position:relative; }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--gold); transition:var(--transition); }
+    .nav-links a:hover { color:#fff; }
+    .nav-links a:hover::after { width:100%; }
+    nav.scrolled .nav-links a { color:rgba(0,0,0,0.7); }
+    nav.scrolled .nav-links a:hover { color:var(--dark); }
+    .nav-cta { background:var(--gold); color:#fff !important; padding:10px 24px; border-radius:50px; font-weight:600; }
+    .nav-cta::after { display:none !important; }
+    .nav-cta:hover { background:#c49335 !important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; }
+    .hamburger span { width:24px; height:2px; background:#fff; transition:var(--transition); }
+    nav.scrolled .hamburger span { background:var(--dark); }
+    body.dark nav.scrolled .hamburger span { background:#f9fafb; }
 
-    /* ── MOBILE MENU (base: hidden on desktop) ── */
-    .mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1099; }
-    .mobile-overlay.active { display: block; }
-    .mobile-menu { display: none; position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background: #1f2937; padding: 80px 32px 32px; z-index: 1100; overflow-y: auto; }
-    .mobile-menu.active { display: block; }
-    .mobile-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: rgba(255,255,255,0.8); font-size: 1.8rem; cursor: pointer; z-index: 1101; width: 40px; height: 40px; display: none; align-items: center; justify-content: center; }
-    .mobile-menu.active .mobile-close { display: flex; }
-    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-    .mobile-menu a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 1rem; font-weight: 500; transition: var(--transition); }
-    .mobile-menu a:hover { color: var(--gold); }
+    /* ── MOBILE MENU ── */
+    .mobile-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1099; }
+    .mobile-overlay.active { display:block; }
+    .mobile-menu { display:none; position:fixed; top:0; right:0; bottom:0; width:280px; background:#1f2937; padding:80px 32px 32px; z-index:1100; overflow-y:auto; }
+    .mobile-menu.active { display:block; }
+    .mobile-close { position:absolute; top:20px; right:20px; background:none; border:none; color:rgba(255,255,255,0.8); font-size:1.8rem; cursor:pointer; z-index:1101; width:40px; height:40px; display:none; align-items:center; justify-content:center; }
+    .mobile-menu.active .mobile-close { display:flex; }
+    .mobile-menu ul { list-style:none; display:flex; flex-direction:column; gap:20px; }
+    .mobile-menu a { color:rgba(255,255,255,0.9); text-decoration:none; font-size:1rem; font-weight:500; transition:var(--transition); }
+    .mobile-menu a:hover { color:var(--gold); }
 
     /* ── HERO ── */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('logo.png') center 35%/cover no-repeat;
-    }
-    @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.15); } }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.5) 100%);
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 720px; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
-      padding: 8px 18px; border-radius: 50px;
-      font-size: 0.8rem; color: #fff; font-weight: 500;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 8vw, 5.5rem);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .hero h1 span { color: var(--gold); }
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(255,255,255,0.8);
-      line-height: 1.7;
-      max-width: 560px;
-      margin-bottom: 36px;
-    }
-    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-scroll {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-      z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      color: rgba(255,255,255,0.6); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
-      animation: scrollBounce 2s ease-in-out infinite;
-    }
-    .hero-scroll .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent); }
-    @keyframes scrollBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    .hero { position:relative; height:100vh; min-height:620px; display:flex; align-items:center; overflow:hidden; }
+    /* No default photo URL — avoids flash of wrong image before CMS / cache apply */
+    .hero-bg { position:absolute; inset:0; background-color:#1b4332; background-position:center 40%; background-size:cover; background-repeat:no-repeat; animation:heroZoom 18s ease-in-out infinite alternate; }
+    @keyframes heroZoom { from { transform:scale(1); } to { transform:scale(1.06); } }
+    .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(27,67,50,0.75) 0%,rgba(0,0,0,0.25) 55%,rgba(26,26,46,0.65) 100%); }
+    .hero-content { position:relative; z-index:2; max-width:760px; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.12); backdrop-filter:blur(8px); padding:8px 18px; border-radius:50px; font-size:0.8rem; color:#fff; font-weight:500; margin-bottom:24px; border:1px solid rgba(255,255,255,0.2); }
+    .hero-badge-dot { width:7px; height:7px; border-radius:50%; background:#4ade80; box-shadow:0 0 0 3px rgba(74,222,128,0.2); animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,0.2);}50%{box-shadow:0 0 0 6px rgba(74,222,128,0.1);} }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.6rem,7.5vw,5rem); font-weight:700; color:#fff; line-height:1.1; margin-bottom:24px; }
+    .hero h1 .accent { color:var(--gold); font-style:italic; }
+    .hero-sub { font-size:clamp(1rem,2vw,1.15rem); color:rgba(255,255,255,0.85); line-height:1.75; max-width:580px; margin-bottom:16px; }
+    .hero-proof { font-size:0.82rem; color:rgba(255,255,255,0.55); margin-bottom:36px; }
+    .hero-proof strong { color:rgba(255,255,255,0.85); }
+    .hero-cta { display:flex; gap:16px; flex-wrap:wrap; }
+    /* FIX #6: hide scroll nudge on mobile */
+    .hero-scroll { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,0.5); font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; animation:scrollBounce 2.5s ease-in-out infinite; }
+    .hero-scroll .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,rgba(255,255,255,0.5),transparent); }
+    @keyframes scrollBounce { 0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);} }
 
-    /* ── FEATURED GRID ── */
-    .featured-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
-
-    /* ── EXPERIENCES ── */
-    .experiences-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .exp-card {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 400px;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .exp-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .exp-card img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-    .exp-card:hover img { transform: scale(1.08); }
-    .exp-card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);
-    }
-    .exp-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; }
-    .exp-card-tag {
-      display: inline-block;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-      color: var(--gold); background: rgba(0,0,0,0.3); backdrop-filter: blur(4px);
-      padding: 4px 12px; border-radius: 50px; margin-bottom: 12px;
-    }
-    .exp-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; font-weight: 600; }
-    .exp-card p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 6px; }
-
-    /* ── DESTINATIONS ── */
-    .dests-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .dest-card {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 280px;
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    .dest-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .dest-card:first-child { grid-column: 1 / 3; grid-row: 1 / 3; height: auto; }
-    .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-    .dest-card:hover img { transform: scale(1.06); }
-    .dest-card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 70%);
-    }
-    .dest-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; }
-    .dest-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: #fff; font-weight: 600; }
-    .dest-card:first-child h3 { font-size: 1.6rem; }
-    .dest-card p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
-
-    /* ── NEWSLETTER ── */
-    .newsletter-box {
-      background: var(--dark);
-      border-radius: 20px;
-      padding: 80px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .newsletter-box::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 30% 50%, rgba(212,163,65,0.08) 0%, transparent 60%);
-    }
-    .newsletter-box h2 { color: #fff; }
-    .newsletter-box p { color: rgba(255,255,255,0.6); max-width: 500px; margin: 0 auto 32px; }
-    .newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
-    .newsletter-form input {
-      flex: 1;
-      padding: 16px 24px;
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-      transition: var(--transition);
-    }
-    .newsletter-form input::placeholder { color: rgba(255,255,255,0.4); }
-    .newsletter-form input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
-
-    /* ── FOOTER ── */
-    footer { background: var(--dark); color: rgba(255,255,255,0.7); }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding: 80px 0 48px; }
-    .footer-brand .nav-logo { font-size: 1.8rem; color: #fff; display: inline-block; margin-bottom: 16px; }
-    .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 320px; }
-    .footer-social { display: flex; gap: 12px; margin-top: 20px; }
-    .footer-social a {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
-    .footer-col h5 { color: #fff; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
-    .footer-col a {
-      display: block;
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      font-size: 0.9rem;
-      padding: 4px 0;
-      transition: var(--transition);
-    }
-    .footer-col a:hover { color: var(--gold); padding-left: 4px; }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 24px 0;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.8rem;
-    }
+    /* ── TRUST BAR ── */
+    .trust-bar { background:var(--green-dark); padding:24px 0; }
+    .trust-bar-inner { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .trust-stat { text-align:center; padding:10px 36px; border-right:1px solid rgba(255,255,255,0.1); flex:1; min-width:130px; }
+    .trust-stat:last-child { border-right:none; }
+    .trust-stat-number { font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:700; color:var(--gold); line-height:1; display:block; }
+    .trust-stat-label { font-size:0.72rem; color:rgba(255,255,255,0.65); text-transform:uppercase; letter-spacing:1.5px; margin-top:5px; display:block; }
 
     /* ── PACKAGES ── */
-    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .package-card {
-      background: #fff;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    .package-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .package-img {
-      position: relative;
-      height: 200px;
-      overflow: hidden;
-    }
-    .package-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-    .package-card:hover .package-img img { transform: scale(1.06); }
-    .package-badge {
-      position: absolute; top: 12px; right: 12px;
-      background: var(--gold); color: #fff;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
-      padding: 6px 14px; border-radius: 50px;
-    }
-    .package-badge-green { background: var(--green); }
-    .package-badge-gold { background: var(--terracotta); }
-    .package-body { padding: 24px; }
-    .package-meta {
-      display: flex; justify-content: space-between;
-      font-size: 0.75rem; color: var(--gray); margin-bottom: 12px;
-    }
-    .package-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .package-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
-    .package-highlights {
-      display: flex; flex-direction: column; gap: 6px;
-      margin-bottom: 20px;
-    }
-    .package-highlights span { font-size: 0.8rem; color: var(--gray); }
-    .package-footer {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 16px; border-top: 1px solid var(--gray-light);
-    }
-    .package-price { font-size: 0.85rem; color: var(--gray); }
-    .package-price strong { font-size: 1.2rem; color: var(--dark); font-weight: 700; }
-    .package-price small { font-size: 0.75rem; }
+    .packages-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+    .package-card { background:var(--white); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); transition:var(--transition); display:flex; flex-direction:column; }
+    .package-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .package-card.filter-hidden { display:none; }
+    .package-img { position:relative; height:210px; overflow:hidden; }
+    .package-img img { width:100%; height:100%; object-fit:cover; transition:var(--transition); }
+    .package-card:hover .package-img img { transform:scale(1.06); }
+    .package-badge { position:absolute; top:12px; right:12px; background:var(--gold); color:#fff; font-size:0.7rem; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; padding:6px 14px; border-radius:50px; }
+    .package-badge-green { background:var(--green); }
+    .package-badge-terra { background:var(--terracotta); }
+    .package-body { padding:24px; display:flex; flex-direction:column; flex:1; }
+    .package-meta { display:flex; justify-content:space-between; font-size:0.75rem; color:var(--gray); margin-bottom:12px; }
+    .package-title { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:600; margin-bottom:8px; }
+    .package-desc { font-size:0.85rem; color:var(--gray); line-height:1.6; margin-bottom:16px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .package-highlights { display:flex; flex-direction:column; gap:5px; margin-bottom:20px; flex:1; max-height:112px; overflow:hidden; }
+    /* FIX #7: styled SVG checkmark */
+    .package-highlights span { font-size:0.8rem; color:var(--gray); display:flex; align-items:flex-start; gap:8px; }
+    .package-highlights span::before { content:''; width:15px; height:15px; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232d6a4f'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") center/contain no-repeat; flex-shrink:0; margin-top:2px; }
+    .package-footer { display:flex; justify-content:space-between; align-items:center; padding-top:16px; border-top:1px solid var(--gray-light); }
+    .package-price { font-size:0.85rem; color:var(--gray); }
+    .package-price strong { font-size:1.2rem; color:var(--dark); font-weight:700; }
+    .package-price small { font-size:0.75rem; }
 
-    @media (max-width: 1024px) {
-      .packages-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .packages-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 480px) {
-      .packages-grid { grid-template-columns: 1fr; }
-    }
+    /* FILTER TABS */
+    .filter-tabs { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:40px; flex-wrap:wrap; }
+    .filter-tab { padding:10px 24px; border-radius:50px; font-size:0.85rem; font-weight:600; cursor:pointer; border:2px solid var(--gray-light); background:transparent; color:var(--gray); transition:var(--transition); font-family:'Inter',sans-serif; }
+    .filter-tab:hover { border-color:var(--gold); color:var(--gold); }
+    .filter-tab.active { background:var(--gold); border-color:var(--gold); color:#fff; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; max-width:900px; margin:0 auto; }
+    .testimonial-card { background:var(--white); border-radius:var(--radius); padding:36px; box-shadow:var(--shadow); transition:var(--transition); position:relative; }
+    .testimonial-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+    .testimonial-quote { font-size:3rem; line-height:1; color:var(--gold); opacity:0.2; position:absolute; top:20px; right:24px; font-family:'Playfair Display',serif; }
+    .testimonial-stars { color:var(--gold); font-size:0.9rem; margin-bottom:14px; }
+    .testimonial-text { font-size:0.92rem; color:var(--gray); line-height:1.75; margin-bottom:22px; font-style:italic; }
+    .testimonial-author { display:flex; align-items:center; gap:14px; }
+    .testimonial-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--green),var(--gold)); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:0.95rem; flex-shrink:0; }
+    .testimonial-name { font-weight:600; font-size:0.9rem; }
+    .testimonial-origin { font-size:0.78rem; color:var(--gray); margin-top:2px; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-box { background:var(--dark); border-radius:20px; padding:72px 80px; text-align:center; position:relative; overflow:hidden; }
+    .newsletter-box::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 30% 50%,rgba(212,163,65,0.08) 0%,transparent 60%); }
+    .newsletter-box h2 { color:#fff; }
+    .newsletter-box p { color:rgba(255,255,255,0.6); max-width:500px; margin:0 auto 28px; }
+    .newsletter-form { display:flex; gap:12px; max-width:480px; margin:0 auto; }
+    .newsletter-form input { flex:1; padding:16px 24px; border-radius:50px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.06); color:#fff; font-size:1rem; outline:none; transition:var(--transition); }
+    .newsletter-form input::placeholder { color:rgba(255,255,255,0.4); }
+    .newsletter-form input:focus { border-color:var(--gold); background:rgba(255,255,255,0.1); }
+
+    /* ── FOOTER ── */
+    footer { background:var(--dark); color:rgba(255,255,255,0.7); }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; padding:72px 0 44px; }
+    .footer-brand .nav-logo { font-size:1.8rem; color:#fff; display:inline-block; margin-bottom:16px; }
+    .footer-brand p { font-size:0.9rem; line-height:1.7; max-width:320px; }
+    .footer-social { display:flex; gap:12px; margin-top:20px; }
+    .footer-social a { width:40px; height:40px; border-radius:50%; border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.6); text-decoration:none; transition:var(--transition); }
+    .footer-social a:hover { border-color:var(--gold); color:var(--gold); }
+    .footer-col h5 { color:#fff; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:18px; }
+    .footer-col a { display:block; color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.9rem; padding:4px 0; transition:var(--transition); }
+    .footer-col a:hover { color:var(--gold); padding-left:4px; }
+    .footer-bottom { border-top:1px solid rgba(255,255,255,0.06); padding:22px 0; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; }
 
     /* ── DARK MODE TOGGLE ── */
-    .theme-toggle {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 1000;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: none;
-      background: var(--dark);
-      color: var(--gold);
-      font-size: 1.3rem;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .theme-toggle:hover { transform: scale(1.1); }
+    .theme-toggle { position:fixed; bottom:24px; right:24px; z-index:1000; width:48px; height:48px; border-radius:50%; border:none; background:var(--dark); color:var(--gold); font-size:1.3rem; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.2); transition:var(--transition); display:flex; align-items:center; justify-content:center; }
+    .theme-toggle:hover { transform:scale(1.1); }
 
-    /* ── MOBILE ── */
-    @media (max-width: 1024px) {
-      .featured-grid { grid-template-columns: 1fr; }
-      #featured > .container > div:last-child { grid-template-columns: 1fr !important; }
-      .dest-card img { width: 100%; height: 100%; object-fit: cover; }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    }
+    /* FIX #1: cards visible by default — animation is progressive enhancement */
+    .animate-ready { opacity:0; transform:translateY(28px); transition:opacity 0.6s ease, transform 0.6s ease; }
+    .animate-in { opacity:1 !important; transform:translateY(0) !important; }
 
-    @media (max-width: 768px) {
-      .section { padding: 60px 0; }
-      .nav-links.desktop-only { display: none !important; }
-      .hamburger { display: flex; }
-      .hero h1 { font-size: 2.6rem; }
-      #featured > .container > div:last-child { grid-template-columns: 1fr !important; gap: 16px !important; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .newsletter-box { padding: 40px 24px; border-radius: 12px; }
-      .newsletter-form { flex-direction: column; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    /* ── RESPONSIVE ── */
+    @media (max-width:1024px) {
+      .packages-grid { grid-template-columns:repeat(2,1fr); }
+      .package-card[data-filter="custom"] { grid-column:span 2; }
+      .footer-grid { grid-template-columns:repeat(2,1fr); gap:32px; }
+      .trust-stat { padding:10px 18px; }
+    }
+    @media (max-width:768px) {
+      .section { padding:60px 0; }
+      .nav-links.desktop-only { display:none !important; }
+      .hamburger { display:flex; }
+      .hero h1 { font-size:2.6rem; }
+      .packages-grid { grid-template-columns:1fr; }
+      .testimonials-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; }
+      .newsletter-box { padding:44px 24px; border-radius:12px; }
+      .newsletter-form { flex-direction:column; }
+      .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+      .trust-stat { border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); padding:12px 20px; min-width:50%; }
+    }
+    @media (max-width:480px) {
+      .hero h1 { font-size:2.2rem; }
+      /* FIX #6: hide scroll nudge on small screens */
+      .hero-scroll { display:none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══ NAV ═══ -->
-  <nav id="navbar">
+  <!-- NAV -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+      <a href="index.html" class="nav-logo">Kiboko<span>.</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links desktop-only" id="navLinks">
@@ -463,15 +286,15 @@
         <li><a href="destinations.html">Destinations</a></li>
         <li><a href="plan.html">Plan Your Trip</a></li>
         <li><a href="stories.html">Stories</a></li>
-        <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+        <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ═══ MOBILE MENU (outside nav to avoid stacking issues) ═══ -->
+  <!-- MOBILE MENU -->
   <div class="mobile-overlay" id="mobileOverlay"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+    <button class="mobile-close" id="mobileClose" aria-label="Close navigation menu">&times;</button>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="experiences.html">Experiences</a></li>
@@ -479,106 +302,136 @@
       <li><a href="destinations.html">Destinations</a></li>
       <li><a href="plan.html">Plan Your Trip</a></li>
       <li><a href="stories.html">Stories</a></li>
-      <li><a href="inquire.html" class="nav-cta">Inquire Now</a></li>
+      <li><a href="inquire.html" class="nav-cta">Book a Safari</a></li>
     </ul>
   </div>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <div class="hero-bg"></div>
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero section">
+    <div class="hero-bg" data-hero-key="hero_home" role="img" aria-label="Safari vehicle at sunset in the Kenyan savanna" style="background-color:#1b4332;background-size:cover;background-position:center;background-repeat:no-repeat"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-content">
-      <h1>Kiboko<br><span>Adventures</span></h1>
-      <div class="company-description" style="margin-top: 1.5rem; font-size: 1rem; line-height: 1.8; color: #fff; max-width: 600px; margin-left: auto; margin-right: auto; padding: 20px 28px; border-radius: 12px; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">
-        <p>Your gateway to authentic Kenyan safaris, coastal escapes, and cultural tours. Expert-led journeys across Kenya's most iconic destinations. Every trip supports conservation and local communities.</p>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Based in Meru &nbsp;&middot;&nbsp; Laikipia &nbsp;&middot;&nbsp; Northern Kenya
       </div>
+      <h1>Trek <span class="accent">Mt Kenya.</span><br>Track Lions in Laikipia.</h1>
+      <p class="hero-sub">Kenya&rsquo;s only operator combining high-altitude Mt Kenya trekking with intimate conservancy safaris &mdash; tracking the Big Five at Ol Pejeta &amp; Solio from our home base in Meru.</p>
+      <p class="hero-proof">&#9733;&#9733;&#9733;&#9733;&#9733; Rated &nbsp;&middot;&nbsp; <strong>500+</strong> guests from 40 countries &nbsp;&middot;&nbsp; <strong>100%</strong> community-benefit trips</p>
       <div class="hero-cta">
-        <a href="#experiences" class="btn btn-primary">Explore Experiences &#8594;</a>
-        <a href="#plan" class="btn btn-outline">Plan Your Safari</a>
+        <a href="packages.html" class="btn btn-primary" id="hero-cta-packages">See Our Packages &rarr;</a>
+        <a href="inquire.html" class="btn btn-outline" id="hero-cta-inquire">Custom Safari Inquiry</a>
       </div>
     </div>
-    <div class="hero-scroll">
-      <span>Scroll</span>
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Discover</span>
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ═══ FEATURED ═══ -->
-  <section class="section section-cream" id="featured">
+  <!-- TRUST BAR -->
+  <div class="trust-bar" role="region" aria-label="Key statistics">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <div class="trust-stat"><span class="trust-stat-number">500+</span><span class="trust-stat-label">Happy Guests</span></div>
+        <div class="trust-stat"><span class="trust-stat-number">14</span><span class="trust-stat-label">Years Operating</span></div>
+        <div class="trust-stat"><span class="trust-stat-number">6</span><span class="trust-stat-label">Conservancies Partnered</span></div>
+        <div class="trust-stat"><span class="trust-stat-number">4.9&#9733;</span><span class="trust-stat-label">Average Rating</span></div>
+        <div class="trust-stat"><span class="trust-stat-number">100%</span><span class="trust-stat-label">Community Benefit</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PACKAGES -->
+  <section class="section section-cream" id="packages" aria-labelledby="packages-heading">
     <div class="container">
       <div class="section-header">
-        <span class="tag">&#127758; Kiboko Adventures</span>
-        <h2>Your Gateway to<br>Kenya's Wonders</h2>
+        <span class="tag">&#128205; Signature Itineraries</span>
+        <h2 id="packages-heading">Find Your Perfect<br>Kenya Safari Package</h2>
+        <p class="section-subtitle">Every package is fully customisable. Filter by duration, or <a href="inquire.html" style="color:var(--gold);text-decoration:none;font-weight:600;">tell us your dates</a> for a bespoke quote.</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 0 auto;">
-        <a href="experiences.html" class="exp-card" style="height: 320px; text-decoration: none;">
-          <img src="Elelphant/elephant.png.jpg" alt="Safari" loading="lazy">
-          <div class="exp-card-overlay"></div>
-          <div class="exp-card-content">
-            <span class="exp-card-tag">Experiences</span>
-            <h3>Safaris & Adventures</h3>
-            <p>From Big Five safaris to coastal escapes.</p>
-          </div>
-        </a>
-        <a href="destinations.html" class="dest-card" style="height: 320px;">
-          <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1000&q=80" alt="Destinations" loading="lazy">
-          <div class="dest-card-overlay"></div>
-          <div class="dest-card-content">
-            <span class="exp-card-tag">Destinations</span>
-            <h3>Explore Kenya</h3>
-            <p>Seven iconic destinations await.</p>
-          </div>
-        </a>
-        <a href="packages.html" class="package-card" style="height: 320px; border-radius: var(--radius); overflow: hidden; position: relative; display: block;">
-          <img src="Classic mara/classic mara.jpg" alt="Packages" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-          <div class="exp-card-overlay"></div>
-          <div class="exp-card-content" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;">
-            <span class="exp-card-tag">Packages</span>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; font-weight: 600;">Safari Packages</h3>
-            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 6px;">Curated itineraries from $2,450.</p>
-          </div>
-        </a>
-        <a href="stories.html" class="story-card" style="height: 320px; border-radius: var(--radius); overflow: hidden; position: relative; display: block;">
-          <img src="Maasai/pexels-garycohen-12339475.png.jpg" alt="Maasai Elder - Travel Stories" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-          <div class="exp-card-overlay"></div>
-          <div class="exp-card-content" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 32px;">
-            <span class="exp-card-tag">Stories</span>
-            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; font-weight: 600;">Travel Stories</h3>
-            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 6px;">Tips, guides, and inspiration.</p>
-          </div>
-        </a>
+
+      <div class="filter-tabs" role="tablist" aria-label="Filter packages by duration">
+        <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true" id="filter-all">All Packages</button>
+        <button class="filter-tab" data-filter="4-day" role="tab" aria-selected="false" id="filter-4day">4-Day Safaris</button>
+        <button class="filter-tab" data-filter="5-day" role="tab" aria-selected="false" id="filter-5day">5-Day Safaris</button>
+        <button class="filter-tab" data-filter="custom" role="tab" aria-selected="false" id="filter-custom">7+ Day Custom</button>
+      </div>
+
+      <div class="packages-grid" id="packagesGrid">
+        <!-- Cards rendered dynamically from /api/packages — images come from admin CMS -->
+        <div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray);font-size:0.95rem;">Loading packages&#8230;</div>
+      </div>
+
+      <div style="text-align:center;margin-top:44px;">
+        <a href="packages.html" class="btn btn-dark" id="view-all-packages">View All Packages &rarr;</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ NEWSLETTER ═══ -->
-  <section class="section">
+  <!-- TESTIMONIALS -->
+  <section class="section" id="reviews" aria-labelledby="reviews-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="tag">&#11088; Guest Stories</span>
+        <h2 id="reviews-heading">What Our Guests Say</h2>
+        <p class="section-subtitle">Verified reviews from 500+ adventurers on TripAdvisor and Google.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote">&ldquo;</div>
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">We summited Point Lenana at sunrise and by evening we were watching a lion pride at Ol Pejeta. The most extraordinary 5 days of my life &mdash; the guides&rsquo; knowledge of the land is unmatched.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SH</div>
+            <div>
+              <div class="testimonial-name">Sarah H.</div>
+              <div class="testimonial-origin">London, UK &middot; Mt Kenya + Ol Pejeta Package</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote">&ldquo;</div>
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">The northern Kenya safari from Meru is genuinely off the beaten path &mdash; reticulated giraffe, Grevy&rsquo;s zebra, and a leopard at the river. As a solo traveller Kiboko ticked every box. Absolutely book them.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AK</div>
+            <div>
+              <div class="testimonial-name">Amara K.</div>
+              <div class="testimonial-origin">Nairobi, Kenya &middot; Northern Kenya from Meru</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:40px;">
+        <a href="stories.html" class="btn btn-dark" id="stories-cta">Read More Stories &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section" id="newsletter">
     <div class="container">
       <div class="newsletter-box">
         <span class="tag">&#128231; Stay Inspired</span>
         <h2>Get Kenya in Your Inbox</h2>
-        <p>Subscribe for exclusive travel tips, hidden gems, special offers, and stories from the wild.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); (async()=>{try{const r=await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('nlEmail').value})});const d=await r.json();if(r.ok)alert(d.message);else alert('Error: '+d.error)}catch{alert('Error subscribing. Please try again.')}})()">
-          <input type="email" id="nlEmail" placeholder="Enter your email address" required>
-          <button type="submit" class="btn btn-primary">Subscribe</button>
+        <p>Seasonal safari tips, conservancy updates, and early-access deals from our team on the ground in Meru.</p>
+        <form class="newsletter-form" id="newsletterForm" onsubmit="event.preventDefault();(async()=>{try{const r=await fetch('/api/newsletter',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('nlEmail').value})});const d=await r.json();if(r.ok)alert(d.message);else alert('Error: '+d.error)}catch{alert('Error subscribing. Please try again.')}})()" aria-label="Newsletter signup">
+          <input type="email" id="nlEmail" placeholder="Enter your email address" required aria-label="Email address">
+          <button type="submit" class="btn btn-primary" id="newsletter-submit">Subscribe</button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer id="contact">
+  <!-- FOOTER -->
+  <footer id="contact" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          
-          <p>The official destination website for Kiboko Adventures. Your guide to the origin of wonder — where safari was born.</p>
+          <a href="index.html" class="nav-logo">Kiboko<span>.</span></a>
+          <p>Community-based safari operator based in Meru, Kenya. Specialists in Mt Kenya trekking, Laikipia conservancy safaris, and sustainable northern Kenya expeditions. Founded 2010.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-            <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
           </div>
         </div>
         <div class="footer-col">
@@ -593,89 +446,198 @@
         </div>
         <div class="footer-col">
           <h5>Plan Your Trip</h5>
-          <a href="visa.html">Visa & eTA</a>
+          <a href="visa.html">Visa &amp; eTA</a>
           <a href="travel-guide.html">Travel Guide</a>
           <a href="accommodation.html">Accommodation</a>
           <a href="getting-here.html">Getting Here</a>
-          <a href="weather.html">Weather & Seasons</a>
+          <a href="weather.html">Weather &amp; Seasons</a>
           <a href="faqs.html">FAQs</a>
         </div>
         <div class="footer-col">
-          <h5>Contact</h5>
-          <a href="index.html">Kenya Tourism Board</a>
-          <a href="#">Kenya-Re Towers, Nairobi</a>
+          <h5>Contact Kiboko</h5>
           <a href="tel:+254202711262">+254-20-2711-262</a>
           <a href="mailto:info@kibokoadventures.com">info@kibokoadventures.com</a>
-          <a href="#">Media & Press</a>
-          <a href="#">Careers</a>
+          <span style="display:block;color:rgba(255,255,255,0.5);font-size:0.9rem;padding:4px 0;">Meru, Kenya (Base Camp)</span>
+          <a href="inquire.html">Book a Safari</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; 2026 Kenya Tourism Board. All rights reserved.</span>
-        <span>Privacy Policy &nbsp;|&nbsp; Terms of Service &nbsp;|&nbsp; Cookie Policy</span>
+        <span>&copy; 2026 Kiboko Adventures. All rights reserved.</span>
+        <span>Community-powered adventures since 2010</span>
       </div>
     </div>
   </footer>
 
-  <!-- ═══ DARK MODE TOGGLE ═══ -->
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">&#9789;</button>
 
   <script>
     // Navbar scroll
     const navbar = document.getElementById('navbar');
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const current = window.scrollY;
-      if (current > 60) { navbar.classList.add('scrolled'); }
-      else { navbar.classList.remove('scrolled'); }
-      lastScroll = current;
-    });
+    window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); });
 
     // Mobile nav
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileClose = document.getElementById('mobileClose');
     const mobileOverlay = document.getElementById('mobileOverlay');
-    function openNav() {
-      mobileMenu.classList.add('active');
-      mobileOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeNav() {
-      mobileMenu.classList.remove('active');
-      mobileOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+    function openNav() { mobileMenu.classList.add('active'); mobileOverlay.classList.add('active'); document.body.style.overflow='hidden'; hamburger.setAttribute('aria-expanded','true'); }
+    function closeNav() { mobileMenu.classList.remove('active'); mobileOverlay.classList.remove('active'); document.body.style.overflow=''; hamburger.setAttribute('aria-expanded','false'); }
     hamburger.addEventListener('click', openNav);
     mobileClose.addEventListener('click', closeNav);
     mobileOverlay.addEventListener('click', closeNav);
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', closeNav);
-    });
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', closeNav));
 
-    // Intersection Observer for fade-in
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, { threshold: 0.1 });
+    // ── Dynamic package loader from /api/packages ──
+    const FALLBACK_IMG = 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80';
 
-    document.querySelectorAll('.exp-card, .dest-card, .package-card, .story-card').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
-    });
-    // Dark mode toggle
-    const toggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-      document.body.classList.add('dark');
-      toggle.innerHTML = '&#9788;';
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
     }
+
+    /** Duration string → filter tab: 4-day | 5-day | custom (7+) */
+    function durationToFilter(duration) {
+      if (!duration) return 'custom';
+      const m = String(duration).match(/(\d+)/);
+      if (!m) return 'custom';
+      const days = parseInt(m[1], 10);
+      if (days === 4) return '4-day';
+      if (days === 5) return '5-day';
+      return 'custom';
+    }
+
+    function badgeClass(badge) {
+      if (!badge) return '';
+      const b = badge.toLowerCase();
+      if (b.includes('popular') || b.includes('value') || b.includes('community') || b.includes('tailored') || b.includes('signature') || b.includes('best')) return 'package-badge-green';
+      if (b.includes('path') || b.includes('off') || b.includes('iconic') || b.includes('adventure')) return 'package-badge-terra';
+      return '';
+    }
+
+    function initFilter(cards) {
+      const filterTabs = document.querySelectorAll('.filter-tab');
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const filter = tab.dataset.filter;
+          filterTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+          tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+          cards.forEach(card => {
+            const match = filter === 'all' || card.dataset.filter === filter;
+            if (match) {
+              card.style.display = '';
+              requestAnimationFrame(() => { card.style.opacity='1'; card.style.transform='scale(1)'; card.style.transition='opacity 0.3s ease,transform 0.3s ease'; });
+            } else {
+              card.style.opacity='0'; card.style.transform='scale(0.96)'; card.style.transition='opacity 0.3s ease,transform 0.3s ease';
+              setTimeout(() => { if(card.style.opacity==='0') card.style.display='none'; }, 320);
+            }
+          });
+        });
+      });
+    }
+
+    function initObserver(els) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('animate-in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      els.forEach(el => obs.observe(el));
+    }
+
+    (async () => {
+      const grid = document.getElementById('packagesGrid');
+
+      // Category-specific Unsplash fallbacks — no external dependencies
+      const CATEGORY_IMGS = {
+        safari:    'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80',
+        combo:     'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80',
+        culture:   'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&q=80',
+        adventure: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80',
+        luxury:    'https://images.unsplash.com/photo-1504173010664-32509107de7f?w=800&q=80',
+        family:    'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800&q=80',
+        _default:  'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&q=80'
+      };
+
+      async function fetchWithRetry(url, attempts = 3) {
+        for (let i = 0; i < attempts; i++) {
+          try {
+            const r = await fetch(url);
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return await r.json();
+          } catch (e) {
+            if (i === attempts - 1) throw e;
+            await new Promise(res => setTimeout(res, 600));
+          }
+        }
+      }
+
+      function homePkgImageKey(slug) {
+        return slug ? 'home_pkg_' + slug : '';
+      }
+
+      function renderPackageCard(pkg, siteImgs) {
+        siteImgs = siteImgs || {};
+        const imgKey = homePkgImageKey(pkg.slug);
+        const fromAdmin = imgKey && siteImgs[imgKey] ? siteImgs[imgKey] : null;
+        const imgSrc = escapeHtml(fromAdmin || pkg.image_url || CATEGORY_IMGS[pkg.category] || CATEGORY_IMGS._default);
+        const fallback = CATEGORY_IMGS._default;
+        const filter = durationToFilter(pkg.duration);
+        const isCustom = filter === 'custom';
+        const highlights = Array.isArray(pkg.highlights) ? pkg.highlights : [];
+        const price = pkg.price ? '$' + Number(pkg.price).toLocaleString() : 'POA';
+        const badge = pkg.badge || '';
+        const ctaText = isCustom ? 'Start Planning' : 'Enquire Now';
+        const ctaHref = 'inquire.html?pkg=' + encodeURIComponent(pkg.slug || '');
+        return `
+          <div class="package-card animate-ready" data-filter="${filter}">
+            <div class="package-img">
+              <img src="${imgSrc}" alt="${escapeHtml(pkg.title)}" loading="lazy" ${imgKey ? 'data-img-key="' + escapeHtml(imgKey) + '"' : ''} onerror="this.src='${fallback}';this.onerror=null">
+              ${badge ? `<span class="package-badge ${badgeClass(badge)}">${escapeHtml(badge)}</span>` : ''}
+            </div>
+            <div class="package-body">
+              <div class="package-meta">
+                <span>&#9971; ${escapeHtml(pkg.duration || '')}${pkg.nights ? ' / ' + escapeHtml(pkg.nights) : ''}</span>
+                <span>&#128101; ${pkg.review_count ? escapeHtml(String(pkg.review_count)) + ' reviews' : 'Small group'}</span>
+              </div>
+              <h3 class="package-title">${escapeHtml(pkg.title)}</h3>
+              <p class="package-desc">${escapeHtml(pkg.description || '')}</p>
+              <div class="package-highlights">
+                ${highlights.slice(0, 4).map(h => `<span>${escapeHtml(h)}</span>`).join('')}
+              </div>
+              <div class="package-footer">
+                <div class="package-price">from <strong>${price}</strong> <small>/person</small></div>
+                <a href="${ctaHref}" class="btn btn-primary" style="padding:10px 22px;font-size:0.8rem;">${ctaText}</a>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      try {
+        const [packages, siteImgs] = await Promise.all([
+          fetchWithRetry('/api/packages'),
+          fetchWithRetry('/api/site-images').catch(() => ({}))
+        ]);
+        if (packages && packages.length) {
+          grid.innerHTML = packages.map(pkg => renderPackageCard(pkg, siteImgs || {})).join('');
+        } else {
+          grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">No packages available yet. <a href="packages.html" style="color:var(--gold)">View all packages &rarr;</a></div>';
+        }
+      } catch (err) {
+        console.error('Package load failed:', err);
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">Packages temporarily unavailable. <a href="packages.html" style="color:var(--gold)">View all packages &rarr;</a></div>';
+      }
+
+      const cards = [...grid.querySelectorAll('.package-card')];
+      initFilter(cards);
+      initObserver([...cards, ...document.querySelectorAll('.testimonial-card')]);
+    })();
+
+    // Dark mode
+    const toggle = document.getElementById('themeToggle');
+    if (localStorage.getItem('theme') === 'dark') { document.body.classList.add('dark'); toggle.innerHTML='&#9788;'; }
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
       const isDark = document.body.classList.contains('dark');
@@ -683,5 +645,7 @@
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
+
+  <script src="/js/apply-site-images.js"></script>
 </body>
 </html>

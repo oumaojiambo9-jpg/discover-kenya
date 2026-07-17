@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const initSqlJs = require('sql.js');
 const fs = require('fs');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,6 +18,29 @@ app.use(express.urlencoded({ extended: true }));
 
 const publicDir = path.join(__dirname, '..');
 app.use(express.static(publicDir));
+
+// ── Uploads folder ──
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+app.use('/uploads', express.static(uploadsDir));
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadsDir),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    cb(null, uuidv4() + ext);
+  }
+});
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB
+  fileFilter: (req, file, cb) => {
+    const allowed = /jpeg|jpg|png|gif|webp|avif|svg/;
+    const ok = allowed.test(path.extname(file.originalname).toLowerCase()) &&
+                allowed.test(file.mimetype.split('/')[1]);
+    ok ? cb(null, true) : cb(new Error('Only image files are allowed'));
+  }
+});
 
 let db;
 
@@ -85,6 +110,106 @@ function authMiddleware(req, res, next) {
 }
 
 SQL_PROMISE.then(() => {
+
+// ── Site Images table (editorial / non-DB images) ──
+db.run(`CREATE TABLE IF NOT EXISTS site_images (
+  key TEXT PRIMARY KEY,
+  url TEXT DEFAULT NULL,
+  label TEXT,
+  page TEXT,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)`);
+[
+  // Homepage package cards (must match live /api/packages slugs)
+  ['home_pkg_mt-kenya-ol-pejeta-5day',   'Mt Kenya Trek & Ol Pejeta Safari',  'homepage', '/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg'],
+  ['home_pkg_laikipia-conservancy-4day', 'Laikipia Conservancy Escape',       'homepage', '/IMAGES/Lion/lion.png.jpg'],
+  ['home_pkg_solio-ol-pejeta-4day',      'Solio & Ol Pejeta Rhino Trail',     'homepage', '/IMAGES/Elelphant/elephant.png.jpg'],
+  ['home_pkg_mt-kenya-lenana-5day',      'Mt Kenya Point Lenana Summit',      'homepage', '/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg'],
+  ['home_pkg_northern-kenya-meru-7day',  'Northern Kenya from Meru',          'homepage', '/IMAGES/Maasai/huts.png.jpg'],
+  ['home_pkg_luxury-conservancy-custom', 'Private Luxury Conservancy Safari', 'homepage', '/IMAGES/Luxury/luxury.png.jpg'],
+  ['story_migration',       'Great Migration',             'stories', null],
+  ['story_swahili_coast',   'Swahili Coast',               'stories', null],
+  ['story_conservation',    'Conservation',                'stories', null],
+  ['story_safari_lodges',   'Safari Lodges',               'stories', null],
+  ['story_photography',     'Wildlife Photography',        'stories', null],
+  ['story_cuisine',         'Kenyan Cuisine',              'stories', null],
+  ['exp_big_five',          'Big Five Safari',             'experiences', null],
+  ['exp_coastal_paradise',  'Coastal Paradise',            'experiences', null],
+  ['exp_cultural_immersion','Cultural Immersion',          'experiences', null],
+  ['exp_mount_kenya',       'Mount Kenya Trekking',        'experiences', null],
+  ['exp_rift_valley',       'Great Rift Valley',           'experiences', null],
+  ['exp_balloon_safari',    'Balloon Safari',              'experiences', null],
+  // Page hero banners (editable in Admin → Hero Images)
+  ['hero_home',             'Homepage',                    'heroes', 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=85'],
+  ['hero_experiences',      'Experiences',                 'heroes', '/IMAGES/Elelphant/elephant.png.jpg'],
+  ['hero_stories',          'Stories',                     'heroes', '/IMAGES/Stories/bonfire%20stories.jpg'],
+  ['hero_inquire',          'Book / Inquire',              'heroes', '/IMAGES/Inquiring/inquiring.jpg'],
+  ['hero_packages',         'Packages',                    'heroes', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80'],
+  ['hero_destinations',     'Destinations',                'heroes', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80'],
+  ['hero_plan',             'Plan Your Trip',              'heroes', 'https://images.pexels.com/photos/2249106/pexels-photo-2249106.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_visa',             'Visa & eTA',                  'heroes', 'https://images.pexels.com/photos/2249106/pexels-photo-2249106.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_travel_guide',     'Travel Guide',                'heroes', 'https://images.pexels.com/photos/2249106/pexels-photo-2249106.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_accommodation',    'Accommodation',               'heroes', 'https://images.pexels.com/photos/1402688/pexels-photo-1402688.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_getting_here',     'Getting Here',                'heroes', 'https://images.pexels.com/photos/4108195/pexels-photo-4108195.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_weather',          'Weather & Seasons',           'heroes', 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=1600&q=80'],
+  ['hero_faqs',             'FAQs',                        'heroes', 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80'],
+  ['hero_maasai_mara',      'Maasai Mara',                 'heroes', 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1600&q=80'],
+  ['hero_amboseli',         'Amboseli',                    'heroes', 'https://images.pexels.com/photos/2888307/pexels-photo-2888307.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_nairobi',          'Nairobi',                     'heroes', 'https://images.pexels.com/photos/931007/pexels-photo-931007.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_diani_beach',      'Diani Beach',                 'heroes', 'https://images.pexels.com/photos/2053950/pexels-photo-2053950.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_mount_kenya',      'Mount Kenya',                 'heroes', 'https://images.pexels.com/photos/3807792/pexels-photo-3807792.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_lake_nakuru',      'Lake Nakuru',                 'heroes', 'https://images.pexels.com/photos/3326647/pexels-photo-3326647.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+  ['hero_lamu',             'Lamu Island',                 'heroes', 'https://images.pexels.com/photos/1148997/pexels-photo-1148997.jpeg?auto=compress&cs=tinysrgb&w=1600&q=80'],
+].forEach(([key, label, page, url]) =>
+  db.run('INSERT OR IGNORE INTO site_images (key, label, page, url) VALUES (?, ?, ?, ?)', [key, label, page, url || null])
+);
+saveDB();
+
+// ── Image Upload ──
+
+app.post('/api/admin/upload', authMiddleware, upload.single('image'), (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: 'No image file provided' });
+    const url = `/uploads/${req.file.filename}`;
+    res.json({ url, filename: req.file.filename, originalName: req.file.originalname, size: req.file.size });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.delete('/api/admin/upload/:filename', authMiddleware, (req, res) => {
+  try {
+    const filename = path.basename(req.params.filename); // sanitize
+    const filePath = path.join(uploadsDir, filename);
+    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    res.json({ message: 'File deleted' });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// ── Site Images API ──
+
+app.get('/api/site-images', (req, res) => {
+  try {
+    const rows = rowsAll('SELECT key, url FROM site_images');
+    const map = {};
+    rows.forEach(r => { map[r.key] = r.url || null; });
+    res.json(map);
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.get('/api/admin/site-images', authMiddleware, (req, res) => {
+  try { res.json(rowsAll('SELECT * FROM site_images ORDER BY page, key')); }
+  catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+app.put('/api/admin/site-images/:key', authMiddleware, (req, res) => {
+  try {
+    const { url } = req.body;
+    const existing = rowGet('SELECT key FROM site_images WHERE key = ?', [req.params.key]);
+    if (!existing) return res.status(404).json({ error: 'Image key not found' });
+    db.run('UPDATE site_images SET url = ?, updated_at = CURRENT_TIMESTAMP WHERE key = ?', [url || null, req.params.key]);
+    saveDB();
+    res.json({ message: 'Site image updated' });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
 
 // ── Auth ──
 
@@ -397,9 +522,8 @@ app.get('*', (req, res) => {
 
 }).then(() => {
   app.listen(PORT, () => {
-    console.log(`Discover Kenya backend running at http://localhost:${PORT}`);
+    console.log(`Kiboko Adventures backend running at http://localhost:${PORT}`);
     console.log(`Admin dashboard: http://localhost:${PORT}/admin`);
-    console.log(`Default login: admin / admin123`);
   });
 }).catch(err => {
   console.error('Failed to initialize database:', err);

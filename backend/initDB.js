@@ -9,7 +9,7 @@ async function initDB() {
   if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
 
   const dbPath = path.join(dbDir, 'discover-kenya.db');
-  const db = new SQL.Database();
+  let db = new SQL.Database();
   if (fs.existsSync(dbPath)) {
     const buf = fs.readFileSync(dbPath);
     db = new SQL.Database(buf);
@@ -117,47 +117,52 @@ async function initDB() {
   stmt.free();
   if (userCount === 0) {
     const hash = bcrypt.hashSync('admin123', 10);
-    db.run('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', ['admin', 'admin@discoverkenya.com', hash, 'admin']);
+    db.run('INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)', ['admin', 'admin@kibokoadventures.com', hash, 'admin']);
     console.log('Default admin user created (admin / admin123)');
   }
 
+  const forceReseed = process.argv.includes('--reseed');
   const pkgStmt = db.prepare('SELECT COUNT(*) as c FROM packages');
   pkgStmt.step();
   const pkgCount = pkgStmt.getAsObject().c;
   pkgStmt.free();
-  if (pkgCount === 0) {
+  if (pkgCount === 0 || forceReseed) {
+    if (forceReseed) {
+      db.run('DELETE FROM packages');
+      console.log('Cleared existing packages for reseed');
+    }
     const pkgs = [
-      ['Classic Mara Safari', 'classic-mara-safari', 'safari', '7 Days', '6 Nights', 2450, 4.9, 128,
-        'Witness the Great Migration, visit Maasai villages, enjoy game drives, and end with a hot air balloon safari over the Mara.',
-        '["Full-board accommodation","Daily game drives","Park fees included","Airport transfers"]',
-        null, 'Best Seller', 1],
-      ['Safari & Beach Combo', 'safari-beach-combo', 'combo', '10 Days', '9 Nights', 3280, 4.8, 94,
-        'Combine the thrill of a 5-day safari with 5 days of pure beach bliss on the pristine white sands of Diani Beach.',
-        '["5 days safari + 5 days beach","All flights & transfers","Snorkeling & dhow cruise","Half-board beach resort"]',
-        null, 'Popular', 1],
-      ['Cultural Heritage Trail', 'cultural-heritage-trail', 'culture', '5 Days', '4 Nights', 1890, 4.7, 63,
-        'Immerse yourself in Kenya\'s rich cultures — visit Maasai, Samburu, and Swahili communities, explore museums and historic sites.',
-        '["Guided village visits","Cultural performances","Local cuisine experiences","Nairobi city tour"]',
-        null, null, 1],
-      ['Mount Kenya Trekking Expedition', 'mount-kenya-trekking', 'adventure', '8 Days', '7 Nights', 2150, 4.9, 47,
-        'Conquer Africa\'s second-highest peak via the scenic Sirimon route. Expert guides, quality gear, and stunning alpine scenery.',
-        '["Professional mountain guides","All camping equipment","Meals & porters included","Summit certificate"]',
-        null, null, 1],
-      ['Ultimate Luxury Safari', 'ultimate-luxury-safari', 'luxury', '12 Days', '11 Nights', 8900, 5.0, 34,
-        'Experience Kenya at its finest — private charters, award-winning lodges, champagne sunsets, and exclusive wildlife encounters.',
-        '["Private safari vehicle","Luxury all-inclusive lodges","Private guide & chef","Spa & wellness included"]',
-        null, 'Luxury', 1],
-      ['Family Adventure Safari', 'family-adventure-safari', 'family', '9 Days', '8 Nights', 3450, 4.8, 72,
-        'A family-friendly journey with kid-friendly lodges, educational game drives, beach time, and cultural activities for all ages.',
-        '["Family-friendly lodges","Kids\' safari program","Child discounts available","Beach & pool time"]',
-        null, 'Family', 1]
+      ['Mt Kenya Trek & Ol Pejeta Safari', 'mt-kenya-ol-pejeta-5day', 'adventure', '5 Days', '4 Nights', 2450, 4.9, 128,
+        'Summit Point Lenana on Mt Kenya (4,985m), then track the Big Five and endangered rhinos at Ol Pejeta Conservancy — our signature Meru-based itinerary.',
+        '["Point Lenana summit attempt","Ol Pejeta Big Five game drives","Professional mountain guides","Community-benefit lodges"]',
+        '/IMAGES/Mount%20Kenya/mount%20kenya.png.jpg', 'Signature', 1],
+      ['Laikipia Conservancy Escape', 'laikipia-conservancy-4day', 'safari', '4 Days', '3 Nights', 1890, 4.8, 86,
+        'Four intimate days tracking lions, elephants, and Grevy\'s zebra across private Laikipia conservancies — small groups, no mass tourism.',
+        '["Private conservancy access","Daily game drives","Local Meru guides","Full-board bush camps"]',
+        '/IMAGES/Lion/lion.png.jpg', 'Best Seller', 1],
+      ['Solio & Ol Pejeta Rhino Trail', 'solio-ol-pejeta-4day', 'safari', '4 Days', '3 Nights', 1750, 4.9, 72,
+        'A focused rhino and wildlife safari linking Solio Ranch and Ol Pejeta — Africa\'s strongest black and white rhino sanctuaries.',
+        '["Solio Ranch rhinos","Ol Pejeta conservancy","Chimpanzee sanctuary visit","Airport transfers from Meru/Nanyuki"]',
+        '/IMAGES/Elelphant/elephant.png.jpg', 'Popular', 1],
+      ['Mt Kenya Point Lenana Summit', 'mt-kenya-lenana-5day', 'adventure', '5 Days', '4 Nights', 2150, 4.9, 94,
+        'Conquer Point Lenana via the scenic Sirimon route with expert local guides, quality gear, and alpine scenery few operators match.',
+        '["Sirimon route trek","Summit certificate","Meals & porters included","All camping equipment"]',
+        '/IMAGES/Mount%20Kenya/mt%20kenya.png.jpg', 'Adventure', 1],
+      ['Northern Kenya from Meru', 'northern-kenya-meru-7day', 'safari', '7 Days', '6 Nights', 3280, 4.8, 61,
+        'Go beyond the beaten path from our Meru base: reticulated giraffe, Grevy\'s zebra, Samburu culture, and remote northern landscapes.',
+        '["Meru National Park","Samburu / northern specials","Cultural village visit","Full-board lodges & camps"]',
+        '/IMAGES/Maasai/huts.png.jpg', 'Off the Path', 1],
+      ['Private Luxury Conservancy Safari', 'luxury-conservancy-custom', 'luxury', '8 Days', '7 Nights', 5900, 5.0, 34,
+        'A fully private Laikipia & Mt Kenya journey — exclusive camps, private vehicle and guide, and tailor-made pacing for couples or small groups.',
+        '["Private safari vehicle & guide","Luxury conservancy lodges","Flexible daily itinerary","Spa & exclusive experiences"]',
+        '/IMAGES/Luxury/luxury.png.jpg', 'Luxury', 1]
     ];
     const insertPkg = db.prepare(
       'INSERT INTO packages (title, slug, category, duration, nights, price, rating, review_count, description, highlights, image_url, badge, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     for (const p of pkgs) { insertPkg.bind(p); insertPkg.step(); insertPkg.reset(); }
     insertPkg.free();
-    console.log('Packages seeded');
+    console.log('Packages seeded (Kiboko signature itineraries)');
   }
 
   const destStmt = db.prepare('SELECT COUNT(*) as c FROM destinations');
@@ -186,13 +191,14 @@ async function initDB() {
   testStmt.step();
   const testCount = testStmt.getAsObject().c;
   testStmt.free();
-  if (testCount === 0) {
+  if (testCount === 0 || forceReseed) {
+    if (forceReseed) db.run('DELETE FROM testimonials');
     const insertTest = db.prepare('INSERT INTO testimonials (name, location, rating, text, featured) VALUES (?, ?, ?, ?, ?)');
-    insertTest.bind(['Sarah Mitchell', 'London, UK', 5, 'An absolutely life-changing experience. Watching the Great Migration from a hot air balloon at sunrise is something I will never forget. Kenya exceeded every expectation.', 1]); insertTest.step(); insertTest.reset();
-    insertTest.bind(['James Walker', 'New York, USA', 5, 'From the Maasai Mara to Diani Beach, every moment was magical. The Kenyan people are the warmest I\'ve ever met. Hakuna Matata is a way of life here!', 1]); insertTest.step(); insertTest.reset();
-    insertTest.bind(['Emma Chen', 'Beijing, China', 5, 'Climbing Mount Kenya was the challenge of a lifetime, and the coastal relaxation in Watamu was pure bliss. Kenya offers adventure and serenity in one incredible package.', 1]); insertTest.step(); insertTest.reset();
+    insertTest.bind(['Sarah H.', 'London, UK', 5, 'We summited Point Lenana at sunrise and by evening we were watching a lion pride at Ol Pejeta. The most extraordinary 5 days of my life — the guides\' knowledge of the land is unmatched.', 1]); insertTest.step(); insertTest.reset();
+    insertTest.bind(['Amara K.', 'Nairobi, Kenya', 5, 'The northern Kenya safari from Meru is genuinely off the beaten path — reticulated giraffe, Grevy\'s zebra, and a leopard at the river. As a solo traveller Kiboko ticked every box.', 1]); insertTest.step(); insertTest.reset();
+    insertTest.bind(['James W.', 'New York, USA', 5, 'Laikipia conservancy stays felt exclusive and wild. Small groups, real community benefit, and guides who grew up on this land. We will be back for Mt Kenya.', 1]); insertTest.step(); insertTest.reset();
     insertTest.free();
-    console.log('Testimonials seeded');
+    console.log('Testimonials seeded (Kiboko guest stories)');
   }
 
   const data = db.export();
